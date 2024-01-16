@@ -1,0 +1,66 @@
+@import url('https://fonts.googleapis.com/css2?family=Italiana&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+*{
+  margin: 0px;
+  padding: 0px;
+}
+
+.nav {
+  font-family: 'Italiana', sans-serif;
+}
+.kanu{
+  
+  height: 80vh;
+  width: 100vw;
+  background:rgba(0, 0, 0, 0.24);
+  background-blend-mode: darken;
+  background-image: url('bgimg.avif');
+  background-size: 100vw 80vh;
+  background-repeat: no-repeat;
+  
+}
+.dropdown{
+  box-shadow: 0px 0px 1px 0px blue;
+}
+.kon{
+  box-shadow: 0px 0px 3px 0px black;
+  
+}
+/* width */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  
+  margin-bottom: 8px;
+  border-bottom-right-radius: 200%;
+  border-bottom-left-radius: 10%;
+  
+  
+  
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: rgb(146, 38, 38);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(146, 38, 38);
+}
+
+::-webkit-scrollbar-track-piece{
+  height: 100px;
+
+}
+
+::-webkit-scrollbar-corner{
+  border-radius: 40px;
+}
