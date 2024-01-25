@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from "react";
 import bgimg from '../bgimg.avif'
 import Search from "./Search";
+import Popular from "./Popular";
+import Categories from "./Categories";
+import Modal from "./Modal";
 
 
 function Home({products}){
 
     const [search, setsearch] = useState('')
+
+    const [is, setis] = useState(false)
+
+    const [cardinfo, setcardinfo] = useState()
+
+    
+    console.log(is)
+    
+    
+
+
 
     function onSearchChange(value){
         setsearch(value)
@@ -32,18 +46,34 @@ function Home({products}){
       })
 
     }
+
+    let modaldata
+    if(products){
+        modaldata = products.filter((item) => item.id == cardinfo)
+    }
+
+    console.log(modaldata)
+    
+    function handleis(is){
+        setis(!is)
+
+    }
+
+
+    
     
 
-    console.log(searchData)
    
 
-    return <div>
-        <section className="kanu"
+    return <div >
+
+        
+        <section className="kanu  "
         >
             <div className="search-dropdown flex flex-col  ">
                 <Search search={search} setsearch={setsearch} onsearch={onSearchChange}/>
                 <div className=" kon   max-h-[30vh] rounded-bl-3xl rounded-br-3xl overflow-x-clip flex-wrap  overflow-auto ml-[31vw] mr-[32vw]">
-                    {search === '' ? console.log('empty') : searchData.map((item) =>{
+                    {search === '' ? null : searchData.map((item) =>{
                     return (
                         <div className=" ">
                             <div className="dropdown  flex bg-white w-[37vw]   rounded-[-20px] pt-1 h-[60px] hover:bg-[#fad8d8d7]">
@@ -61,19 +91,7 @@ function Home({products}){
 
                 </div>
                 
-                {/* <div className="">
-
-
-                    <div className=" flex bg-white w-[37vw]  ml-[31vw] rounded-[-20px] pt-1 h-[50px] ">
-                        <img src="https://dummyimage.com/50x50/000/ffff" alt="" className="max-h-[70px] max-w-[70px]"/>
-                        <div className=" flex  w-[33vw] justify-between h-[46px] bg-blue-200 text-center align-middle "> 
-                            <h1 className="">Titleiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</h1> 
-                            <h1> Quantiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii</h1>
-                        </div>
-                    </div>
-
-                    
-                </div> */}
+                
 
             </div>
             
@@ -81,6 +99,25 @@ function Home({products}){
 
 
         </section>
+
+        <section className=" underheader mt-20 h-[60vh] ml-20 mr-20">
+
+            <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is}/>
+
+
+
+
+
+        </section>
+
+        <section className=" categories mt-10  h-[90vh] w-[100vw] ml-20 mr-20"  >
+            
+            <Categories products={products}/>
+
+        </section>
+
+        {is? <Modal setis={setis} data={modaldata}/>: null}
+        
 
 
 
