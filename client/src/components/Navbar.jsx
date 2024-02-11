@@ -1,15 +1,16 @@
 import React, { useEffect, useState } from "react";
+import cart from '../cart.png'
 
 
 function Navbar(){
     const [isShown, setIsShown] = useState(false)
     return <div>
 
-        <div className="  hover:bg-[#fad8d8ad]  h-[78px] w-full text-white hover:text-black nav  fixed">
+        <div className="  bg-[#fad8d8ad]  h-[78px] w-full text-black nav  fixed z-10">
             <div className=" flex ">
                 <div className="logo py-[14px]  h-[78px] w-[20vw] flex justify-between">
                     <div></div>
-                    <h1 className=" text-5xl "> Decora</h1>
+                    <a href="/"><h1 className=" text-5xl "> Decora</h1></a>
 
                 </div>
 
@@ -37,6 +38,11 @@ function Navbar(){
                     <ul className="list-none  text-2xl font-medium flex  items-center ">
                     <li className=" hover:font-semibold px-5 "> Login</li>
                     <li className=" hover:font-semibold px-5"> Signup</li>
+                    <div className="flex ">
+                        <img src={cart} alt="" className="h-[25px] w-[25px] z-10" />
+                        <h1 className="z-20 ">1</h1>
+                    </div>
+                    
 
                     </ul>
 

@@ -3,7 +3,7 @@ import React from 'react'
 export default function Card({img, name, price, id, setcardinfo, handleis, is}) {
   return (
     <div data-aos="fade-up"
-    data-aos-anchor-placement="center-bottom"  data-aos-duration="1000" data-aos-easing="ease" className=' flex flex-col justify-between mx-[3.8vw] mb-1  w-[15vw] h-[38vh]'
+    data-aos-anchor-placement="center-bottom"  data-aos-duration="1000" data-aos-easing="ease" className=' flex flex-col justify-between mx-[-44vw] mb-1  w-[15vw] h-[38vh] '
     onClick={() => {
       setcardinfo(id)
       handleis(is)

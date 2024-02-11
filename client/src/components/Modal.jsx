@@ -1,11 +1,19 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import { Link, NavLink, useNavigate} from 'react-router-dom';
+import { Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 
 
 
-function Modal({setis, data}) {
+
+
+function Modal({setis, data, is, setadd}) {
+
+  const location = useLocation()
+  const navigate = useNavigate()
+
+
+  
 
   const responsive = {
     desktop: {
@@ -35,13 +43,13 @@ function Modal({setis, data}) {
       <div
       
       
-      id="" className=" modal fixed h-[100vh] top-[0vh] flex justify-center items-center  left-[0vw] w-[100vw] koli " onClick={() => setis(false)}>
+      id="" className=" modal fixed h-[100vh] top-[0vh] flex justify-center items-center  left-[0vw] w-[100vw] modalo " onClick={() => setis(false)}>
             
-        </div>
+      </div>
 
         <div 
         data-aos="zoom-in-up" 
-        id="" className=" modal fixed text-black  text-xl  flex h-[40vh] top-[30vh] left-[26vw] w-[44vw] bg-white " onClick={() => setis(true)} >
+        id="" className=" modal fixed text-black  text-xl  flex h-[40vh] top-[30vh] left-[26vw] w-[44vw] bg-white "  >
               <div className=' h-[40vh]  w-[20vw]  border-zinc-300 border-r-[1px] '>
 
                 <Carousel responsive={responsive} showDots={true}  className=''>
@@ -84,9 +92,15 @@ function Modal({setis, data}) {
                 <h1 className=' w-[18vw] mx-4 mt-[-20px] '>tag: <span className='font-sans'>{data[0].tag}</span></h1>
 
                 <div className='flex justify-around w-[20vw]'>
-
-                    <Link to={`/products/${data[0].name.split(` `).join(`-`)}/${data[0].id}`}><button class="button-60" role="button">View Full Details</button></Link>
-                    <button class="button-60" role="button">Add to Cart</button>
+                     <a href={`/products/${data[0].name.split(` `).join(`-`)}/${data[0].id}`}><button class="button-60"  role="button" onClick={() => {setis(!is)
+                   }}>View Full Details</button></a>
+                     
+                    <button class="button-60" role="button"
+                    onClick={() => {
+                      setis(false)
+                      setadd(true)
+                    }}
+                    >Add to Cart</button>
 
                 </div>
 

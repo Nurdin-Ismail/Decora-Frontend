@@ -9,6 +9,9 @@ import ProductPage from './components/ProductPage';
 function App() {
 
   const [products, setproducts] = useState()
+  const [is, setis] = useState(false)
+  const [cardinfo, setcardinfo] = useState()
+  const [add, setadd] = useState()
 
   useEffect(() => {
     fetch('http://127.0.0.1:5555/products')
@@ -16,6 +19,11 @@ function App() {
     .then(data => setproducts(data))
 
   }, [])
+
+  function handleis(is){
+    setis(!is)
+
+}
 
   
 
@@ -26,9 +34,9 @@ function App() {
 
       <Navbar/>
       <Routes>
-        <Route exact path='/' element={<Home products={products}/>}></Route>
-        <Route exact path='/products/:name/:id' element={<ProductPage />}></Route>
-        <Route exact path='/*' element={<Home products={products}/>} />
+        
+        <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
+        <Route path='/products/:name/:id' element={<ProductPage products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
       </Routes>
       <Footer/>
 

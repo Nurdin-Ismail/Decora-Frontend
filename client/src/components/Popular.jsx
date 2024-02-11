@@ -107,7 +107,7 @@ function Popular(props) {
   
 
   return (
-    <div className=' ml-1 '>
+    <div className=''>
 
       <div className='title pt-8 flex flex-row items-center mb-10'>
         <h1 className='  mr-5 ml-5 font-medium'> Popular Items</h1>

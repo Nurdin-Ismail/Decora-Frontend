@@ -3,7 +3,7 @@ import React from 'react'
 function Footer() {
   return (
     <div >
-        <footer class="site-footer">
+        <footer class="site-footer mt-2">
       <div class="container marker:">
         <div class="row flex justify-between">
           <div class="col-sm-12 col-md-6 w-[30vw]">

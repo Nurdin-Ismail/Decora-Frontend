@@ -4,15 +4,13 @@ import Search from "./Search";
 import Popular from "./Popular";
 import Categories from "./Categories";
 import Modal from "./Modal";
+import CartModal from "./CartModal";
 
 
-function Home({products}){
+function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}){
 
     const [search, setsearch] = useState('')
 
-    const [is, setis] = useState(false)
-
-    const [cardinfo, setcardinfo] = useState()
 
     
     console.log(is)
@@ -53,11 +51,18 @@ function Home({products}){
     }
 
     console.log(modaldata)
-    
-    function handleis(is){
-        setis(!is)
+    let counter = 1
 
+    let product 
+
+    if(cardinfo){
+        console.log(cardinfo)
+        product= products.filter((item) => item.id == cardinfo)[0]
     }
+    console.log(product)
+
+    
+    
 
 
     
@@ -78,7 +83,7 @@ function Home({products}){
                         <div className=" ">
                             <div className="dropdown  flex bg-white w-[37vw]   rounded-[-20px] pt-1 h-[60px] hover:bg-[#fad8d8d7]">
                                 <div className=" flex ml-2 h-[50px] w-[50px] items-center">
-                                    <img src={'http://127.0.0.1:5555' + item.image} alt="" className="max-h-[50px]  max-w-[50px]  rounded-full"/> 
+                                    <img src={'http://127.0.0.1:5555' + item.images[0]} alt="" className="max-h-[50px]  max-w-[50px]  rounded-full"/> 
                                 </div>
                                 <div className=" flex  w-[33vw] justify-between h-[50px] items-center  "> 
                                     <h1 className=" ml-5">{item.name}</h1> 
@@ -100,9 +105,9 @@ function Home({products}){
 
         </section>
 
-        <section className=" underheader mt-20 h-[60vh] ml-20 mr-20">
+        <section className=" underheader mt-20 h-[60vh] ml-[40px] mr-[60px]">
 
-            <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is}/>
+            <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} />
 
 
 
@@ -116,8 +121,9 @@ function Home({products}){
 
         </section>
 
-        {is? <Modal setis={setis} data={modaldata}/>: null}
+        {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
         
+        {add ? <CartModal setadd={setadd} count={counter} product={product}/>: null}
 
 
 
