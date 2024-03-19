@@ -29,14 +29,11 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     const mainGroupId = 'Main';
 
 
+
+
     
 
-  useEffect(() => {
-   
-      // window.location.reload();
-      // window.location.reload()
-    
-  }, [params]);
+  
 
 
 
@@ -95,8 +92,10 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
    
       
     
-
+    let elo = 1
     
+
+    const test = elo == 2  ? `bg-blue-500 w-[full] h-[4px]` : 'bg-gray-200 w-[full] h-[4px]' 
 
     
 
@@ -144,16 +143,36 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
       
     }
 
+    const [next , setnext] = useState(null)
+
+    let slides = product ?  product.images.length : null
+    console.log(slides)
+
+    let lomi
+    
+    if(slides){
+      if(next && next == 'next'){
+        lomi = `lomi flex translate-x-[${-1}00%]`
+
+      }else if(next == 'previous'){
+        lomi = `lomi flex translate-x-[${3}00%]`
+
+      }
+      
+    }
+
+    
+
     
   return (
     <div className='flex flex-col'>
 
       <h1 className=' product-title text-[17px]  mb-[-50px] mt-[110px] font-serif ml-[90px] text-[#707262]'><span>Shop</span> / <span>{product? product.category: null}</span> / <span>{product? product.sub_category: null}</span></h1>
 
-      <div ref={kanu} className='  flex mb-[2vh] pt-20 ml-[20vw] '>
-      <div className='flex flex-col'>
+      <div ref={kanu} className='  flex mb-[2vh] pt-20 ml-[15vw] '>
+      <div className='flex flex-col' >
         {product ? product.images.map((item) => {
-        return <img key={product.images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt="" loading="lazy" className='  mt-1 mb-2  mx-7 h-[400px] w-[400px] '/>
+        return <img key={product.images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt="" loading="lazy" className='  mt-1 mb-2   h-[700px] w-[600px] ' />
         
 
 
@@ -272,11 +291,48 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
     {add ? <CartModal setadd={setadd} count={counter} product={product}/>: null}
 
-    
+    <section className=' h-[500vh] w-full'>
+
+      <div className='ml-[200px] w-[20vw]'>
+
+      
+        <div className='rori w-[100%] h-[396px] bg-sky-200  text-4xl   '>
+          <div className='koni flex items-center justify-between'> 
+            <h1 className='  select-none hover:cursor-pointer' onClick={() => { setnext('previous')}}>&#8592;</h1>
+            <h1 className='  select-none hover:cursor-pointer'onClick={() => { setnext('next')}}>&#8594;</h1>
+          </div>
+          
+          <div className={lomi}>
+            {product ? product.images.map((item) => {
+                return <img key={product.images.indexOf(item)} id={product.images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt="" loading="lazy" className='  mt-1 mb-2   min-h-[396px] w-[392px] ' onClick={(e) => console.log(e.target.id)}/>
+        
+
+
+            }) : null}
+
+          </div>
+
+
+        </div>
+
+        <div className={test}>
+
+          <div  className=' w-[50%] bg-black  dsIndicatorKnob_2yUtU translate-x-[100%]'></div>
+
+
+        </div>
+      </div>
+
+      
+
+
+
+    </section>
     
     </div>
     
   )
+  
 }
 
 export default ProductPage;

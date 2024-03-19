@@ -22,7 +22,7 @@ function Categories() {
      data-aos-duration="800" 
      className="decor  ml-40 mt-10 flex items-center justify-center    "
      >
-        <h1 className=' text-white text-4xl font-semibold '>DÉCOR & ARTS</h1>
+        <a href={`/product-category/` + 'DÉCOR & ARTS/-'}><h1 className=' text-white text-4xl font-semibold '>DÉCOR & ARTS</h1></a>
 
      </div>
         <div className=' bg-white h-[60vh] w-[35vw] mt-10 ml-10 flex flex-col'>
@@ -32,8 +32,8 @@ function Categories() {
             data-aos-duration="500"
             
             className='kitchen flex items-center justify-center  '>
-                <h1 className=' text-white text-4xl font-semibold '>Kitchen & Dining</h1>
-
+               <a href={`/product-category/` + `Kitchen & Dining/-`}><h1 className=' text-white text-4xl font-semibold '>Kitchen & Dining</h1>
+</a> 
 
             </div>
                 
@@ -43,8 +43,8 @@ function Categories() {
                     data-aos-duration="300"
                     data-aos-easing="ease-in" 
                     className='kids flex items-center justify-center '>
-                        <h1 className=' text-white text-4xl font-semibold '>Kids Decor</h1>
-                        
+                        <a href="/product-category/Kids Decor/-"><h1 className=' text-white text-4xl font-semibold '>Kids Decor</h1>
+                        </a>
 
 
                     </div>
@@ -53,8 +53,8 @@ function Categories() {
                 data-aos-duration="300"
                 data-aos-easing="ease-in" 
                 className='bath flex items-center justify-center '>
-                    <h1 className=' text-white text-3xl font-semibold '>Bathroom     &       Laundry</h1>
-
+                   <a href="/product-category/Bathroom & Laundry /-"><h1 className=' text-white text-3xl font-semibold '>Bathroom     &       Laundry</h1>
+</a> 
 
 
                 </div>

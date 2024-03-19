@@ -9,41 +9,41 @@ import CartModal from "./CartModal";
 
 function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}){
 
-    const [search, setsearch] = useState('')
+    // const [search, setsearch] = useState('')
 
 
     
-    console.log(is)
+    // console.log(is)
     
     
 
 
 
-    function onSearchChange(value){
-        setsearch(value)
-        console.log(search)
+    // function onSearchChange(value){
+    //     setsearch(value)
+    //     console.log(search)
 
         
 
-    }
+    // }
 
 
 
     
-    let searchData
-    if(products){
-        searchData = products.filter((item) => {
-        if (item.name.toLowerCase().includes(search.toLowerCase())) {
-          return item
+    // let searchData
+    // if(products){
+    //     searchData = products.filter((item) => {
+    //     if (item.name.toLowerCase().includes(search.toLowerCase())) {
+    //       return item
     
     
     
     
     
-        }
-      })
+    //     }
+    //   })
 
-    }
+    // }
 
     let modaldata
     if(products){
@@ -75,7 +75,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
         
         <section className="kanu  "
         >
-            <div className="search-dropdown flex flex-col  ">
+            {/* <div className="search-dropdown flex flex-col  ">
                 <Search search={search} setsearch={setsearch} onsearch={onSearchChange}/>
                 <div className=" kon   max-h-[30vh] rounded-bl-3xl rounded-br-3xl overflow-x-clip flex-wrap  overflow-auto ml-[31vw] mr-[32vw]">
                     {search === '' ? null : searchData.map((item) =>{
@@ -98,7 +98,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
                 
                 
 
-            </div>
+            </div> */}
             
 
 

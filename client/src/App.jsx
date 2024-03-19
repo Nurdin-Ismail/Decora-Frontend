@@ -5,6 +5,8 @@ import Home from './components/Home';
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import ProductPage from './components/ProductPage';
+import Store from './components/Store';
+import kanu from './1.jpg'
 
 function App() {
 
@@ -19,6 +21,7 @@ function App() {
     .then(data => setproducts(data))
 
   }, [])
+  console.log(products)
 
   function handleis(is){
     setis(!is)
@@ -31,12 +34,14 @@ function App() {
 
   return (
     <div className=" overflow-x-clip">
+      {/* <img src={kanu} alt="" /> */}
 
-      <Navbar/>
+      <Navbar products={products}/>
       <Routes>
         
         <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
         <Route path='/products/:name/:id' element={<ProductPage products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
+        <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
       </Routes>
       <Footer/>
 
