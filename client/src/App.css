@@ -431,6 +431,7 @@ select {
 }
 
 .main{
+  margin-left: 112px;
 }
 /* .filter{
   z-index: 10;

@@ -58,9 +58,9 @@ function Store(props) {
     }
 
   return (
-    <div className=' flex flex-col mb-40'> 
+    <div className=' flex flex-col '> 
 
-        <div className='  mt-[12vh] flex justify-between  h-[5vh] mb-9 w-[72vw] mx-[12vw]'>
+        <div className='  mt-[2vh] flex justify-between  h-[5vh] mb-9 w-[72vw] '>
             <div className=' select-none w-[5.6vw] rounded-md flex items-center justify-center bg-gray-100 ' onClick={() => {
                 handleIconChange()
                 setfilter(!filtero)
@@ -87,10 +87,10 @@ function Store(props) {
             </div>
 
         </div>
-        <div className='  flex mx-[50px]'>    
+        <div className='   '>    
             {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null}
 
-            <div className=' main flex flex-wrap'>
+            <div className=' main bg-slate-50 flex flex-wrap mx-[100px]'>
 
         {display ? display.map((item) => {
             return <div className='mx-[1vw] my-[4vh]'>

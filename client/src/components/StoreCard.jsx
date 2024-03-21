@@ -23,7 +23,7 @@ function StoreCard({img, name, price, id, setcardinfo, handleis, is}) {
     return (
   
       // data-aos="fade-up" data-aos-anchor-placement="center-bottom"  data-aos-duration="1000" data-aos-easing="ease"
-      <div  className=' flex flex-col justify-between  mb-[80px]  w-[392px] h-[393px] select-none '
+      <div  className=' flex flex-col justify-between  mb-[10px] mx-[-15px]  w-[392px] h-[393px] select-none '
       onClick={() => {
         setcardinfo(id)
         handleis(is)
