@@ -13,23 +13,7 @@ AOS.init();
 
 function Popular(props) {
     const [carts, setcarts] = useState()
-    const responsive = {
-        desktop: {
-          breakpoint: { max: 3000, min: 1024 },
-          items: 4,
-          slidesToSlide: 1 // optional, default to 1.
-        },
-        tablet: {
-          breakpoint: { max: 1024, min: 464 },
-          items: 2,
-          slidesToSlide: 3 // optional, default to 1.
-        },
-        mobile: {
-          breakpoint: { max: 464, min: 0 },
-          items: 1,
-          slidesToSlide: 1 // optional, default to 1.
-        }
-      };
+    
 
     useEffect(()=>{
         fetch('http://127.0.0.1:5555/carts')
@@ -94,6 +78,16 @@ function Popular(props) {
   }
   }
 
+  popular_products.pop()
+
+  console.log(popular_products.length)
+  if(popular_products.length > 0){
+    props.setcards(popular_products.length)
+  }
+  
+ 
+   
+
   
   
 
@@ -107,51 +101,50 @@ function Popular(props) {
   
 
   return (
-    <div className=''>
 
-      <div className='title pt-8 flex flex-row items-center mb-10'>
-        <h1 className='  mr-5 ml-5 font-medium'> Popular Items</h1>
+   
 
-        <div className='bg-[#f5bfbf] mt-1 h-[0.2vh] w-[70vw] rounded-lg'></div>
+      <div className='flex best' 
+      style={{transform: `translate(-${props.slide * 25.65}%)`}}
+      >
 
+     
+
+
+       
+            
+{popular_products.map((item) => {
+    return (
+      <div className=' ml-[20px]'>
+        <Card 
+        key={item.id}
+        img= {'http://127.0.0.1:5555' + item.images[0] } 
+        name={item.name} 
+        price={item.price}
+        id={item.id}
+        setcardinfo={props.setcardinfo}
+        handleis={props.handleis}
+        onClickItem={action('click')}
+        is={props.is}
+        
+        
+        
+        />
       </div>
+    )
+})}
 
 
 
-        <Carousel 
-        
-        responsive={responsive}
-        infinite={true}
-        className=' carousel'
-        
-        
-        >
-            
-            {popular_products.map((item) => {
-                return (<Card 
-                    key={item.id}
-                    img= {'http://127.0.0.1:5555' + item.images[0] } 
-                    name={item.name} 
-                    price={item.price}
-                    id={item.id}
-                    setcardinfo={props.setcardinfo}
-                    handleis={props.handleis}
-                    onClickItem={action('click')}
-                    is={props.is}
-                    
-                    
-                    
-                    />)
-            })}
-            
-
-        </Carousel>
-
-        
 
 
 
-    </div>
+
+
+</div> 
+
+   
+    
   )
 }
 export default Popular;

@@ -6,44 +6,13 @@ import Categories from "./Categories";
 import Modal from "./Modal";
 import CartModal from "./CartModal";
 
+import forward from '../arrow1.png'
+
 
 function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}){
 
-    // const [search, setsearch] = useState('')
-
-
-    
-    // console.log(is)
-    
-    
-
-
-
-    // function onSearchChange(value){
-    //     setsearch(value)
-    //     console.log(search)
-
-        
-
-    // }
-
-
-
-    
-    // let searchData
-    // if(products){
-    //     searchData = products.filter((item) => {
-    //     if (item.name.toLowerCase().includes(search.toLowerCase())) {
-    //       return item
-    
-    
-    
-    
-    
-    //     }
-    //   })
-
-    // }
+    const [slide, setslide] = useState(0)
+    const [cards, setcards] = useState()
 
     let modaldata
     if(products){
@@ -61,6 +30,27 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
     }
     console.log(product)
 
+    function handlearrows(direction){
+        if(direction == 'left'){
+
+            if(slide != 0){
+                setslide(slide-1)
+            }
+            
+                
+            
+             
+            
+        }else if(direction == 'right'){
+
+            if(slide != cards - 4){
+                setslide(slide + 1)
+            }
+
+        }
+
+    }
+
     
     
 
@@ -73,53 +63,56 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
     return <div >
 
         
-        <section className="kanu  "
-        >
-            {/* <div className="search-dropdown flex flex-col  ">
-                <Search search={search} setsearch={setsearch} onsearch={onSearchChange}/>
-                <div className=" kon   max-h-[30vh] rounded-bl-3xl rounded-br-3xl overflow-x-clip flex-wrap  overflow-auto ml-[31vw] mr-[32vw]">
-                    {search === '' ? null : searchData.map((item) =>{
-                    return (
-                        <div className=" ">
-                            <div className="dropdown  flex bg-white w-[37vw]   rounded-[-20px] pt-1 h-[60px] hover:bg-[#fad8d8d7]">
-                                <div className=" flex ml-2 h-[50px] w-[50px] items-center">
-                                    <img src={'http://127.0.0.1:5555' + item.images[0]} alt="" className="max-h-[50px]  max-w-[50px]  rounded-full"/> 
-                                </div>
-                                <div className=" flex  w-[33vw] justify-between h-[50px] items-center  "> 
-                                    <h1 className=" ml-5">{item.name}</h1> 
-                                    <h1 className=" me-2 text-red-500">Ksh {item.price}</h1>
-                                </div>
-                            </div>
-                        </div>
-                    )
-                })}
+        <section className="kanu"></section>
+
+        <section className="highlight ml-[250px] my-10 bg-green-200 h-[657px]">
+
+
+        </section>
+
+        <section className="  flex h-[390px] my-20 ml-[200px]  ">
+
+            <div className=" bg-white h-[200px]  min-w-[20%] max-w-[20%]">
+
+                <h1 className=" font-semibold text-2xl">Most Wanted Products</h1>
+
+                <p className="mt-2">
+                Transform your living space with our handpicked collection of top-selling home decor essentials.
+                </p>
+
+                <div className=" flex w-[120px] justify-evenly mt-10">
+
+                    <img className=" cursor-pointer rotate-180" src={forward} alt="" onClick={() => handlearrows('left')} />
+                    <img className=" cursor-pointer" src={forward} alt="" onClick={() => handlearrows('right')} />
+
 
                 </div>
-                
-                
 
-            </div> */}
+
+            </div>
+
+            <div className=" w-[80%] overflow-x-hidden">
+
+                <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} slide={slide} setcards={setcards} />
+
+
+
+            </div>
+
+
+
+
+
+
+        </section>
+
+        <section className=" lookbook mt-10 bg-black  h-[663px]  ml-[250px]"  >
             
-
-
-
-        </section>
-
-        <section className=" underheader mt-20 h-[60vh] ml-[40px] mr-[60px]">
-
-            <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} />
-
-
-
-
+            {/* <Categories products={products}/> */}
 
         </section>
 
-        <section className=" categories mt-10  h-[90vh] w-[100vw] ml-20 mr-20"  >
-            
-            <Categories products={products}/>
-
-        </section>
+        <section className="new bg-violet-300 h-[430px] my-[100px] ml-[250px]"></section>
 
         {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
         
