@@ -5,7 +5,8 @@ import Popular from "./Popular";
 import Categories from "./Categories";
 import Modal from "./Modal";
 import CartModal from "./CartModal";
-import New from "./New";
+import New from "./New"
+import Highlight from "./Highlight";
 
 import forward from '../forward.png'
 import arrow from '../arrow1.png'
@@ -88,9 +89,17 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
     return <div >
 
         
-        <section className="kanu"></section>
+        <section className="kanu flex items-center justify-center">
+            <div></div>
 
-        <section className="highlight ml-[250px] my-10 bg-green-200 h-[657px]">
+            <div className=" text-white text-7xl w-[49%] ">Seamless Home Decor <span className="pl-10">with Natural Fabrics</span></div>
+        
+        </section>
+
+        <section className="highlight ml-[250px] my-10 h-[657px]">
+
+
+            <Highlight />
 
 
         </section>
