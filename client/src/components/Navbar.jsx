@@ -94,7 +94,7 @@ function Navbar({products}){
 
                 </div>
                 <div className=" ml-[]">
-                     <img src={logo} alt="" className=" h-[18vh] w-[10vw] mt-[-40px] " />
+                     <a href="/"><img src={logo} alt="" className=" h-[18vh] w-[10vw] mt-[-40px] " /></a>
                 </div>
 
                

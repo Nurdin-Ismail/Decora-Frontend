@@ -5,14 +5,18 @@ import Popular from "./Popular";
 import Categories from "./Categories";
 import Modal from "./Modal";
 import CartModal from "./CartModal";
+import New from "./New";
 
-import forward from '../arrow1.png'
+import forward from '../forward.png'
+import arrow from '../arrow1.png'
 
 
 function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}){
 
     const [slide, setslide] = useState(0)
+    const [slide2, setslide2] = useState(0)
     const [cards, setcards] = useState()
+    const [cards2, setcards2] = useState()
 
     let modaldata
     if(products){
@@ -50,6 +54,27 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
         }
 
     }
+    
+    function handlearrows2(direction){
+        if(direction == 'left'){
+
+            if(slide2 != 0){
+                setslide2(slide2-1)
+            }
+            
+                
+            
+             
+            
+        }else if(direction == 'right'){
+
+            if(slide2 != cards2 - 4){
+                setslide2(slide2 + 1)
+            }
+
+        }
+
+    }
 
     
     
@@ -82,8 +107,8 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
                 <div className=" flex w-[120px] justify-evenly mt-10">
 
-                    <img className=" cursor-pointer rotate-180" src={forward} alt="" onClick={() => handlearrows('left')} />
-                    <img className=" cursor-pointer" src={forward} alt="" onClick={() => handlearrows('right')} />
+                    <img className=" cursor-pointer rotate-180" src={arrow} alt="" onClick={() => handlearrows('left')} />
+                    <img className=" cursor-pointer" src={arrow} alt="" onClick={() => handlearrows('right')} />
 
 
                 </div>
@@ -91,7 +116,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
             </div>
 
-            <div className=" w-[80%] overflow-x-hidden">
+            <div className=" w-[80%] overflow-x-hidden overflow-y-clip">
 
                 <Popular products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} slide={slide} setcards={setcards} />
 
@@ -112,7 +137,29 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
         </section>
 
-        <section className="new bg-violet-300 h-[430px] my-[100px] ml-[250px]"></section>
+        <section className="new  h-[430px] my-[100px] ml-[200px]">
+
+            <div className="flex justify-between mr-[70px] ">
+                <div className=" font-[19px] text-3xl ">New Arrivals
+
+                </div>
+
+                <div className="flex">
+                    <img className=" cursor-pointer rotate-180 h-[30px]" src={forward} alt="" onClick={() => handlearrows2('left')} />
+                    <img className=" cursor-pointer h-[30px]" src={forward} alt="" onClick={() => handlearrows2('right')} />
+
+
+                </div>
+            </div>
+
+            <div className=" h-[100%]">
+
+                <New products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} slide2={slide2} setcards2={setcards2}/>
+
+            </div>
+
+
+        </section>
 
         {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
         

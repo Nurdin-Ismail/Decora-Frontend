@@ -50,14 +50,14 @@ function Modal({setis, data, is, setadd}) {
         <div 
         data-aos="zoom-in-up" 
         id="" className=" modal fixed text-black  text-xl  flex h-[40vh] top-[30vh] left-[26vw] w-[44vw] bg-white "  >
-              <div className=' h-[40vh]  w-[20vw]  border-zinc-300 border-r-[1px] '>
+              <div className=' h-[100%]  w-[20vw]  border-zinc-300 border-r-[1px] '>
 
                 <Carousel responsive={responsive} showDots={true}  className=''>
 
                   {data[0].images.map((item) => {
                     
                     
-                    return <img key={data[0].images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt=""  className=' mt-11 mb-7 mx-9'/>
+                    return <img key={data[0].images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt=""  className=' h-[40vh]'/>
                     
                     })}
 
