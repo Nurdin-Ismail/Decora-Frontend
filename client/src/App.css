@@ -8,6 +8,9 @@
   padding: 0px;
   font-family: "Poppins", sans-serif;
 
+  
+
+
 
 }
 
@@ -110,8 +113,10 @@ font-family: 'Philosopher', sans-serif;
   z-index: 1;
 }
 .modalo{
-  background:rgba(0, 0, 0, 0.24);
+  background:#00000042;
   background-blend-mode: darken;
+
+  z-index: 200000;
   
 }
 .kanu{
@@ -138,6 +143,46 @@ font-family: 'Philosopher', sans-serif;
 }
 /* width */
 
+.over{
+  grid-area: 2/2;
+  position: relative;
+  z-index: 100000;
+}
+
+.kkk{
+  visibility: hidden;
+}
+
+.jojo{
+  /* background-color: aliceblue; */
+}
+
+.jojo .ka{
+  grid-area: 1/1;
+
+  z-index: 10;
+  /* background-color: #ffffffea; */
+
+  
+}
+
+.jojo .ki{
+    background-color: #ffffffea;
+    grid-area: 1/1;
+
+}
+.small{
+  grid-area: 1/1;
+}
+
+.jojo img{
+  grid-area: 1/1;
+
+  z-index: 9;
+
+  /* background-color: #00aced; */
+}
+
 
 
 
@@ -151,8 +196,18 @@ font-family: 'Philosopher', sans-serif;
 
 }
 .best{
-  transition: all 1s ease;
+  transition: all 1s ease-in-out;
 
+
+}
+.besto{
+  transition: all 1.5s ease-in-out;
+
+
+}
+.highlight{
+  transition: all 1.5s ease-in-out;
+  
 
 }
 
@@ -379,6 +434,7 @@ font-family: 'Philosopher', sans-serif;
 .modal{
   font-family: 'Noto Serif Display';
   transition: ease-out;
+  z-index: 300000000;
 
 
 }
@@ -571,4 +627,135 @@ select {
 .icon{
   transition: all 1s ease-in;
 
+}
+
+.shopthelook-title{
+
+  display: grid;
+
+  place-items: center start;
+
+}
+.shopthelook-arrows{
+
+  display: grid;
+  grid-template-columns: 50% 50%;
+
+
+
+  place-self: center end;
+
+}
+
+.shopthelook-arrows .forward-one{
+
+}
+.shopthelook-arrows .forward-two{
+
+}
+
+
+.shopthelook-bath{
+
+}
+
+.shopthelook-bath .shop{
+  position: relative;
+
+  grid-area: 1/1;
+
+  z-index: -133;
+  
+}
+.shopthelook-bath  div{
+
+ 
+  position: relative;
+  grid-area: 1/1;
+  z-index: 167;
+
+  display: grid; 
+
+  grid-template-rows: 60% 20% 20%;
+
+  
+
+
+
+  
+}
+
+.tumbler{
+  grid-area: 2/3;
+  place-self: center;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+  cursor: pointer;
+
+}
+
+.cotton-jar{
+  grid-area: 3/4;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+
+}
+
+.tissue-box-cover{
+  grid-area: 2/8;
+  place-self: end start;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+
+
+}
+
+.towel-tray{
+  grid-area: 3/9;
+  place-self: end center;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+
+
+}
+
+.soap-dish{
+  grid-area: 3/3;
+  place-self: end center;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+
+}
+
+.soap-dispenser{
+  grid-area: 2/5;
+  place-self: center;
+  cursor: pointer;
+  box-shadow: 0px 0px 1px 1px #0000001a;
+  
+  border-radius: 50%;
+
+}
+
+
+.pulse{
+  animation: pulse-animation 2s infinite;
+}
+
+@keyframes pulse-animation {
+  0% {
+    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+  }
 }

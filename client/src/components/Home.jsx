@@ -7,6 +7,7 @@ import Modal from "./Modal";
 import CartModal from "./CartModal";
 import New from "./New"
 import Highlight from "./Highlight";
+import LookBook from "./LookBook";
 
 import forward from '../forward.png'
 import arrow from '../arrow1.png'
@@ -18,6 +19,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
     const [slide2, setslide2] = useState(0)
     const [cards, setcards] = useState()
     const [cards2, setcards2] = useState()
+    
 
     let modaldata
     if(products){
@@ -89,22 +91,22 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
     return <div >
 
         
-        <section className="kanu flex items-center justify-center">
+        <section className="kanu flex items-center justify-center mb-48">
             <div></div>
 
             <div className=" text-white text-7xl w-[49%] ">Seamless Home Decor <span className="pl-10">with Natural Fabrics</span></div>
         
         </section>
 
-        <section className="highlight ml-[250px] my-10 h-[657px]">
+        <section className=" ml-[200px] mt-10 mb-48 h-[655px] min-h-[655px] max-h-[655px]">
 
 
-            <Highlight />
+            <Highlight  />
 
 
         </section>
 
-        <section className="  flex h-[390px] my-20 ml-[200px]  ">
+        <section className="  flex h-[390px] mt-20 mb-48 ml-[200px]  ">
 
             <div className=" bg-white h-[200px]  min-w-[20%] max-w-[20%]">
 
@@ -140,13 +142,12 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
         </section>
 
-        <section className=" lookbook mt-10 bg-black  h-[663px]  ml-[250px]"  >
-            
-            {/* <Categories products={products}/> */}
+        <section className=" lookbook mb-48 mt-10 h-[663px]  "  >
+            <LookBook />
 
         </section>
 
-        <section className="new  h-[430px] my-[100px] ml-[200px]">
+        <section className="new  h-[430px] mt-[100px] mb-48 ml-[200px]">
 
             <div className="flex justify-between mr-[70px] ">
                 <div className=" font-[19px] text-3xl ">New Arrivals
@@ -161,7 +162,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
                 </div>
             </div>
 
-            <div className=" h-[100%]">
+            <div className=" h-[100%] ">
 
                 <New products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} slide2={slide2} setcards2={setcards2}/>
 

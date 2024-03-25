@@ -28,7 +28,7 @@ function Navbar({products}){
     let uniqueCategories = getUniqueCategories(products);
     console.log(uniqueCategories)
     const [search, setsearch] = useState('')
-
+    
 
     
     
@@ -113,7 +113,7 @@ function Navbar({products}){
                 
                 <div className=" relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-[#4D3F74] font-semibold text-md font-serif ">
                     {uniqueCategories ? uniqueCategories.map((item) => {
-                    return <h1 className="">{item.toLowerCase()}</h1>
+                    return <h1 className="">{item.toLowerCase().charAt(0).toUpperCase() + item.toLowerCase().slice(1)}</h1>
                 }): null}
                 </div>
 
