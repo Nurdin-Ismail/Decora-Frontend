@@ -119,7 +119,7 @@ function Popular(props) {
       <div className=' ml-[20px]'>
         <Card 
         key={item.id}
-        img= {'http://127.0.0.1:5555' + item.images[0] } 
+        img= {'http://127.0.0.1:5555' + item.images[1] } 
         name={item.name} 
         price={item.price}
         id={item.id}

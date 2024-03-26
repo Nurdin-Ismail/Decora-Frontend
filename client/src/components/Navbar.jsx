@@ -101,7 +101,7 @@ function Navbar({products}){
 
                 <div className="flex justify-evenly items-center w-[16vw] mr-10 ml-20">
                     <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
-                    <h1 className=" text-lg font-medium h-[5vh] bg-[#4D3F74] flex items-center w-[5vw] justify-center text-white">Signup</h1>
+                    <h1 className=" text-lg font-medium h-[5vh] bg-[#47367cec] flex items-center w-[5vw] justify-center text-white">Signup</h1>
                 </div>
 
 
@@ -111,7 +111,7 @@ function Navbar({products}){
             </div>
             
                 
-                <div className=" relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-[#4D3F74] font-semibold text-md font-serif ">
+                <div className=" relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-black font-semibold text-md font-serif ">
                     {uniqueCategories ? uniqueCategories.map((item) => {
                     return <h1 className="">{item.toLowerCase().charAt(0).toUpperCase() + item.toLowerCase().slice(1)}</h1>
                 }): null}

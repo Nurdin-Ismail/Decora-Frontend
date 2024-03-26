@@ -1,60 +1,106 @@
 import React from 'react'
+import logo from '../logotwo.png'
 
 function Footer() {
   return (
-    <div >
-        <footer class="site-footer mt-2">
-      <div class="container marker:">
-        <div class="row flex justify-between">
-          <div class="col-sm-12 col-md-6 w-[30vw]">
-            <h6>About</h6>
-            <p class="text-justify">Scanfcode.com <i>CODE WANTS TO BE SIMPLE </i> is an initiative  to help the upcoming programmers with the code. Scanfcode focuses on providing the most efficient code or snippets as the code wants to be simple. We will help programmers build up concepts in different programming languages that include C, C++, Java, HTML, CSS, Bootstrap, JavaScript, PHP, Android, SQL and Algorithm.</p>
-          </div>
+    <div className=' grid grid-rows-[360px_65px_60px] bg-[#EAF0FD]'>
+        <div className='  mx-[250px] border-t-[2px] grid grid-cols-[500px_200px_200px_200px_200px]'>
 
-          <div class="col-xs-6 col-md-3">
-            <h6>Categories</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/category/c-language/">C</a></li>
-              <li><a href="http://scanfcode.com/category/front-end-development/">UI Design</a></li>
-              <li><a href="http://scanfcode.com/category/back-end-development/">PHP</a></li>
-              <li><a href="http://scanfcode.com/category/java-programming-language/">Java</a></li>
-              <li><a href="http://scanfcode.com/category/android/">Android</a></li>
-              <li><a href="http://scanfcode.com/category/templates/">Templates</a></li>
+          <div className=' grid grid-rows-[136px_60px_20px] gap-[10px]'> 
+            <img src={logo} alt="" className=''/>
+            <h1 className=' '>Exclusive offers, a heads up on new arrivals, and more. <br />On Socials #mydecora</h1>
+            <div className=' inline-flex gap-[20px]'>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M22 12C22 6.477 17.523 2 12 2C6.477 2 2 6.477 2 12C2 16.991 5.657 21.128 10.438 21.878V14.891H7.898V12H10.438V9.797C10.438 7.291 11.93 5.907 14.215 5.907C15.309 5.907 16.453 6.102 16.453 6.102V8.562H15.193C13.95 8.562 13.563 9.333 13.563 10.124V12H16.336L15.893 14.89H13.563V21.878C18.343 21.128 22 16.991 22 12Z" fill="#4B5563"></path>
+            </svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M12.315 2C14.745 2 15.099 2.013 16.123 2.06C17.187 2.109 17.914 2.278 18.55 2.525C19.2175 2.77587 19.8222 3.16936 20.322 3.678C20.8306 4.17777 21.2241 4.7825 21.475 5.45C21.722 6.086 21.891 6.813 21.94 7.877C21.988 8.944 22 9.284 22 12V12.08C22 14.723 21.988 15.067 21.94 16.123C21.891 17.187 21.722 17.914 21.475 18.55C21.2241 19.2175 20.8306 19.8222 20.322 20.322C19.8222 20.8306 19.2175 21.2241 18.55 21.475C17.914 21.722 17.187 21.891 16.123 21.94C15.056 21.988 14.716 22 12 22H11.92C9.277 22 8.933 21.988 7.877 21.94C6.813 21.891 6.086 21.722 5.45 21.475C4.7825 21.2241 4.17777 20.8306 3.678 20.322C3.16936 19.8222 2.77587 19.2175 2.525 18.55C2.278 17.914 2.109 17.187 2.06 16.123C2.013 15.099 2 14.744 2 12.315V11.685C2 9.255 2.013 8.901 2.06 7.877C2.109 6.813 2.278 6.086 2.525 5.45C2.77587 4.7825 3.16936 4.17777 3.678 3.678C4.17777 3.16936 4.7825 2.77587 5.45 2.525C6.086 2.278 6.813 2.109 7.877 2.06C8.901 2.013 9.256 2 11.685 2H12.315ZM12.234 3.802H11.766C9.31 3.802 8.982 3.813 7.959 3.86C6.984 3.905 6.455 4.067 6.102 4.204C5.635 4.386 5.302 4.602 4.952 4.952C4.602 5.302 4.386 5.635 4.204 6.102C4.067 6.455 3.904 6.984 3.86 7.959C3.813 8.982 3.802 9.31 3.802 11.766V12.234C3.802 14.69 3.813 15.018 3.86 16.041C3.905 17.016 4.067 17.545 4.204 17.898C4.386 18.364 4.603 18.698 4.952 19.048C5.302 19.398 5.635 19.614 6.102 19.796C6.455 19.933 6.984 20.096 7.959 20.14C9.013 20.188 9.329 20.198 12 20.198H12.08C14.677 20.198 14.997 20.188 16.04 20.14C17.016 20.095 17.545 19.933 17.898 19.796C18.364 19.614 18.698 19.398 19.048 19.048C19.398 18.698 19.614 18.365 19.796 17.898C19.933 17.545 20.096 17.016 20.14 16.041C20.188 14.986 20.198 14.671 20.198 12V11.92C20.198 9.323 20.188 9.003 20.14 7.96C20.095 6.984 19.933 6.455 19.796 6.102C19.6358 5.66757 19.3802 5.2746 19.048 4.952C18.7254 4.61986 18.3324 4.36426 17.898 4.204C17.545 4.067 17.016 3.904 16.041 3.86C15.018 3.813 14.69 3.802 12.234 3.802ZM12 6.865C12.6743 6.865 13.3421 6.99782 13.9651 7.25588C14.5881 7.51394 15.1542 7.89218 15.631 8.36901C16.1078 8.84584 16.4861 9.41191 16.7441 10.0349C17.0022 10.6579 17.135 11.3257 17.135 12C17.135 12.6743 17.0022 13.3421 16.7441 13.9651C16.4861 14.5881 16.1078 15.1542 15.631 15.631C15.1542 16.1078 14.5881 16.4861 13.9651 16.7441C13.3421 17.0022 12.6743 17.135 12 17.135C10.6381 17.135 9.33201 16.594 8.36901 15.631C7.40601 14.668 6.865 13.3619 6.865 12C6.865 10.6381 7.40601 9.33201 8.36901 8.36901C9.33201 7.40601 10.6381 6.865 12 6.865ZM12 8.667C11.116 8.667 10.2683 9.01815 9.64321 9.64321C9.01815 10.2683 8.667 11.116 8.667 12C8.667 12.884 9.01815 13.7317 9.64321 14.3568C10.2683 14.9818 11.116 15.333 12 15.333C12.884 15.333 13.7317 14.9818 14.3568 14.3568C14.9818 13.7317 15.333 12.884 15.333 12C15.333 11.116 14.9818 10.2683 14.3568 9.64321C13.7317 9.01815 12.884 8.667 12 8.667ZM17.338 5.462C17.6563 5.462 17.9615 5.58843 18.1865 5.81347C18.4116 6.03852 18.538 6.34374 18.538 6.662C18.538 6.98026 18.4116 7.28548 18.1865 7.51053C17.9615 7.73557 17.6563 7.862 17.338 7.862C17.0197 7.862 16.7145 7.73557 16.4895 7.51053C16.2644 7.28548 16.138 6.98026 16.138 6.662C16.138 6.34374 16.2644 6.03852 16.4895 5.81347C16.7145 5.58843 17.0197 5.462 17.338 5.462Z" fill="#4B5563"></path>
+            </svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M8.29 20.2534C15.837 20.2534 19.965 14.0004 19.965 8.5784C19.965 8.4004 19.965 8.2234 19.953 8.0484C20.7562 7.46693 21.4493 6.74701 22 5.9224C21.2511 6.2544 20.4566 6.47216 19.643 6.5684C20.4996 6.05546 21.1408 5.24875 21.447 4.2984C20.6417 4.77628 19.7607 5.11313 18.842 5.2944C18.2234 4.63616 17.405 4.20023 16.5136 4.0541C15.6222 3.90797 14.7075 4.0598 13.9111 4.48607C13.1147 4.91234 12.4811 5.58927 12.1083 6.41206C11.7355 7.23485 11.6444 8.15758 11.849 9.0374C10.2176 8.95564 8.6216 8.53172 7.16465 7.79317C5.70769 7.05461 4.42233 6.01792 3.392 4.7504C2.86732 5.6536 2.70659 6.72282 2.94254 7.74036C3.17848 8.75791 3.79337 9.64728 4.662 10.2274C4.00926 10.2085 3.37063 10.0329 2.8 9.7154V9.7674C2.80039 10.7147 3.1284 11.6327 3.7284 12.3658C4.3284 13.0988 5.16347 13.6018 6.092 13.7894C5.48781 13.9541 4.85389 13.9781 4.239 13.8594C4.50116 14.6749 5.01168 15.388 5.69913 15.899C6.38658 16.41 7.21657 16.6934 8.073 16.7094C7.22212 17.378 6.24779 17.8722 5.20573 18.1639C4.16367 18.4556 3.07432 18.539 2 18.4094C3.8766 19.6137 6.06019 20.2525 8.29 20.2494" fill="#4B5563"></path>
+            </svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path fill-rule="evenodd" clip-rule="evenodd" d="M19.792 5.41483C20.6521 5.64589 21.3325 6.32626 21.5635 7.18633C21.9872 8.75244 22 12.0002 22 12.0002C22 12.0002 22 15.2608 21.5764 16.8141C21.3453 17.6741 20.665 18.3545 19.8049 18.5856C18.2516 19.0092 12 19.0092 12 19.0092C12 19.0092 5.74839 19.0092 4.19512 18.5856C3.33504 18.3545 2.65469 17.6741 2.42362 16.8141C2 15.248 2 12.0002 2 12.0002C2 12.0002 2 8.75244 2.41078 7.19917C2.64185 6.33909 3.32221 5.65873 4.18229 5.42767C5.73556 5.00404 11.9872 4.99121 11.9872 4.99121C11.9872 4.99121 18.2388 4.99121 19.792 5.41483ZM15.1836 12.0002L9.99743 15.004V8.99635L15.1836 12.0002Z" fill="#4B5563"></path>
+            </svg>
+            <svg class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M0 10C0 15.5228 4.47715 20 10 20C15.5228 20 20 15.5228 20 10C20 4.47715 15.5228 0 10 0C4.47715 0 0 4.47715 0 10Z" fill="#4B5563"></path>
+              <path d="M10 5C7.25 5 5 7.25 5 10C5 12.0625 6.25 13.8125 8 14.5625C8 14.1875 8 13.8125 8.0625 13.4375C8.1875 13 8.6875 10.6875 8.6875 10.6875C8.6875 10.6875 8.5 10.375 8.5 9.875C8.5 9.125 8.9375 8.5625 9.4375 8.5625C9.875 8.5625 10.125 8.875 10.125 9.3125C10.125 9.75 9.8125 10.4375 9.6875 11.0625C9.5625 11.5625 9.9375 12 10.5 12C11.4375 12 12.0625 10.8125 12.0625 9.3125C12.0625 8.1875 11.3125 7.375 10 7.375C8.5 7.375 7.5625 8.5 7.5625 9.75C7.5625 10.1875 7.6875 10.5 7.875 10.75C7.9375 10.875 8 10.875 7.9375 11C7.9375 11.0625 7.875 11.3125 7.8125 11.375C7.75 11.5 7.6875 11.5625 7.5625 11.5C6.875 11.1875 6.5625 10.4375 6.5625 9.5625C6.5625 8.125 7.75 6.4375 10.125 6.4375C12.0625 6.4375 13.3125 7.8125 13.3125 9.3125C13.3125 11.25 12.25 12.75 10.625 12.75C10.0625 12.75 9.5625 12.4375 9.375 12.125C9.375 12.125 9.0625 13.25 9 13.5C8.875 13.875 8.6875 14.25 8.5 14.5625C8.9375 14.6875 9.4375 14.75 9.9375 14.75C12.6875 14.75 14.9375 12.5 14.9375 9.75C15 7.25 12.75 5 10 5Z" fill="white"></path>
+            </svg>
+            <svg class="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21.9902 7.00684C20.6902 7.00684 19.4881 6.62742 18.5264 5.98983C17.4223 5.25836 16.6254 4.18267 16.3449 2.94661C16.2736 2.6415 16.238 2.32466 16.2336 2H12.516V10.9224L12.5116 15.8079C12.5116 17.1144 11.541 18.2214 10.2009 18.6126C9.80912 18.726 9.39062 18.7808 8.95431 18.7573C8.39334 18.7299 7.87244 18.5813 7.41387 18.3427C6.4433 17.8341 5.78884 16.911 5.77103 15.851C5.74431 14.2003 7.2625 12.8508 9.1413 12.8508C9.51083 12.8508 9.867 12.9055 10.2009 12.9994V10.5625V9.6902C9.84919 9.64326 9.49302 9.61979 9.12794 9.61979C7.07105 9.61979 5.14773 10.3708 3.77202 11.7242C2.73467 12.7452 2.11137 14.0516 2.01342 15.4207C1.88876 17.2161 2.63672 18.9255 4.08812 20.185C4.30182 20.3689 4.52443 20.541 4.76039 20.7013C6.00254 21.5423 7.52517 22 9.12794 22C9.48857 22 9.84919 21.9765 10.2009 21.9296C11.6968 21.734 13.077 21.1316 14.1678 20.185C15.5079 19.0233 16.2469 17.4782 16.2558 15.8353L16.238 8.53628C16.8747 8.97047 17.5737 9.32642 18.3261 9.60415C19.4925 10.0383 20.7302 10.2535 21.9991 10.2535V7.88304V7.00293C22.0035 7.00685 21.9902 7.00684 21.9902 7.00684Z" fill="#4B5563"></path>
+            </svg>
+
+
+            </div>
+
+          </div>
+          <div className='link-block'>
+            <h1 className=''>Shop</h1>
+            <ul className=' my-[5px]'>
+              <li><a href="">New Arrivals</a></li>
+              <li><a href="">Best Selling</a></li>
+              <li><a href="">Clearance</a></li>
             </ul>
           </div>
-
-          <div class="col-xs-6 col-md-3">
-            <h6>Quick Links</h6>
-            <ul class="footer-links">
-              <li><a href="http://scanfcode.com/about/">About Us</a></li>
-              <li><a href="http://scanfcode.com/contact/">Contact Us</a></li>
-              <li><a href="http://scanfcode.com/contribute-at-scanfcode/">Contribute</a></li>
-              <li><a href="http://scanfcode.com/privacy-policy/">Privacy Policy</a></li>
-              <li><a href="http://scanfcode.com/sitemap/">Sitemap</a></li>
+          <div className='link-block '>
+            <h1 className='  my-[5px]'>Comapany</h1>
+            <ul>
+              <li><a href="">About Us</a></li>
+              <li><a href="">Privacy Policy</a></li>
+              <li><a href="">Terms & Conditions</a></li>
+              <li><a href="">Blog</a></li>
+              <li><a href="">Pricing</a></li>
             </ul>
           </div>
+          <div className='link-block'>
+            <h1 className=' my-[5px]'>Account</h1>
+            <ul>
+              <li><a href="">My Account</a></li>
+              <li><a href="">Wishlist</a></li>
+              <li><a href="">Rewards</a></li>
+              
+            </ul>
+          </div>
+          <div className='link-block '>
+            <h1 className=' my-[5px]'>Help</h1>
+            <ul>
+              <li><a href="">Help Center</a></li>
+              <li><a href="">Start a Conversation</a></li>
+              <li><a href="">Shipping Details</a></li>
+              <li><a href="">Returns</a></li>
+            </ul>
+
+          </div>
+
         </div>
-        
-      </div>
-      <div class="container">
-        <div class="row">
-          <div class="col-md-8 col-sm-6 col-xs-12">
-            <p class="copyright-text">Copyright &copy; 2017 All Rights Reserved by 
-         <a href="#">Scanfcode</a>.
-            </p>
-          </div>
+        <div className='  mx-[250px] border-t-[1px] border-stone-400 grid place-content-center'>
 
-          <div class="col-md-4 col-sm-6 col-xs-12">
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>   
-            </ul>
+        <div class="grid grid-cols-[500px_500px_300px] place-items-center">
+          <div class=" grid place-self-start ml-[4px]" id="">
+            <span class="flex place-items-center"><div class=""><img width="40px" src="https://lmg.a.bigcontent.io/v1/static/website_images_static-pages_brand_exp_brand2images_icons_phone-black-24?fmt=auto" alt=""></img></div><div class="flex "><div class="mx-[10px]">Talk to us</div><div dir="ltr">(+254-727845602)</div></div></span>
           </div>
+          <div class="grid place-self-start ml-[4px]" id="">
+            <span class="flex place-items-center"><div class=""><img width="40px" src="https://lmg.a.bigcontent.io/v1/static/website_images_static-pages_brand_exp_brand2images_icons_help-black-24?fmt=auto" alt=""></img></div><div class="flex "><div class="mx-[10px]">Helpcentre</div><div>help.decora.com</div></div></span>
+          </div>
+          <div class="grid place-self-start ml-[4px]" id="">
+            <span class="flex place-items-center"><div class=""><img width="40px" src="https://lmg.a.bigcontent.io/v1/static/website_images_static-pages_brand_exp_brand2images_icons_message-black-24?fmt=auto" alt=""></img></div>
+              <div class="flex ">
+                <div class="mx-[10px]">Write to us</div>
+                <div>support@decora.com</div>
+                </div>
+                </span>
+            
+          </div>
+            </div>
+
         </div>
-      </div>
-</footer>
+        {/* <div className='  mx-[250px] border-t-[1px] border-stone-400'>
+          
+
+        </div> */}
+        <div className=' grid place-items-center  mx-[250px] border-t-[1px] border-stone-400' >
+          <h1>Copyright © 2024 Decora, Inc. All rights reserved.</h1>
+        </div>
     </div>
   )
 }

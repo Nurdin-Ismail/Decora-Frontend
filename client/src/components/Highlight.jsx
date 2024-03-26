@@ -92,7 +92,7 @@ export default function Highlight() {
 
             <p className='grid place-self-end mr-14'>Elevate your home with our curated selection of top-selling categories. From stunning rugs to captivating wall art, cozy throws to elegant vases. </p>
 
-            <button className=' mt-10 borde-solid border-[1px] py-2 mr-10 w-[40%] hover:bg-[#6D28D9] hover:text-white ' >Explore More</button>
+            <button className=' mt-10 borde-solid border-[1px] py-2 mr-10 w-[40%] hover:bg-[#47367cec] hover:text-white ' >Explore More</button>
              
         </div>
         
@@ -123,7 +123,7 @@ export default function Highlight() {
                       data-aos="fade-right"
                       data-aos-offset="300"
                       data-aos-easing="ease-in-sine" 
-                      className=' grid place-self-end  h-[40px] w-[40px] bg-violet-700 z-4 small'
+                      className=' grid place-self-end  h-[40px] w-[40px] bg-[#47367cec] z-4 small'
                       >
                         <img src={arrow} alt="" className=' invert'/>
                         

@@ -143,7 +143,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
         </section>
 
         <section className=" lookbook mb-48 mt-10 h-[663px]  "  >
-            <LookBook />
+            <LookBook setcardinfo={setcardinfo} handleis={handleis} is={is}/>
 
         </section>
 

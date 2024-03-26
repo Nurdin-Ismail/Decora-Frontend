@@ -685,6 +685,9 @@ select {
   
 }
 
+
+
+
 .tumbler{
   grid-area: 2/3;
   place-self: center;
@@ -747,15 +750,169 @@ select {
 }
 
 
+
+
+
+
+
+
+
+.shopthelook-decor .shop{
+  position: relative;
+  
+
+  grid-area: 1/1;
+
+  z-index: -133;
+  
+}
+.shopthelook-decor  div{
+
+ 
+  position: relative;
+  grid-area: 1/1;
+  z-index: 167;
+
+  display: grid; 
+
+  grid-template-rows: 40% 30% 20% 20%;
+
+  
+
+
+
+  
+}
+
+
+
+.dark-grey-ceramic{
+  grid-area: 2/5;
+  place-self: center end;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #ebe5e51a;
+
+
+}
+
+.black-brutalist{
+
+  grid-area: 2/3;
+  place-self: center start;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #e9e1e11a;
+
+
+
+}
+
+.ema-ceramic-vase{
+  margin-top: 3rem;
+  grid-area: 2/3;
+  place-self: center end;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #f0eaea1a;
+
+
+}
+
+.lorin-medium{
+  grid-area: 2/2;
+  place-self: center ;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #fffdfd1a;
+
+
+}
+
+.pulse-decor{
+  animation: pulse-animation 2s infinite;
+}
+
+
+
+
+.shopthelook-candle .shop{
+  position: relative;
+
+  grid-area: 1/1;
+
+  z-index: -133;
+  
+}
+.shopthelook-candle  div{
+
+ 
+  position: relative;
+  grid-area: 1/1;
+  z-index: 167;
+
+  display: grid; 
+
+  grid-template-rows: 50% 20% 20% 10%;
+
+  
+
+
+
+  
+}
+
+.lorin-large{
+  grid-area: 2/4;
+  place-self: start center ;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #fffdfd1a;
+
+}
+
+.lorin-medium-two{
+  grid-area: 2/3;
+  place-self: center ;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #fffdfd1a;
+
+}
+
+.lorin-small{
+  grid-area: 2/2;
+  place-self: center ;
+  border-radius: 50%;
+  box-shadow: 0px 0px 1px 1px #fffdfd1a;
+
+}
+
+
+
+
+
+
+
+
+
+
 .pulse{
   animation: pulse-animation 2s infinite;
 }
 
 @keyframes pulse-animation {
   0% {
-    box-shadow: 0 0 0 0px rgba(0, 0, 0, 0.4);
+    box-shadow: 0 0 0 0px rgba(3, 3, 3, 0.575);
   }
   100% {
-    box-shadow: 0 0 0 20px rgba(0, 0, 0, 0);
+    box-shadow: 0 0 0 20px rgba(228, 222, 222, 0);
   }
 }
+
+.link-block{
+  display: grid;
+  grid-template-rows: 40% 60%;
+}
+
+.link-block h1{
+  place-self: end start;
+  font-size: x-large;
+  font-weight: 700;
+  color: #32057a;
+}
+
