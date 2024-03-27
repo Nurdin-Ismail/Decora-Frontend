@@ -67,7 +67,7 @@ function Navbar({products}){
     return <div>
 
         <nav className="">
-            <div className="  bg-white h-[9vh] flex justify-between ">
+            <div className=" topnav  bg-white h-[9vh] flex justify-between ">
 
                 <div className="search-dropdown  ">
                     <Search search={search} setsearch={setsearch} onsearch={onSearchChange}/>
@@ -93,13 +93,13 @@ function Navbar({products}){
                 
 
                 </div>
-                <div className=" ml-[]">
+                <div className=" logo  ml-[]">
                      <a href="/"><img src={logo} alt="" className=" h-[18vh] w-[10vw] mt-[-40px] " /></a>
                 </div>
 
                
 
-                <div className="flex justify-evenly items-center w-[16vw] mr-10 ml-20">
+                <div className=" signup flex justify-evenly items-center w-[16vw] mr-10 ml-20">
                     <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
                     <h1 className=" text-lg font-medium h-[5vh] bg-[#47367cec] flex items-center w-[5vw] justify-center text-white">Signup</h1>
                 </div>
@@ -111,11 +111,31 @@ function Navbar({products}){
             </div>
             
                 
-                <div className=" relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-black font-semibold text-md font-serif ">
+            <div className=" lower-nav relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-black font-semibold text-md font-serif ">
                     {uniqueCategories ? uniqueCategories.map((item) => {
-                    return <h1 className="">{item.toLowerCase().charAt(0).toUpperCase() + item.toLowerCase().slice(1)}</h1>
+                        // let name = item.toLowerCase().charAt(0).toUpperCase() + item.toLowerCase().slice(1)
+                        
+                        let name1 = item.toLowerCase().split(' ')
+                        let name2 = name1.map((item1) => {
+                            
+                            if(item1.length > 1){
+                                console.log(item)
+                                let newterm= item1.slice(0,1).toUpperCase() + item1.toLowerCase().slice(1)
+                                return newterm
+                            }else{
+                                return item1
+                            }
+
+                        })
+                        name2 = name2.join(' ')
+
+                        let name3 = name2
+
+
+                        console.log(name3)
+                    return <a href={'/product-category/' + name3 + '/-'}><h1 className="">{name3}</h1></a>
                 }): null}
-                </div>
+            </div>
 
                 
 

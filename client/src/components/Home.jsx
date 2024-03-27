@@ -98,7 +98,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
         
         </section>
 
-        <section className=" ml-[200px] mt-10 mb-48 h-[655px] min-h-[655px] max-h-[655px]">
+        <section className=" ml-[200px] mt-10 mb-38 h-[655px] min-h-[655px] max-h-[655px]">
 
 
             <Highlight  />
@@ -106,7 +106,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
         </section>
 
-        <section className="  flex h-[390px] mt-20 mb-48 ml-[200px]  ">
+        <section className="  flex h-[390px] mt-20 mb-32 ml-[200px]  ">
 
             <div className=" bg-white h-[200px]  min-w-[20%] max-w-[20%]">
 
@@ -142,7 +142,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
         </section>
 
-        <section className=" lookbook mb-48 mt-10 h-[663px]  "  >
+        <section className=" lookbook mb-32 mt-10 h-[663px]  "  >
             <LookBook setcardinfo={setcardinfo} handleis={handleis} is={is}/>
 
         </section>
