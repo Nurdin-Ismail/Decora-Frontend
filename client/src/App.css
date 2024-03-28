@@ -145,8 +145,22 @@ font-family: 'Philosopher', sans-serif;
 
 .over{
   grid-area: 2/2;
-  position: relative;
   z-index: 100000;
+  /* background-color: #00000086; */
+}
+
+.arrow1{
+  grid-area: 2/2;
+  place-self: center start ;
+  z-index: 1000000;
+
+}
+
+.arrow2{
+  grid-area: 2/2;
+  place-self: center end;
+  z-index: 1000000;
+
 }
 
 .kkk{
@@ -165,7 +179,10 @@ font-family: 'Philosopher', sans-serif;
 
   
 }
-
+.ko{
+  position: relative;
+  z-index: 1000000000000000000;
+}
 .jojo .ki{
     background-color: #ffffffea;
     grid-area: 1/1;

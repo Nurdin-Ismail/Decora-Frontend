@@ -157,7 +157,7 @@ export default function LookBook({setcardinfo, handleis, is}) {
             if(current == 'Bathroom Accessories'){
                 return <div className=' shopthelook-bath grid'>
 
-                    <img src={shopthebath} alt="" className='shop' />
+                    <img src={shopthebath} alt="" className='shop' onClick={() => console.log('clickedo')}/>
                     <div className=' grid grid-cols-12 h-[499.50px] w-[666px]'>
                             <img src={tag} alt="" 
                             className='pulse  tumbler' 

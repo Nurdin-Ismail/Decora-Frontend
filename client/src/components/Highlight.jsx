@@ -57,8 +57,11 @@ export default function Highlight() {
 
   }
 
-  function handlecateg(categ){
-    if(categ == 0){
+  function handlecateg(categ, link_or_title){
+
+    if(link_or_title == 'title')
+    {
+      if(categ == 0){
       return 'Wall Decor'
 
     }else if(categ == 1){
@@ -77,12 +80,35 @@ export default function Highlight() {
       return "Kid's Lighting"
       
     }
+  } else if(link_or_title == 'link'){
+    if(categ == 0){
+      return '/Décor & Arts/Wall Decor'
+
+    }else if(categ == 1){
+      return '/Décor & Arts/Home Accessories'
+      
+    }else if(categ == 2){
+      return '/Kitchen & Dining/ServeWare & Dinnerware'
+      
+    }else if(categ == 3){
+      return '/Décor & Arts/Lamps & Lighting'
+      
+    }else if(categ == 4){
+      return '/Bathroom & Laundry/Bathroom Accessories'
+      
+    }else if(categ == 5){
+      return "/Kids Decor/Decor & Lighting"
+      
+    }
+
   }
+    }
+    
   
   
   
   return (
-    <div className='  grid grid-flow-col  grid-rows-[0] grid-cols-[400px] h-[100%] justify-between  '>
+    <div className=' grid grid-flow-col  grid-rows-[0] grid-cols-[400px] h-[100%] justify-between  '>
         <div className=' grid grid-flow-row grid-rows-[40px_130px_100px_100px] '>
 
             <h1 className=' grid text-3xl font-semibold place-self-end mr-[73px]
@@ -93,31 +119,37 @@ export default function Highlight() {
             <p className='grid place-self-end mr-14'>Elevate your home with our curated selection of top-selling categories. From stunning rugs to captivating wall art, cozy throws to elegant vases. </p>
 
             <button className=' mt-10 borde-solid border-[1px] py-2 mr-10 w-[40%] hover:bg-[#47367cec] hover:text-white ' >Explore More</button>
+            
              
         </div>
+
+          <div className=' arrow1 rounded-full bg-violet-200 h-[40px] w-[40px]  '  onClick={() => handleslides('left')}><img className=" cursor-pointer rotate-180 h-[25px] mx-[6px] my-[6px]  " src={forward} alt=""  /></div> 
+          <div className=' arrow2 rounded-full bg-violet-200 h-[40px] w-[40px]  ' onClick={() => handleslides('right')}><img className=" cursor-pointer h-[25px] mx-[8px] my-[7.5px]" src={forward} alt=""  /></div>
         
 
-        <div className=' over   h-[100%]  overflow-x-hidden  '
+        <div className=' over  overflow-x-hidden grid'
         
         >
 
          
 
 
-          <div className='besto  flex gap-[5px] '
-          style={{transform: `translate(-${slide3 * 28}%)`}}
+          <div className='besto grid gap-[5px] grid-flow-col '
+          style={{transform: `translate(-${slide3 * 11.7}%)`}}
           >
             {imagelist ? imagelist.map((item) => {
 
-            return  <div className=' jojo grid  '>
+            return  <div className=' jojo grid cursor:pointer '>
             {slide3 == imagelist.indexOf(item)? 
             
                   <div 
                     data-aos="fade-down"
-                    data-aos-duration="2000" className=' ka grid grid-cols-1  mt-[400px] ml-10 w-[290px]   h-[60px]  ' 
+                    data-aos-duration="2000"
+                    // key={imagelist.indexOf(item)}
+                    className=' ka grid grid-cols-1  mt-[400px] ml-10 w-[290px]   cursor-pointer h-[60px]' onClick={() => console.log('clicked')}
                   >
-                      <div className=' grid  h-[60px] w-[250px] ki z-5  '>
-                          <h1 className=' grid text-2xl font-serif font-semibold place-content-center'>{handlecateg(imagelist.indexOf(item))}</h1>
+                      <div className=' grid  h-[60px] w-[250px] ki z-5 cursor-pointer '>
+                          <h1 className=' grid text-2xl font-serif font-semibold place-content-center'>{handlecateg(imagelist.indexOf(item), 'title')}</h1>
                       </div>
                       <div
                       data-aos="fade-right"
@@ -125,7 +157,7 @@ export default function Highlight() {
                       data-aos-easing="ease-in-sine" 
                       className=' grid place-self-end  h-[40px] w-[40px] bg-[#47367cec] z-4 small'
                       >
-                        <img src={arrow} alt="" className=' invert'/>
+                        <a href={'/product-category' + handlecateg(imagelist.indexOf(item), 'link') }><img src={arrow} alt="" className=' invert'/></a>
                         
                       </div>
 
@@ -144,14 +176,7 @@ export default function Highlight() {
           
 
         </div>
-        <div className='over flex h-[655px] w-[98%] items-center justify-between '>
-            <div className=' rounded-full bg-violet-50 h-[40px] w-[40px]  '  onClick={() => handleslides('left')}><img className=" cursor-pointer rotate-180 h-[25px] mx-[6px] my-[6px]  " src={forward} alt=""  />
-</div> 
-            <div className=' rounded-full bg-violet-50 h-[40px] w-[40px]  ' onClick={() => handleslides('right')}><img className=" cursor-pointer h-[25px] mx-[8px] my-[7.5px]" src={forward} alt=""  />
-</div> 
-
-
-          </div>
+       
     </div>
   )
 }
