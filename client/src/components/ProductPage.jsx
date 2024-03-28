@@ -17,6 +17,8 @@ import CartModal from './CartModal';
 function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}) {
     const params = useParams();
     const [product, setproduct] = useState()
+    const [slides, setslides] = useState(1)
+    const [cards, setcards] = useState(0)
    
 
 
@@ -52,7 +54,11 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     useEffect(() => {
         fetch(`http://127.0.0.1:5555/product/${params.id}`)
         .then(res => res.json()) 
-        .then(data => setproduct(data))
+        .then(data => {
+          setproduct(data)
+          setcards(data.images.length)
+        
+        })
     
       }, [])
      
@@ -90,8 +96,53 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     
   return (
 
-    <div>
-      
+    <div className=' '>
+      <div className=' grid grid-cols-[255px_1340px_255px] mt-20'>
+        <div></div>
+        <div className='grid grid-cols-[700px_700px]'>
+
+          <div className='grid grid-flow-row overflow-x-hidden gap-[20px]'>
+
+            <div className=' h-[700px] min-w-[700px] grid grid-flow-col ease-in'
+            style={{transform: `translate(-${slides * 100}%)`}}
+            >
+
+              {product ? product.images.map((pic) => {
+                return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[700px] min-w-[700px]' />
+
+              }): null}
+
+
+            </div>
+
+            <div className='grid grid-cols-5 place-items-center gap-[30px]'>
+              {product ? product.images.map((pic) => {
+                return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[100px] min-w-[100px] cursor-pointer' onClick={() => setslides(product.images.indexOf(pic))} />
+
+              }): null}
+
+
+            </div>
+
+
+
+
+
+          </div>
+
+          <div></div>
+
+        </div>
+        <div></div>
+        
+
+
+      </div>
+
+      <div className='h-[40vh]'>
+
+      </div>
+
 
     </div>
    
