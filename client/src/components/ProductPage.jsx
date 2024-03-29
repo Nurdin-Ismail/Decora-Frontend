@@ -17,9 +17,9 @@ import CartModal from './CartModal';
 function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}) {
     const params = useParams();
     const [product, setproduct] = useState()
-    const [slides, setslides] = useState(1)
+    const [slides, setslides] = useState(0)
     const [cards, setcards] = useState(0)
-   
+    const [counter, setcounter] = useState(1)
 
 
 
@@ -31,23 +31,23 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
 
 
-    const responsive = {
-      desktop: {
-        breakpoint: { max: 3000, min: 1024 },
-        items: 4,
-        slidesToSlide: 4 // optional, default to 1.
-      },
-      tablet: {
-        breakpoint: { max: 1024, min: 464 },
-        items: 2,
-        slidesToSlide: 3 // optional, default to 1.
-      },
-      mobile: {
-        breakpoint: { max: 464, min: 0 },
-        items: 1,
-        slidesToSlide: 1 // optional, default to 1.
-      }
-    };
+    // const responsive = {
+    //   desktop: {
+    //     breakpoint: { max: 3000, min: 1024 },
+    //     items: 4,
+    //     slidesToSlide: 4 // optional, default to 1.
+    //   },
+    //   tablet: {
+    //     breakpoint: { max: 1024, min: 464 },
+    //     items: 2,
+    //     slidesToSlide: 3 // optional, default to 1.
+    //   },
+    //   mobile: {
+    //     breakpoint: { max: 464, min: 0 },
+    //     items: 1,
+    //     slidesToSlide: 1 // optional, default to 1.
+    //   }
+    // };
 
 
 
@@ -86,6 +86,34 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
         modaldata = products.filter((item) => item.id == cardinfo)
     }
 
+    function handlecounter(target){
+      console.log(target)
+      if(target == "−"){
+        if(counter > 1 ){
+          setcounter(counter-1)
+        }
+      }
+
+      if(target == '+' ){
+        if(product){
+          if(counter < product.quantity){
+            setcounter(counter + 1)
+         }
+        }
+
+        // if(counter < product.quantity){
+        //    setcounter(counter + 1)
+        // }
+        // console.log(product.quantity)
+
+       
+         
+        
+        
+      }
+      
+    }
+
    
       
     
@@ -98,12 +126,15 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
     <div className=' '>
       <div className=' grid grid-cols-[255px_1340px_255px] mt-20'>
+        {/* margins */}
         <div></div>
-        <div className='grid grid-cols-[700px_700px]'>
+        {/* margins */}
 
-          <div className='grid grid-flow-row overflow-x-hidden gap-[20px]'>
+        <div className='product-display grid grid-cols-[700px_700px]'>
 
-            <div className=' h-[700px] min-w-[700px] grid grid-flow-col ease-in'
+          <div className='display-thumbnail-carousel select-none grid grid-flow-row overflow-x-hidden gap-[20px]'>
+
+            <div className='main-image h-[700px] min-w-[700px] grid grid-flow-col ease-in'
             style={{transform: `translate(-${slides * 100}%)`}}
             >
 
@@ -115,7 +146,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
             </div>
 
-            <div className='grid grid-cols-5 place-items-center gap-[30px]'>
+            <div className='thumbnail grid grid-cols-5 place-items-center gap-[30px]'>
               {product ? product.images.map((pic) => {
                 return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[100px] min-w-[100px] cursor-pointer' onClick={() => setslides(product.images.indexOf(pic))} />
 
@@ -130,18 +161,100 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
           </div>
 
-          <div></div>
+          <div className=' display-product-info   mx-5'>
+            {
+              product ? 
+              
+              <div className='grid gap-[20px] sticky top-[76px]'>
+                <div className=' grid  '>
+                  <h1 className='  mt-[-14px] font-extrabold text-[40px] place-self-start'>{product.name}</h1>
+            
+                </div>
 
-        </div>
+                <div>
+                  <p>{product.description}</p>
+                </div>
+
+
+                <div>
+                  <h1 className=' font-semibold text-3xl'>Ksh {product.price}.00</h1>
+                </div>
+
+                <div className=' grid gap-[10px]'>
+                  <h1 className=' font-semibold text-lg'>Quantity</h1>
+                  <div className='grid h-[50px] w-[250px] grid-cols-[40%_20%_40%] outline-1 border-black border-[1px]'>
+                    <button className='minus ' onClick={() => handlecounter('−')}>−</button>
+                    <h1 className='place-self-center font-semibold text-xl'>{counter}</h1>
+                    <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
+                  </div>
+                  <button className='grid h-[40px] w-[250px] bg-black text-white place-content-center text-xl'  onClick={() => setadd(true)}>Add To Cart</button>
+                </div>
+              </div> 
+            :
+            null
+            }
+            
+            
+
+            
+          </div>
+
+        </div> 
+        {/* margins */}
         <div></div>
+        {/* margins */}
+
         
 
 
       </div>
 
-      <div className='h-[40vh]'>
+      <div className='similar-products mb-20 mt-40'>
+
+        {
+          similar_products ? 
+          <div className='h-[50vh] grid grid-flow-col ml-[200px] mr-[285px] overflow-x-hidden'>
+
+            {similar_products.map((item) => {
+                return (
+                  <div className=' ml-[20px]'>
+                    <Card 
+                      key={item.id}
+                      img= {'http://127.0.0.1:5555' + item.images[1] } 
+                      name={item.name} 
+                      price={item.price}
+                      id={item.id}
+                      setcardinfo={setcardinfo}
+                      handleis={handleis}
+                      onClickItem={action('click')}
+                      is={is}
+        
+        
+        
+                    />
+          </div>
+                  )
+        })}
+
+
+
+          </div> 
+
+          :
+
+          null
+
+        }
+
+
 
       </div>
+
+
+      {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
+        
+      {add ? <CartModal setadd={setadd} count={counter} product={product}/>: null}
+
 
 
     </div>

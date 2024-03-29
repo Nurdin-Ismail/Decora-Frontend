@@ -931,3 +931,17 @@ select {
   color: #32057a;
 }
 
+
+.minus{
+  display: grid;
+  place-self: center end;
+  font-size: 30px;
+ 
+
+}
+
+.add{
+  display: grid;
+  place-self: center start;
+
+}
