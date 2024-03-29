@@ -945,3 +945,13 @@ select {
   place-self: center start;
 
 }
+
+
+.mini-thumb{
+  place-content: center ;
+}
+
+.mini-scroll{
+  place-self: center ;
+  place-content: center;
+}

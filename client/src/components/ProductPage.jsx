@@ -20,6 +20,11 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     const [slides, setslides] = useState(0)
     const [cards, setcards] = useState(0)
     const [counter, setcounter] = useState(1)
+    const [thumbnail, setthumbnail] = useState(true)
+    const [related, setrelated] = useState(0)
+
+
+
 
 
 
@@ -62,13 +67,14 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     
       }, [])
      
-    let similar_products  
+    let similar_products 
+    let relatedcards 
    
         if(product && products){
        
 
           similar_products = products.filter(item => item.id != product.id && item.sub_category == product.sub_category || item.tag == product.tag )
-        
+          relatedcards = similar_products.length
          
           
         
@@ -114,6 +120,16 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
       
     }
 
+    setTimeout(() => {
+      if(related != relatedcards - 4){
+        setrelated(related+1)
+      }else{
+        setrelated(0)
+
+      }
+      
+    }, 3000)
+
    
       
     
@@ -127,47 +143,104 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     <div className=' '>
       <div className=' grid grid-cols-[255px_1340px_255px] mt-20'>
         {/* margins */}
-        <div></div>
+        <div className=' grid h-[200px]'>
+
+          <div className='grid mini-thumb '>
+
+            <div className={thumbnail ? 'h-[60px] w-[50px] bg-neutral-200 grid grid-rows-[70%_30%] gap-[5px] px-[5px] py-[5px] border-[1px] border-black' : 'h-[60px] w-[50px] bg-neutral-200 grid grid-rows-[70%_30%] gap-[5px] px-[5px] py-[5px]'} onClick={() => setthumbnail(true)}>
+              <div className=' bg-white '>
+
+              </div>
+              <div className=' grid grid-flow-col gap-[5px]'>
+                <div className=' bg-white h-[10px]'></div>
+                <div className=' bg-white h-[10px]'></div>
+                <div className=' bg-white h-[10px]'></div>
+              </div>
+            </div>
+            
+
+          </div>
+
+          <div className={thumbnail ? 'grid mini-scroll w-[50px]' : 'grid mini-scroll w-[50px] border-[1px] border-black'} onClick={() => setthumbnail(false)}>
+            <div className='h-[60px] w-[40px] grid bg-neutral-200 grid-rows-[20%_50%_25%] gap-[5px] px-[5px] overflow-y-hidden'>
+              <div className="bg-white"></div>
+              <div className="bg-white"></div>
+              <div className="bg-white"></div>
+            </div>
+          </div>
+          
+        </div>
         {/* margins */}
 
         <div className='product-display grid grid-cols-[700px_700px]'>
 
+         {thumbnail ? 
           <div className='display-thumbnail-carousel select-none grid grid-flow-row overflow-x-hidden gap-[20px]'>
 
-            <div className='main-image h-[700px] min-w-[700px] grid grid-flow-col ease-in'
-            style={{transform: `translate(-${slides * 100}%)`}}
-            >
+          <div className='main-image h-[700px] min-w-[700px] grid grid-flow-col ease-in'
+          style={{transform: `translate(-${slides * 100}%)`}}
+          >
 
-              {product ? product.images.map((pic) => {
-                return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[700px] min-w-[700px]' />
+            {product ? product.images.map((pic) => {
+              return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[700px] min-w-[700px]' />
 
-              }): null}
-
-
-            </div>
-
-            <div className='thumbnail grid grid-cols-5 place-items-center gap-[30px]'>
-              {product ? product.images.map((pic) => {
-                return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[100px] min-w-[100px] cursor-pointer' onClick={() => setslides(product.images.indexOf(pic))} />
-
-              }): null}
-
-
-            </div>
-
-
-
+            }): null}
 
 
           </div>
 
-          <div className=' display-product-info   mx-5'>
+          <div className='thumbnail grid grid-cols-5 place-items-center gap-[30px]'>
+            {product ? product.images.map((pic) => {
+              return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[100px] min-w-[100px] cursor-pointer' onClick={() => setslides(product.images.indexOf(pic))} />
+
+            }): null}
+
+
+          </div>
+
+
+
+
+
+        </div>
+
+
+
+         :
+
+         <div className='display-scroll select-none grid grid-flow-row overflow-x-hidden gap-[20px]'>
+
+         <div className=' grid gap-[20px]'
+         
+         >
+
+           {product ? product.images.map((pic) => {
+             return <img key={product.images.indexOf(pic)} src={"http://127.0.0.1:5555" + pic} alt="" className=' h-[600px] min-w-[500px]' />
+
+           }): null}
+
+
+         </div>
+
+        
+
+
+
+
+
+       </div>
+
+
+         
+        }
+
+          <div className={thumbnail ? ' display-product-info   mx-20' : ' display-product-info  ml-[-10px] mr-[184px]'}>
             {
               product ? 
               
               <div className='grid gap-[20px] sticky top-[76px]'>
                 <div className=' grid  '>
-                  <h1 className='  mt-[-14px] font-extrabold text-[40px] place-self-start'>{product.name}</h1>
+                  <h1 className='  mt-[-14px] font-extrabold text-[40px] place-self-start opacity-[70%]'>{product.name}</h1>
             
                 </div>
 
@@ -177,7 +250,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
 
                 <div>
-                  <h1 className=' font-semibold text-3xl'>Ksh {product.price}.00</h1>
+                  <h1 className=' font-semibold text-3xl opacity-[60%]'>Ksh {product.price}.00</h1>
                 </div>
 
                 <div className=' grid gap-[10px]'>
@@ -187,7 +260,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
                     <h1 className='place-self-center font-semibold text-xl'>{counter}</h1>
                     <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
                   </div>
-                  <button className='grid h-[40px] w-[250px] bg-black text-white place-content-center text-xl'  onClick={() => setadd(true)}>Add To Cart</button>
+                  <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => setadd(true)}>Add To Cart</button>
                 </div>
               </div> 
             :
@@ -209,15 +282,29 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
       </div>
 
-      <div className='similar-products mb-20 mt-40'>
+      <div className=' similar-products mb-20 mt-40 overflow-x-hidden'
+      
+      >
+
+        <h1 className='ml-[255px] mb-6 text-2xl font-semibold'>Related Products</h1>
 
         {
           similar_products ? 
-          <div className='h-[50vh] grid grid-flow-col ml-[200px] mr-[285px] overflow-x-hidden'>
+
+
+          <div className=' grid grid-cols-[255px_1320px_255px] '>
+            <div>
+            </div>
+            {/* margins */}
+
+            <div className=' overflow-x-hidden'>
+            <div className=' besto grid grid-flow-col gap-[20px]  '
+          style={{transform: `translate(-${related * 25.35}%)`}}
+          >
 
             {similar_products.map((item) => {
                 return (
-                  <div className=' ml-[20px]'>
+                  <div className=' '>
                     <Card 
                       key={item.id}
                       img= {'http://127.0.0.1:5555' + item.images[1] } 
@@ -238,6 +325,15 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
 
 
+          </div>
+
+            </div>
+            
+
+          {/* margins */}
+
+          <div>
+          </div>
           </div> 
 
           :
