@@ -174,13 +174,13 @@ function Store(props) {
                     </div>
                     {clicked == 'Categories' ? 
 
-                    <div className=' grid grid-flow-row'>
+                    <div className='besto grid grid-flow-row ml-6'>
                         {child_categ ? 
                         
                         child_categ.map((item) => {
 
                             return <div className=''>
-                                <h1>{item}</h1>
+                               <li><a href={'/product-category/' + params.category + '/' + item} className=' hover:text-[#552ae0fb]'>{item}</a></li>
                             
                             </div>
                         })
