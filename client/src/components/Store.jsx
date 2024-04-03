@@ -7,8 +7,7 @@ import Modal from './Modal';
 import CartModal from './CartModal';
 import Filter from './Filter';
 
-import StoreCard from './StoreCard';
-
+import Card from './Card';
 function Store(props) {
     const params = useParams();
     const [display, setdisplay] = useState()
@@ -58,9 +57,13 @@ function Store(props) {
     }
 
   return (
-    <div className=' flex flex-col '> 
+    <div className=' grid grid-flow-row'> 
 
-        <div className='  mt-[2vh] flex justify-between  h-[5vh] mb-9 w-[72vw] '>
+    <h1>KAnuuuu</h1>
+
+    {/* Filter */}
+
+        <div className='  mt-[2vh] flex justify-between mx-[120px]'>
             <div className=' select-none w-[5.6vw] rounded-md flex items-center justify-center bg-gray-100 ' onClick={() => {
                 handleIconChange()
                 setfilter(!filtero)
@@ -87,16 +90,18 @@ function Store(props) {
             </div>
 
         </div>
-        <div className='   '>    
-            {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null}
 
-            <div className=' main bg-slate-50 flex flex-wrap mx-[100px]'>
+    {/* Products */}
+        <div className='  grid grid-flow-col mt-10'>    
+            {/* {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null} */}
+
+            <div className=' grid grid-cols-4 mx-[120px] gap-[0px] '>
 
         {display ? display.map((item) => {
-            return <div className='mx-[1vw] my-[4vh]'>
-   <StoreCard
+            return <div className=' '>
+   <Card
                 key={item.id}
-                img= {item.images} 
+                img= {'http://127.0.0.1:5555' + item.images[1]} 
                 name={item.name} 
                 price={item.price}
                 id={item.id}
@@ -104,6 +109,7 @@ function Store(props) {
                 handleis={props.handleis}
                 onClickItem={action('click')}
                 is={props.is}
+                type={'large'}
                 
                 
                 
@@ -118,12 +124,12 @@ function Store(props) {
         </div>
 
     
-    {/* {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd}/>: null}
+    {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd}/>: null}
     
     {props.add ? <CartModal setadd={props.setadd} count={props.counter} product={modaldata[0]}/>: null}
     
     
-     */}
+    
     </div>
   )
 }
