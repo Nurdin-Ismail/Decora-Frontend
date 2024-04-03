@@ -4,9 +4,11 @@
 @tailwind utilities;
 
 *{
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   font-family: "Poppins", sans-serif;
+  /* transition: all 1s ease-in-out; */
+
 
 
   
@@ -985,4 +987,11 @@ select {
 }
 .kol {
   place-self: start center;
+}
+
+.filter-div{
+  place-self: start;
+  position: sticky;
+  top: 8%;
+  
 }

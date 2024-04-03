@@ -9,6 +9,12 @@ import Filter from './Filter';
 import arrow from '../arrow1.png'
 
 import Card from './Card';
+
+import AOS from 'aos';
+import 'aos/dist/aos.css'; // You can also use <link> for styles
+// ..
+AOS.init();
+
 function Store(props) {
     const params = useParams();
     const [display, setdisplay] = useState()
@@ -16,6 +22,9 @@ function Store(props) {
     const [icon, seticon] = useState(filter)
     const [filtero, setfilter] = useState(false)
     const [header, setheader] = useState([])
+    const [child_categ, setchild_categ] = useState()
+    const [sibling_categ, setsibling_categ] = useState()
+    const [clicked, setclicked] = useState()
 
 
 
@@ -26,14 +35,22 @@ function Store(props) {
             if(params.sub_categ && params.sub_categ != '-'){
                 console.log(props.products)
                 let filtered = props.products.filter(item => item.sub_category == params.sub_categ)
+                
+                
                 console.log(filtered)
                 setdisplay(filtered)
                 setheader(['Home', arrow, params.category, arrow, params.sub_categ])
+                let child = filtered.map((item) => item.tag)
+                let unique = [...new Set(child)]
+                setchild_categ(unique)
             }else{
                 let filtered = props.products.filter(item => item.category == params.category)
                 console.log(filtered)
                 setdisplay(filtered)
                 setheader(['Home', arrow ,params.category])
+                let child = filtered.map((item) => item.sub_category)
+                let unique = [...new Set(child)]
+                setchild_categ(unique)
 
             }
         }
@@ -41,6 +58,7 @@ function Store(props) {
     }, [productso])
 
     console.log(header)
+    console.log(child_categ)
 
     if (display){
         console.log(display)
@@ -88,7 +106,7 @@ function Store(props) {
 
     {/* Filter */}
 
-        <div className='  mt-[2vh] flex justify-between mx-[120px] mb-10'>
+        <div className='  mt-[2vh]  flex justify-between mx-[125px] mb-10'>
             <div className=' select-none w-[5.6vw] rounded-md flex items-center justify-center bg-gray-100 ' onClick={() => {
                 handleIconChange()
                 setfilter(!filtero)
@@ -117,7 +135,7 @@ function Store(props) {
         </div>
 
     {/* Products */}
-    <div className='grid grid-flow-col '>
+    <div className='besto grid grid-flow-col grid-cols-[125px_1585px_125px] '>
         
         {/* <div className={filtero ? ' w-[274px] grid ' : 'filtery hidden'}>
 
@@ -130,31 +148,63 @@ function Store(props) {
 
         </div> */}
 
-        <div className='w-[80px]'></div>
+        <div className='grid min-w-[100px]'>
 
-        {filtero ?
-
-        <div className=' grid w-[240px]'>
-            <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[250px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => {
-
-            }}>
-                Price Range
-
-            </div>
-
+            
         </div>
-        
-        : null}
-        
+
         
         
-        <div className='  grid grid-flow-col '>    
+        
+        
+        <div className='  grid grid-flow-col '> 
+            {filtero ?
+
+                <div className=' grid gap-[6px]  filter-div mr-[10px] '
+                >
+                     <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[260px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => { setclicked('Price Range')
+
+                        }}>
+                        Price Range
+
+                    </div>
+
+                    <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[260px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => setclicked('Categories')}>
+                        Categories
+                    </div>
+                    {clicked == 'Categories' ? 
+
+                    <div className=' grid grid-flow-row'>
+                        {child_categ ? 
+                        
+                        child_categ.map((item) => {
+
+                            return <div className=''>
+                                <h1>{item}</h1>
+                            
+                            </div>
+                        })
+
+                        
+                        
+                        : null}
+
+                    </div>
+                    
+                    
+                    : null}
+
+                </div>
+
+            : null}
+
+
             {/* {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null} */}
 
-            <div className=' grid grid-cols-4  '>
+            <div className=' grid grid-cols-4 gap-[10px]'>
 
                 {display ? display.map((item) => {
-                    return <div className='  '>
+                    return <div className=' '>
                         <Card
                             key={item.id}
                             img= {'http://127.0.0.1:5555' + item.images[1]} 
@@ -179,7 +229,9 @@ function Store(props) {
             </div>
         </div>
 
-        <div className='w-[100px]'></div>
+        <div className='grid w-[100px]'>
+           
+        </div>
 
 
     </div>
