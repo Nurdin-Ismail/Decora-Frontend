@@ -6,6 +6,7 @@ import x from '../x.png'
 import Modal from './Modal';
 import CartModal from './CartModal';
 import Filter from './Filter';
+import arrow from '../arrow1.png'
 
 import Card from './Card';
 function Store(props) {
@@ -14,6 +15,7 @@ function Store(props) {
     let productso = props.products
     const [icon, seticon] = useState(filter)
     const [filtero, setfilter] = useState(false)
+    const [header, setheader] = useState([])
 
 
 
@@ -26,15 +28,19 @@ function Store(props) {
                 let filtered = props.products.filter(item => item.sub_category == params.sub_categ)
                 console.log(filtered)
                 setdisplay(filtered)
+                setheader(['Home', arrow, params.category, arrow, params.sub_categ])
             }else{
                 let filtered = props.products.filter(item => item.category == params.category)
                 console.log(filtered)
                 setdisplay(filtered)
+                setheader(['Home', arrow ,params.category])
 
             }
         }
 
     }, [productso])
+
+    console.log(header)
 
     if (display){
         console.log(display)
@@ -57,13 +63,32 @@ function Store(props) {
     }
 
   return (
-    <div className=' grid grid-flow-row'> 
+    <div className=' filtery grid grid-flow-row '> 
 
-    <h1>KAnuuuu</h1>
+    <h1 className='grid place-self-center my-10 '>
+
+        {header && header.length << 3 ? 
+        <h1 className=' flex place-items-center text-2xl font-thin '>
+            <a href='/'>{header[0]}</a>  <span className='mx-5'><img src={header[1]} alt="" /></span>    <a href={"/product-category/" + header[2] + '/-'}>{header[2]}</a> <span className='mx-5'><img src={header[3]} alt="" /></span> <a href={"/product-category/" + header[2] + '/' + header[4]}>{header[4]}</a>
+        </h1>
+        
+
+        : null}
+
+        {/* {header && header.length >> 4 ? 
+        <h1 className=' flex place-items-center '>
+            {header[0]}  <span className='mx-5'><img src={header[1]} alt="" /></span>    {header[2]} <span className='mx-5'><img src={header[3]} alt="" /></span>  {header[4]}
+        </h1>
+        
+
+        : null} */}
+
+        
+    </h1>
 
     {/* Filter */}
 
-        <div className='  mt-[2vh] flex justify-between mx-[120px]'>
+        <div className='  mt-[2vh] flex justify-between mx-[120px] mb-10'>
             <div className=' select-none w-[5.6vw] rounded-md flex items-center justify-center bg-gray-100 ' onClick={() => {
                 handleIconChange()
                 setfilter(!filtero)
@@ -92,36 +117,73 @@ function Store(props) {
         </div>
 
     {/* Products */}
-        <div className='  grid grid-flow-col mt-10'>    
+    <div className='grid grid-flow-col '>
+        
+        {/* <div className={filtero ? ' w-[274px] grid ' : 'filtery hidden'}>
+
+            <div className=' border-[1px] border-black kol px-[70px] py-[20px] mr-[-250px] cursor-pointer hover:bg-[#554586b4] hover:text-white' onClick={() => {
+
+            }}>
+                Price Range
+
+            </div>
+
+        </div> */}
+
+        <div className='w-[80px]'></div>
+
+        {filtero ?
+
+        <div className=' grid w-[240px]'>
+            <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[250px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => {
+
+            }}>
+                Price Range
+
+            </div>
+
+        </div>
+        
+        : null}
+        
+        
+        
+        <div className='  grid grid-flow-col '>    
             {/* {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null} */}
 
-            <div className=' grid grid-cols-4 mx-[120px] gap-[0px] '>
+            <div className=' grid grid-cols-4  '>
 
-        {display ? display.map((item) => {
-            return <div className=' '>
-   <Card
-                key={item.id}
-                img= {'http://127.0.0.1:5555' + item.images[1]} 
-                name={item.name} 
-                price={item.price}
-                id={item.id}
-                setcardinfo={props.setcardinfo}
-                handleis={props.handleis}
-                onClickItem={action('click')}
-                is={props.is}
-                type={'large'}
+                {display ? display.map((item) => {
+                    return <div className='  '>
+                        <Card
+                            key={item.id}
+                            img= {'http://127.0.0.1:5555' + item.images[1]} 
+                            name={item.name} 
+                            price={item.price}
+                            id={item.id}
+                            setcardinfo={props.setcardinfo}
+                            handleis={props.handleis}
+                            onClickItem={action('click')}
+                            is={props.is}
+                            type={filtero ? null :'large'}
                 
                 
                 
                 
-                />
-</div>
+                        />
+                    </div>
              
 
-        }):<h1>Kanu</h1> }
+                }):<h1>Kanu</h1> }
+
+            </div>
+        </div>
+
+        <div className='w-[100px]'></div>
+
 
     </div>
-        </div>
+        
 
     
     {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd}/>: null}

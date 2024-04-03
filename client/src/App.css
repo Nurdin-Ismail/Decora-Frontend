@@ -8,6 +8,7 @@
   padding: 0px;
   font-family: "Poppins", sans-serif;
 
+
   
 
 
@@ -396,6 +397,7 @@ font-family: 'Philosopher', sans-serif;
     font-weight:600
   }
 }
+
 
 
 
@@ -954,4 +956,33 @@ select {
 .mini-scroll{
   place-self: center ;
   place-content: center;
+}
+
+.filtery {
+  transition: 2s;
+
+}
+
+
+#slide {
+  position: absolute;
+  left: -100px;
+  width: 100px;
+  height: 100px;
+  background: blue;
+  -webkit-animation: slide 0.5s forwards;
+  -webkit-animation-delay: 2s;
+  animation: slide 0.5s forwards;
+  animation-delay: 2s;
+}
+
+@-webkit-keyframes slide {
+  100% { left: 0; }
+}
+
+@keyframes slide {
+  100% { left: 0; }
+}
+.kol {
+  place-self: start center;
 }
