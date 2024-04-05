@@ -10,6 +10,9 @@ import arrow from '../arrow1.png'
 
 import Card from './Card';
 
+import Slider from '@mui/material/Slider';
+
+
 import AOS from 'aos';
 import 'aos/dist/aos.css'; // You can also use <link> for styles
 // ..
@@ -18,6 +21,7 @@ AOS.init();
 function Store(props) {
     const params = useParams();
     const [display, setdisplay] = useState()
+    const [backup, setbackup] = useState()
     let productso = props.products
     const [icon, seticon] = useState(filter)
     const [filtero, setfilter] = useState(false)
@@ -25,6 +29,21 @@ function Store(props) {
     const [child_categ, setchild_categ] = useState()
     const [sibling_categ, setsibling_categ] = useState()
     const [clicked, setclicked] = useState()
+    
+
+    
+
+    
+
+    const [value, setValue] = React.useState([20, 37000]);
+
+    const handleChange = (event, newValue) => {
+         setValue(newValue);
+    };
+
+    function valuetext(value) {
+        return `${value}°C`;
+      }
 
 
 
@@ -39,6 +58,8 @@ function Store(props) {
                 
                 console.log(filtered)
                 setdisplay(filtered)
+                setbackup(filtered)
+
                 setheader(['Home', arrow, params.category, arrow, params.sub_categ])
                 let child = filtered.map((item) => item.tag)
                 let unique = [...new Set(child)]
@@ -47,6 +68,7 @@ function Store(props) {
                 let filtered = props.products.filter(item => item.category == params.category)
                 console.log(filtered)
                 setdisplay(filtered)
+                setbackup(filtered)
                 setheader(['Home', arrow ,params.category])
                 let child = filtered.map((item) => item.sub_category)
                 let unique = [...new Set(child)]
@@ -78,6 +100,51 @@ function Store(props) {
     let modaldata
     if(props.products){
         modaldata = props.products.filter((item) => item.id == props.cardinfo)
+    }
+
+    function handlesort(e){
+
+        console.log(e)
+        if(display){
+
+            
+            if(e === "Default Sorting" ){
+                if(backup){
+                    setdisplay(backup)
+                }
+                
+
+            }else if( e === "Sort by latest"){
+                function handleNew(){
+                    const arr = [...display]
+                    
+                    arr.sort(function(a, b) {
+                      var c = new Date(a.date);
+                      var d = new Date(b.date);
+                      return c-d;
+                  })
+                  return arr
+                
+                }
+
+                console.log(handleNew())
+
+                  setdisplay(handleNew())
+
+            }else if(e === "Sort by price: High-Low"){
+                let backup2 = [...backup]
+
+                backup2.sort((a, b) => b.price - a.price)
+                setdisplay(backup2)
+                
+            }else if(e === "Sort by price: Low-High"){
+                let backup2 = [...backup]
+
+                backup2.sort((a, b) => a.price - b.price)
+                setdisplay(backup2)
+                
+            }
+        }
     }
 
   return (
@@ -123,12 +190,13 @@ function Store(props) {
             <div className=' w-[12vw] bg-gray-100 rounded-md  flex items-center justify-center'>
                 <h1></h1>
 
-                <select name="" id="" className='minimal  bg-gray-100 w-[12vw] pl-4   text-sm h-[3.5vh]'>
-                    <option value="" className=' text-sm'>Default Sorting</option>
-                    <option value="" className=''>Sort by latest</option>
-                    <option value="" className=''>Sort by price: high to low</option>
-                    <option value="" className=''>Sort by price: low to high</option>
+                <select name="" id="" className='minimal  bg-gray-100 w-[12vw] pl-4    text-sm h-[3.5vh]' onChange={(e) => handlesort(e.target.value)}>
+                    <option value="Default Sorting" className=' text-sm'>Default Sorting</option>
+                    <option value="Sort by latest" className=''>Sort by latest</option>
+                    <option value="Sort by price: High-Low" className=''>Sort by price: High-Low</option>
+                    <option value="Sort by price: Low-High" className=''>Sort by price: Low-High</option>
                 </select>
+
 
             </div>
 
@@ -162,14 +230,53 @@ function Store(props) {
 
                 <div className=' grid gap-[6px]  filter-div mr-[10px] '
                 >
-                     <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[260px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => { setclicked('Price Range')
+                     <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[285px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => { setclicked('Price Range')
 
                         }}>
                         Price Range
 
                     </div>
 
-                    <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[260px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => setclicked('Categories')}>
+                    {clicked == 'Price Range' ?
+                    <div>
+                        <div className='w-[95%] ml-[8px]'>
+                        <Slider
+                            getAriaLabel={() => 'Temperature range'}
+                            value={value}
+                            onChange={handleChange}
+                            getAriaValueText={valuetext}
+                            size="small"
+                            aria-label="Small"
+                            disableSwap
+                            
+                            
+                            
+                        />
+
+                        </div>
+
+                        <div className='flex justify-between items-center'>
+                            <button className=' best mr-2 border-[2px] border-gray-300 px-3 py-1 text-md hover:border-black rounded-lg'>Confirm</button>
+
+                            <h1 className='text-sm'>Price:Ksh{value[0].toLocaleString()} — Ksh{value[1].toLocaleString()}</h1>
+
+                        </div>
+
+
+
+
+
+
+
+
+                        
+                    </div>
+
+                    :
+                    null
+                    }
+
+                    <div className=' grid place-content-center border-[1px] border-black hover:border-white w-[285px] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white' onClick={() => setclicked('Categories')}>
                         Categories
                     </div>
                     {clicked == 'Categories' ? 
@@ -209,7 +316,7 @@ function Store(props) {
                             key={item.id}
                             img= {'http://127.0.0.1:5555' + item.images[1]} 
                             name={item.name} 
-                            price={item.price}
+                            price={item.price.toLocaleString()}
                             id={item.id}
                             setcardinfo={props.setcardinfo}
                             handleis={props.handleis}
