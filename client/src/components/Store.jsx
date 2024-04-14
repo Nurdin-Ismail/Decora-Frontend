@@ -29,13 +29,27 @@ function Store(props) {
     const [child_categ, setchild_categ] = useState()
     const [sibling_categ, setsibling_categ] = useState()
     const [clicked, setclicked] = useState()
-    
+    const [min, setmin] = useState(0)
+    const [max, setmax] = useState(0)
+
+
+    useEffect(() => {
+
+        let k = max * 2/4
+
+        let l = max * 3/4
+
+        setValue([k, l])
+
+    }, [max])
+
+
 
     
 
     
-
-    const [value, setValue] = React.useState([20, 37000]);
+    
+    const [value, setValue] = useState([min, max]);
 
     const handleChange = (event, newValue) => {
          setValue(newValue);
@@ -64,6 +78,14 @@ function Store(props) {
                 let child = filtered.map((item) => item.tag)
                 let unique = [...new Set(child)]
                 setchild_categ(unique)
+                let backup2 = [...filtered]
+
+                backup2.sort((a, b) => a.price - b.price)
+                setmin(backup2[0]['price'])
+                let backup3 = [...filtered]
+
+                backup3.sort((a, b) => b.price - a.price)
+                setmax(backup3[0]['price'])
             }else{
                 let filtered = props.products.filter(item => item.category == params.category)
                 console.log(filtered)
@@ -73,6 +95,18 @@ function Store(props) {
                 let child = filtered.map((item) => item.sub_category)
                 let unique = [...new Set(child)]
                 setchild_categ(unique)
+
+                let backup2 = [...filtered]
+
+                backup2.sort((a, b) => a.price - b.price)
+                setmin(backup2[0]['price'])
+
+                let backup3 = [...filtered]
+
+                backup3.sort((a, b) => b.price - a.price)
+                setmax(backup3[0]['price'])
+
+
 
             }
         }
@@ -144,6 +178,22 @@ function Store(props) {
                 setdisplay(backup2)
                 
             }
+        }
+    }
+
+
+    function handleFilterbyPrice(){
+        let filteredbyprice
+        if(display){
+            filteredbyprice = backup.filter(item => item.price < value[1] && item.price > value[0])
+            console.log(filteredbyprice, min, max)
+
+            if(filteredbyprice){
+                setdisplay(filteredbyprice)
+            }
+
+
+
         }
     }
 
@@ -241,13 +291,13 @@ function Store(props) {
                     <div>
                         <div className='w-[95%] ml-[8px]'>
                         <Slider
-                            getAriaLabel={() => 'Temperature range'}
                             value={value}
+                            min={min}
+                            max={max}
                             onChange={handleChange}
-                            getAriaValueText={valuetext}
                             size="small"
                             aria-label="Small"
-                            disableSwap
+                            color='black'
                             
                             
                             
@@ -256,7 +306,7 @@ function Store(props) {
                         </div>
 
                         <div className='flex justify-between items-center'>
-                            <button className=' best mr-2 border-[2px] border-gray-300 px-3 py-1 text-md hover:border-black rounded-lg'>Confirm</button>
+                            <button className=' best mr-2 border-[2px] border-gray-300 px-3 py-1 text-md hover:border-black rounded-lg' onClick={() => handleFilterbyPrice()}>Confirm</button>
 
                             <h1 className='text-sm'>Price:Ksh{value[0].toLocaleString()} — Ksh{value[1].toLocaleString()}</h1>
 

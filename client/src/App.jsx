@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import ProductPage from './components/ProductPage';
 import Store from './components/Store';
+import Cart from './components/Cart';
 
 import kanu from './1.jpg'
 import Exercise from './components/Exercise';
@@ -16,6 +17,7 @@ function App() {
   const [is, setis] = useState(false)
   const [cardinfo, setcardinfo] = useState()
   const [add, setadd] = useState()
+  const [user, setuser] = useState(1)
 
   useEffect(() => {
     fetch('http://127.0.0.1:5555/products')
@@ -45,6 +47,7 @@ function App() {
         <Route path='/products/:name/:id' element={<ProductPage products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
         <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd}/>}></Route>
         <Route path= '/exercise' element={<Exercise/>}></Route>
+        <Route path= '/cart' element={<Cart user={user}/>}></Route>
       </Routes>
       <Footer/>
 

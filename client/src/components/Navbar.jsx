@@ -2,6 +2,9 @@ import React, { useEffect, useState } from "react";
 import cart from '../cart2.png'
 import Search from "./Search";
 import logo from '../7.png'
+import cartsmall from '../cartsmall.png'
+import cartbig from '../cartbig.png'
+import user from '../user2.png'
 
 
 
@@ -99,9 +102,17 @@ function Navbar({products}){
 
                
 
-                <div className=" signup flex justify-evenly items-center w-[16vw] mr-10 ml-20">
-                    <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
-                    <h1 className=" text-lg font-medium h-[5vh] bg-[#47367cec] flex items-center w-[5vw] justify-center text-white">Signup</h1>
+                <div className=" signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 ">
+
+                    <div className="grid grid-cols-[30px_32px]">
+                        <img src={user} alt="" className="cursor-pointer "/>
+                        <div className="grid cart  ">
+                            <img src={cartsmall} alt="" className="cursor-pointer"/>
+                            <h1 className="text-xs grid place-content-center rounded-full ml-1 w-[12px] h-[12px] bg-[#cbc0fa] ">12</h1>
+                        </div>
+                    </div>
+                    {/* <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
+                    <h1 className=" text-lg font-medium h-[5vh] bg-[#47367cec] flex items-center w-[5vw] justify-center text-white">Signup</h1> */}
                 </div>
 
 

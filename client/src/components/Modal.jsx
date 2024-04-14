@@ -52,12 +52,12 @@ function Modal({setis, data, is, setadd}) {
         id="" className=" modal fixed text-black  text-xl  flex h-[40vh] top-[30vh] left-[26vw] w-[44vw] bg-white "  >
               <div className=' h-[100%]  w-[20vw]  border-zinc-300 border-r-[1px] '>
 
-                <Carousel responsive={responsive} showDots={true}  className=''>
+                <Carousel responsive={responsive} showDots={true}  className='mx-3 my-5 pb-6 grid-flow-col'>
 
                   {data[0].images.map((item) => {
                     
                     
-                    return <img key={data[0].images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt=""  className=' h-[40vh]'/>
+                    return <img key={data[0].images.indexOf(item)} src={"http://127.0.0.1:5555" + item} alt=""  className=' h-[35vh] mx-1 max-w-[20vw]'/>
                     
                     })}
 

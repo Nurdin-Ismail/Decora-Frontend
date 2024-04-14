@@ -943,3 +943,42 @@ font-family: 'Philosopher', sans-serif;
   top: 8%;
   
 }
+
+.cart img{
+  grid-area: 1/1;
+}
+
+.cart h1{
+  grid-area: 1/1;
+  place-self: start end;
+}
+
+.cart-header .one{
+  place-self: center start;
+
+}
+
+.cart-header .two{
+  place-self: center ;
+
+
+}
+
+.cart-header .three{
+  place-self: center ;
+
+
+}
+
+.cart-product-title{
+
+  place-items: center start;
+
+}
+
+.cart-product-price{
+  display: grid;
+
+  place-content: center;
+}
+
