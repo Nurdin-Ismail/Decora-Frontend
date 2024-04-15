@@ -6,8 +6,7 @@ import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
 import ProductPage from './components/ProductPage';
 import Store from './components/Store';
-import Cart from './components/Cart';
-
+import Cart from './components/Cart/Cart';
 import kanu from './1.jpg'
 import Exercise from './components/Exercise';
 
