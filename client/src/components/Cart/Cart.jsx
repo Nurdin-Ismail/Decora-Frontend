@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
+import trash from '../../trash.png'
 
 
 export default function ({user}) {
 
     const [display, setdisplay] = useState()
     const [cart, setcart] = useState()
+    const [updated, setupdated] = useState()
     const [changed, setchanged] = useState([])
     console.log(changed)
 
@@ -80,7 +82,7 @@ export default function ({user}) {
                         fetchAndPatchData(endpoints)
         
 
-    }, [cart])
+    }, [updated])
 
     useEffect(() => {
         if(user){
@@ -132,7 +134,19 @@ export default function ({user}) {
                     
                 </div>
 
-                <div>
+                <div className='grid grid-cols-[80%_20%]  h-[10vh]'>
+
+                    <div className=''>
+                        <div className='grid grid-cols-[85%_15%]'>
+                            <img src={trash} alt="" className='grid place-self-end' />
+                        <h1 className='grid place-self-end'>Empty Cart</h1>
+                        </div>
+                        
+                    </div>
+                    <div>
+                        <button className='border-solid border-black border-[1px]' onClick={() => setupdated(cart)}>Update Cart</button>
+                    </div>
+                    
                     
                 </div>
             </div>
