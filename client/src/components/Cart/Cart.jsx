@@ -1,17 +1,38 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
 import trash from '../../trash.png'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 
 export default function ({user}) {
+
+    const navigate = useNavigate
+
 
     const [display, setdisplay] = useState()
     const [cart, setcart] = useState()
     const [updated, setupdated] = useState()
     const [changed, setchanged] = useState([])
+    const [delete_cart, setdelete_cart] = useState()
+ 
     console.log(changed)
 
     console.log(cart)
+
+    useEffect(() => {
+        if(user){
+            fetch(`http://127.0.0.1:5555/user/${70}`)
+            .then(res => res.json()) 
+            .then(data => {
+                setdisplay(data.cart)
+                setcart(data.cart)
+            })
+
+            
+        }
+        
+
+    }, [])
 
     useEffect(() => {
         setchanged(changed.filter((value, index) => changed.indexOf(value) === index))
@@ -84,20 +105,52 @@ export default function ({user}) {
 
     }, [updated])
 
+
+
     useEffect(() => {
-        if(user){
-            fetch(`http://127.0.0.1:5555/user/${48}`)
-            .then(res => res.json()) 
-            .then(data => {
-                setdisplay(data.cart)
-                setcart(data.cart)
-            })
 
-            
+        if(cart){
+            let endpoints = cart.map((item) => `http://127.0.0.1:5555/cart/${item.cart_id}`)
+            console.log(delete_cart)
+            console.log(endpoints)
+            const DeleteData = async (endpoints) => {
+                try {
+                     const promises = endpoints.map((url) => {
+                        return fetch(url, {
+                            method: 'DELETE'
+                        })
+                        .then(response => response.json())
+
+                     })
+
+                        
+                    
+                    const deletepromises = await Promise.all(promises);
+
+                    if(deletepromises){
+                         console.log(deletepromises)
+                         window.location.replace('/')
+
+                    }
+
+                   
+                    
+                } catch (error) {
+                    console.error(error);
+                }
+            };
+
+            DeleteData(endpoints)
+
         }
-        
 
-    }, [])
+
+
+        
+    
+    }, [delete_cart])
+
+    
 
     
 
@@ -138,7 +191,7 @@ export default function ({user}) {
 
                     <div className=''>
                         <div className='grid grid-cols-[85%_15%]'>
-                            <img src={trash} alt="" className='grid place-self-end' />
+                            <img src={trash} alt="" className='grid place-self-end' onClick={() => setdelete_cart(true)}/>
                         <h1 className='grid place-self-end'>Empty Cart</h1>
                         </div>
                         
@@ -151,7 +204,7 @@ export default function ({user}) {
                 </div>
             </div>
             <div className=' w-[400px] '>
-                <div className='bg-white h-[20vh] grid sticky top-[4%]'>
+                <div className='bg-white  h-[20vh] grid sticky top-[4%]'>
                     <h1 className='text-[#36196b] text-xl'>Cart Totals</h1>
                     <h1>Subtotal</h1>
 
