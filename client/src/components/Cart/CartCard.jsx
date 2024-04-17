@@ -103,7 +103,7 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
                         </div> 
                         <div className='grid cart-product-title'>
 
-                            <h1 className=''>{item.name}</h1>
+                            <a href={`/products/${item.name.split(` `).join(`-`)}/${item.id}`}><h1 className=''>{item.name}</h1></a>
                             
                         </div> 
 
