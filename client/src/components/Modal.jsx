@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import Carousel from 'react-multi-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
@@ -7,10 +7,67 @@ import { Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 
 
 
-function Modal({setis, data, is, setadd}) {
+function Modal({setis, data, is, setadd, user}) {
 
   const location = useLocation()
   const navigate = useNavigate()
+
+  const [post, setpost] = useState(false)
+
+
+
+    // useEffect(() => {
+
+    //   if(data){
+    //     const url = 'http://127.0.0.1:5555/carts'
+
+        
+
+    //     const PostData = async (url) => {
+    //       try {
+    //            const promises = fetch(url, {
+    //                   method: 'POST',
+    //                   headers: { 'Content-Type': 'application/json' },
+    //                   body: JSON.stringify({
+    //                     user_id : user,
+    //                     product_id: data[0].id,
+    //                     quantity: "1"
+              
+    //                   })
+
+    //             })
+    //             .then(response => {
+    //               if(response.ok){
+    //                 setadd(true)
+    //                 return response.json()
+                    
+    //               }
+    //             })
+    //             .then(res => console.log(res))
+                
+
+         
+
+                
+                  
+
+            
+
+           
+            
+    //           } catch (error) {
+    //               console.error(error);
+    //       }
+    //       };
+    //     if(url){
+    //       PostData(url)
+    //     }
+    //   }
+
+      
+     
+
+    // }, [post])
 
 
   

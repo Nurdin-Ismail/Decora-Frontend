@@ -21,7 +21,7 @@ export default function ({user}) {
 
     useEffect(() => {
         if(user){
-            fetch(`http://127.0.0.1:5555/user/${70}`)
+            fetch(`http://127.0.0.1:5555/user/${user}`)
             .then(res => res.json()) 
             .then(data => {
                 setdisplay(data.cart)
@@ -161,7 +161,12 @@ export default function ({user}) {
 
                 
                 
-                return <CartCard  item={item} key={item.cart_id} id={item.cart_id} index={display.indexOf(item)} cart={cart} setcart={setcart} setchanged={setchanged} changed={changed}/>
+                return <div key={item.cart_id}>
+
+                     <CartCard key={item.cart_id} item={item}  id={item.cart_id} index={display.indexOf(item)} cart={cart} setcart={setcart} setchanged={setchanged} changed={changed}/>
+
+                </div>
+                
             })
 
             return listo
@@ -172,10 +177,10 @@ export default function ({user}) {
   return (
     <div className='h-[100%]'>
         <div className='h-[15vh]'></div>
-        <div className='grid grid-flow-col h-[100vh] gap-10'>
+        <div className='grid grid-flow-col  gap-10'>
             <div className='w-[200px] '></div>
             <div className='w-[930px] '>
-                <div className=' cart-header h-[50px] grid grid-cols-[60%_20%_20%] border-b-[1px]'>
+                <div className=' cart-header h-[50px] grid grid-cols-[60%_20%_10%_10%] border-b-[1px]'>
                     <div className='one'>Product</div>
                     <div className='two'>Quantity</div>
                     <div className='three'> Price</div>

@@ -1,10 +1,34 @@
 import React, { useEffect, useState } from 'react'
 
-export default function CartCard({item, index, cart, setcart, changed, setchanged, id}) {
+export default function CartCard({item, key, index, cart, setcart, changed, setchanged, id}) {
 
 
     const [counter, setcounter] = useState(item.quantity[1])
     const [quantity, setquantity] = useState(item.quantity[0])
+    const [del_product, setdel_product] = useState(false)
+    console.log(del_product)
+
+    useEffect(() => {
+
+      console.log(`${id} has been clicked`)
+
+      if(del_product){
+        fetch(`http://127.0.0.1:5555/cart/${id}`, {
+        method: "DELETE",
+      })
+      .then((r) => r.json())
+      .then((res) => {
+
+        window.location.reload()
+        
+        console.log(res)});
+
+      }
+
+      
+
+
+    }, [del_product])
     
 
     useEffect(() => {
@@ -32,6 +56,9 @@ export default function CartCard({item, index, cart, setcart, changed, setchange
         
 
     }, [counter])
+
+
+    
 
     
 
@@ -68,7 +95,7 @@ export default function CartCard({item, index, cart, setcart, changed, setchange
         
     }
   return (
-    <div className=' h-[160px]  grid  grid-cols-[60%_20%_20%] border-b-[1px]'>
+    <div className=' h-[160px]  grid  grid-cols-[60%_20%_10%_10%] border-b-[1px]'>
                     <div className=' grid grid-cols-[30%_70%]'>
                         <div className='place-self-center'>
                             <img src={"http://127.0.0.1:5555" + item.images[1]} alt="" className='h-[130px] ' />
@@ -90,6 +117,10 @@ export default function CartCard({item, index, cart, setcart, changed, setchange
                     </div>
                     <div className=' cart-product-price'>
                         {item.price ? <h1>Ksh {item.price.toLocaleString()}</h1> : null}
+                    </div>
+
+                    <div className='grid place-content-center'>
+                      <button onClick={() => setdel_product(true)}>X</button>
                     </div>
 
     </div>

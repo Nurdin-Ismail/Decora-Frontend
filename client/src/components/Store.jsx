@@ -395,7 +395,7 @@ function Store(props) {
         
 
     
-    {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd}/>: null}
+    {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd} user={props.user}/>: null}
     
     {props.add ? <CartModal setadd={props.setadd} count={props.counter} product={modaldata[0]}/>: null}
     

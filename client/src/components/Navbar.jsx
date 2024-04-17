@@ -29,7 +29,6 @@ function Navbar({products}){
       
       // Example usage
     let uniqueCategories = getUniqueCategories(products);
-    console.log(uniqueCategories)
     const [search, setsearch] = useState('')
     
 
@@ -107,7 +106,7 @@ function Navbar({products}){
                     <div className="grid grid-cols-[30px_32px]">
                         <img src={user} alt="" className="cursor-pointer "/>
                         <div className="grid cart  ">
-                            <img src={cartsmall} alt="" className="cursor-pointer"/>
+                            <a href="/cart"><img src={cartsmall} alt="" className="cursor-pointer"/></a>
                             <h1 className="text-xs grid place-content-center rounded-full ml-1 w-[12px] h-[12px] bg-[#cbc0fa] ">12</h1>
                         </div>
                     </div>
@@ -130,7 +129,6 @@ function Navbar({products}){
                         let name2 = name1.map((item1) => {
                             
                             if(item1.length > 1){
-                                console.log(item)
                                 let newterm= item1.slice(0,1).toUpperCase() + item1.toLowerCase().slice(1)
                                 return newterm
                             }else{
@@ -143,7 +141,6 @@ function Navbar({products}){
                         let name3 = name2
 
 
-                        console.log(name3)
                     return <a href={'/product-category/' + name3 + '/-'}><h1 className="">{name3}</h1></a>
                 }): null}
             </div>
@@ -156,54 +153,9 @@ function Navbar({products}){
 
         </nav>
 
-        {/* <div className="  bg-[#fad8d8ad]  h-[78px] w-full text-black nav  fixed z-10">
-            <div className=" flex ">
-                <div className="logo py-[14px]  h-[78px] w-[20vw] flex justify-between">
-                    <div></div>
-                    <a href="/"><h1 className=" text-5xl "> Decora</h1></a>
-
-                </div>
-
-                <div className="links    h-[78px] w-[60vw] flex justify-center items-center">
-                    <ul className=" list-none  text-2xl font-medium  ">
-                        <li className=" me-7 hover:font-semibold">Shop</li>
-                        
-                    </ul>
-                    <div className="App">
-                        <button className="h-[10vh] w-[15vw]"
-                            onMouseEnter={() => setIsShown(true)}
-                            onMouseLeave={() => setIsShown(false)}>
-                                Hover over me!
-                        </button>
-                        {isShown && (
-                        <div>
-                            I'll appear when you hover over the button.
-                        </div>
-                        )}
-                    </div>
-
-                </div>
-
-                <div className=" login  h-[78px] w-[23vw]  flex justify-center  ">
-                    <ul className="list-none  text-2xl font-medium flex  items-center ">
-                    <li className=" hover:font-semibold px-5 "> Login</li>
-                    <li className=" hover:font-semibold px-5"> Signup</li>
-                    <div className="flex ">
-                        <img src={cart} alt="" className="h-[25px] w-[25px] z-10" />
-                        <h1 className="z-20 ">1</h1>
-                    </div>
-                    
-
-                    </ul>
-
-                </div>
-            </div>
-            
+        
              </div>
-         */}
-
-
-    </div>
+        
 }
 
 export default Navbar;

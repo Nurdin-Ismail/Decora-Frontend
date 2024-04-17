@@ -14,7 +14,7 @@ import CartModal from './CartModal';
 
 
 
-function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}) {
+function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, user}) {
     const params = useParams();
     const [product, setproduct] = useState()
     const [slides, setslides] = useState(0)
@@ -22,7 +22,65 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     const [counter, setcounter] = useState(1)
     const [thumbnail, setthumbnail] = useState(true)
     const [related, setrelated] = useState(0)
+    const [post, setpost] = useState(false)
 
+
+
+    useEffect(() => {
+
+      if(product){
+        const url = 'http://127.0.0.1:5555/carts'
+
+        
+
+        const PostData = async (url) => {
+          try {
+               const promises = fetch(url, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        user_id : user,
+                        product_id: product.id,
+                        quantity: "1"
+              
+                      })
+
+                })
+                .then(response => {
+                  if(response.ok){
+                    setadd(true)
+                    return response.json()
+                    
+                  }
+                })
+                .then(res => console.log(res))
+                
+
+         
+
+                
+                
+
+            
+
+           
+            
+              } catch (error) {
+                  console.error(error);
+          }
+          };
+        if(url){
+          PostData(url)
+        }
+      }
+
+      
+     
+
+    }, [post])
+
+    // console.log(post)
+ 
 
 
 
@@ -36,24 +94,6 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
 
 
-    // const responsive = {
-    //   desktop: {
-    //     breakpoint: { max: 3000, min: 1024 },
-    //     items: 4,
-    //     slidesToSlide: 4 // optional, default to 1.
-    //   },
-    //   tablet: {
-    //     breakpoint: { max: 1024, min: 464 },
-    //     items: 2,
-    //     slidesToSlide: 3 // optional, default to 1.
-    //   },
-    //   mobile: {
-    //     breakpoint: { max: 464, min: 0 },
-    //     items: 1,
-    //     slidesToSlide: 1 // optional, default to 1.
-    //   }
-    // };
-
 
 
     useEffect(() => {
@@ -61,6 +101,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
         .then(res => res.json()) 
         .then(data => {
           setproduct(data)
+          console.log(data)
           setcards(data.images.length)
         
         })
@@ -107,10 +148,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
          }
         }
 
-        // if(counter < product.quantity){
-        //    setcounter(counter + 1)
-        // }
-        // console.log(product.quantity)
+        
 
        
          
@@ -260,7 +298,9 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
                     <h1 className='place-self-center font-semibold text-xl'>{counter}</h1>
                     <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
                   </div>
-                  <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => setadd(true)}>Add To Cart</button>
+                  <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => {
+                    setpost(!post)
+                    }}>Add To Cart</button>
                 </div>
               </div> 
             :
