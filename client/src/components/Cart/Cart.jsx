@@ -4,13 +4,13 @@ import trash from '../../trash.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
-export default function ({user}) {
+export default function ({user, cart, setcart }) {
 
     const navigate = useNavigate
 
 
     const [display, setdisplay] = useState()
-    const [cart, setcart] = useState()
+    
     const [updated, setupdated] = useState()
     const [changed, setchanged] = useState([])
     const [delete_cart, setdelete_cart] = useState()
@@ -24,15 +24,21 @@ export default function ({user}) {
             fetch(`http://127.0.0.1:5555/user/${user}`)
             .then(res => res.json()) 
             .then(data => {
-                setdisplay(data.cart)
                 setcart(data.cart)
+                setdisplay(data.cart)
             })
-
+    
             
         }
         
-
+    
     }, [])
+
+
+
+    
+
+    
 
     useEffect(() => {
         setchanged(changed.filter((value, index) => changed.indexOf(value) === index))
@@ -78,7 +84,13 @@ export default function ({user}) {
                         
                         body: JSON.stringify(data2)
                     })
-                    .then(response => response.json())
+                    .then(response => {
+                        response.json()
+                        if(response.ok){
+                            window.location.reload()
+                        }
+                    
+                    })
                     
 
                     
@@ -109,39 +121,41 @@ export default function ({user}) {
 
     useEffect(() => {
 
-        if(cart){
-            let endpoints = cart.map((item) => `http://127.0.0.1:5555/cart/${item.cart_id}`)
-            console.log(delete_cart)
-            console.log(endpoints)
-            const DeleteData = async (endpoints) => {
-                try {
-                     const promises = endpoints.map((url) => {
-                        return fetch(url, {
-                            method: 'DELETE'
-                        })
-                        .then(response => response.json())
-
-                     })
-
+        if(delete_cart){
+            if(cart){
+                let endpoints = cart.map((item) => `http://127.0.0.1:5555/cart/${item.cart_id}`)
+                console.log(delete_cart)
+                console.log(endpoints)
+                const DeleteData = async (endpoints) => {
+                    try {
+                         const promises = endpoints.map((url) => {
+                            return fetch(url, {
+                                method: 'DELETE'
+                            })
+                            .then(response => response.json())
+    
+                         })
+    
+                            
                         
-                    
-                    const deletepromises = await Promise.all(promises);
-
-                    if(deletepromises){
-                         console.log(deletepromises)
-                         window.location.replace('/')
-
+                        const deletepromises = await Promise.all(promises);
+    
+                        if(deletepromises){
+                             console.log(deletepromises)
+                             window.location.replace('/')
+    
+                        }
+    
+                       
+                        
+                    } catch (error) {
+                        console.error(error);
                     }
-
-                   
-                    
-                } catch (error) {
-                    console.error(error);
-                }
-            };
-
-            DeleteData(endpoints)
-
+                };
+    
+                DeleteData(endpoints)
+    
+            }
         }
 
 
@@ -170,6 +184,28 @@ export default function ({user}) {
             })
 
             return listo
+        }
+    }
+
+    function handleTotal(){
+        if(cart){
+
+            let total = cart.map((item) => {
+                return item.quantity[1] * item.price
+            })
+            console.log(total)
+
+            let sum = 0;
+
+            total.forEach(function(number) {
+                sum += number;
+            });
+
+            console.log(sum);
+
+            return `Ksh ${sum.toLocaleString()}`
+
+            
         }
     }
 
@@ -211,11 +247,18 @@ export default function ({user}) {
             <div className=' w-[400px] '>
                 <div className='bg-white  h-[20vh] grid sticky top-[4%]'>
                     <h1 className='text-[#36196b] text-xl'>Cart Totals</h1>
+                    <div className=" flex justify-between">
                     <h1>Subtotal</h1>
+                    <h1>{handleTotal()}</h1>
+                    </div>
 
                     <div className='border-[0.5px] border-grey-100 mx-2 h-[0.2px]'></div>
 
+                    <div className="flex justify-between">
                     <h1>Total</h1>
+                    <h1>{handleTotal()}</h1>
+
+                    </div>
 
                     <button className=' bg-[#2f284d] text-white rounded-xl '>Proceed to checkout</button>
 

@@ -3,84 +3,100 @@ import { useParams } from "react-router-dom";
 import { useInView } from 'react-intersection-observer';
 import Carousel from 'react-multi-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
-import Card from './Card';
-import Modal from './Modal';
+import Card from '../Card';
+import Modal from '../Modal';
+import AddOrUpdate from './AddOrUpdate';
 
 
 import { action } from '@storybook/addon-actions';
 import { Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
-import CartModal from './CartModal';
+import CartModal from '../CartModal';
 
 
 
 
-function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, user}) {
+function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, user, cart}) {
     const params = useParams();
     const [product, setproduct] = useState()
     const [slides, setslides] = useState(0)
     const [cards, setcards] = useState(0)
     const [counter, setcounter] = useState(1)
+
+    
     const [thumbnail, setthumbnail] = useState(true)
     const [related, setrelated] = useState(0)
-    const [post, setpost] = useState(false)
+    const [changed, setchanged] = useState(false) 
+
+    // const [partOfCart, setpartOfCart] = useState()
+ 
+
+    // let partOfCart
+
+    let cartquantity
+
+    //checks if product is part of current user's cart
+
+    function partOfCart(){
+
+      
 
 
+      if(cart){
+         let partOfCarto 
 
-    useEffect(() => {
+         for(let i = 0; i < cart.length; i++){
+          if(cart[i].id == product.id){
+            cartquantity = cart[i].quantity[1] 
+            return true
+          }
+         }
 
-      if(product){
-        const url = 'http://127.0.0.1:5555/carts'
+        
+        
 
         
 
-        const PostData = async (url) => {
-          try {
-               const promises = fetch(url, {
-                      method: 'POST',
-                      headers: { 'Content-Type': 'application/json' },
-                      body: JSON.stringify({
-                        user_id : user,
-                        product_id: product.id,
-                        quantity: "1"
-              
-                      })
-
-                })
-                .then(response => {
-                  if(response.ok){
-                    setadd(true)
-                    return response.json()
-                    
-                  }
-                })
-                .then(res => console.log(res))
-                
-
-         
-
-                
-                
-
-            
-
-           
-            
-              } catch (error) {
-                  console.error(error);
-          }
-          };
-        if(url){
-          PostData(url)
-        }
+        
       }
+    }
+
+
+
+    
+
+    // useEffect(() => {
+
+      
+    //     if(cart){
+    //       cart.map((item) => {
+    //         if(product.id == item.id){
+    //           cartquantity = item.quantity[1]
+    //           console.log(cartquantity)
+    //         }
+    //       })
+        
+    //   }
+
+    // })
+
+    
+
+
+
+    
+
+    
+
+     
 
       
      
 
-    }, [post])
+    
 
-    // console.log(post)
- 
+
+    
+
 
 
 
@@ -95,7 +111,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
 
 
-
+    //fetch product
     useEffect(() => {
         fetch(`http://127.0.0.1:5555/product/${params.id}`)
         .then(res => res.json()) 
@@ -108,9 +124,12 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     
       }, [])
      
+   
+
+    //check for similar products
     let similar_products 
     let relatedcards 
-   
+
         if(product && products){
        
 
@@ -133,31 +152,8 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
         modaldata = products.filter((item) => item.id == cardinfo)
     }
 
-    function handlecounter(target){
-      console.log(target)
-      if(target == "−"){
-        if(counter > 1 ){
-          setcounter(counter-1)
-        }
-      }
-
-      if(target == '+' ){
-        if(product){
-          if(counter < product.quantity){
-            setcounter(counter + 1)
-         }
-        }
-
-        
-
-       
-         
-        
-        
-      }
-      
-    }
-
+    
+    //switch slide after 3 secs
     setTimeout(() => {
       if(related != relatedcards - 4){
         setrelated(related+1)
@@ -291,17 +287,15 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
                   <h1 className=' font-semibold text-3xl opacity-[60%]'>Ksh {product.price}.00</h1>
                 </div>
 
-                <div className=' grid gap-[10px]'>
-                  <h1 className=' font-semibold text-lg'>Quantity</h1>
-                  <div className='grid h-[50px] w-[250px] grid-cols-[40%_20%_40%] outline-1 border-black border-[1px]'>
-                    <button className='minus ' onClick={() => handlecounter('−')}>−</button>
-                    <h1 className='place-self-center font-semibold text-xl'>{counter}</h1>
-                    <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
-                  </div>
-                  <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => {
-                    setpost(!post)
-                    }}>Add To Cart</button>
-                </div>
+                {partOfCart() ? 
+
+                <AddOrUpdate  partofcart={true} product={product} user={user} setadd={setadd}/>
+                
+                : 
+
+                <AddOrUpdate   />
+                
+                }
               </div> 
             :
             null
@@ -375,6 +369,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
           <div>
           </div>
           </div> 
+
 
           :
 
