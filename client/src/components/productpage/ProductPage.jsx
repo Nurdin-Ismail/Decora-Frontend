@@ -25,16 +25,33 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     
     const [thumbnail, setthumbnail] = useState(true)
     const [related, setrelated] = useState(0)
-    const [changed, setchanged] = useState(false) 
-
-    // const [partOfCart, setpartOfCart] = useState()
+    const [changed, setchanged] = useState(false)
+    
+    const [incart, setincart] = useState()
  
 
-    // let partOfCart
-
-    let cartquantity
+  
+  
 
     //checks if product is part of current user's cart
+
+    
+
+    useEffect(() => {
+      if(cart){
+
+        for(let i = 0; i < cart.length; i++){
+          if(cart[i].id == product.id){
+            setincart(cart[i])
+          }
+         }
+
+        
+      
+      }
+    })
+
+
 
     function partOfCart(){
 
@@ -46,7 +63,6 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
 
          for(let i = 0; i < cart.length; i++){
           if(cart[i].id == product.id){
-            cartquantity = cart[i].quantity[1] 
             return true
           }
          }
@@ -59,56 +75,12 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
         
       }
     }
-
-
-
     
-
-    // useEffect(() => {
-
-      
-    //     if(cart){
-    //       cart.map((item) => {
-    //         if(product.id == item.id){
-    //           cartquantity = item.quantity[1]
-    //           console.log(cartquantity)
-    //         }
-    //       })
-        
-    //   }
-
-    // })
-
     
 
 
 
     
-
-    
-
-     
-
-      
-     
-
-    
-
-
-    
-
-
-
-
-
-
-
-    
-
-  
-
-
-
 
 
     //fetch product
@@ -163,6 +135,43 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
       }
       
     }, 3000)
+
+
+    function handleCart(){
+      if(cart){
+
+        let incart
+
+        for(let i = 0; i < cart.length; i++){
+          if(cart[i].id == product.id){
+
+            incart = cart[i]
+
+            
+
+
+            
+            
+          }
+         }
+
+        if(incart){
+          return <AddOrUpdate product={incart} partofcart={true} quantity={incart.quantity[1]} user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+        }else{
+
+          return <AddOrUpdate product={product} partofcart={false}  user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+
+
+        }
+
+        
+      }
+
+      //        return <AddOrUpdate product={incart} partofcart={true} quantity={incart.quantity[1]} user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+
+
+      
+    }
 
    
       
@@ -287,15 +296,22 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
                   <h1 className=' font-semibold text-3xl opacity-[60%]'>Ksh {product.price}.00</h1>
                 </div>
 
-                {partOfCart() ? 
 
-                <AddOrUpdate  partofcart={true} product={product} user={user} setadd={setadd}/>
+                {/* {incart && incart.quantity[0]? 
+                 
+                 <AddOrUpdate product={incart} partofcart={partOfCart()} quantity={incart.quantity[1]} user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+                :
                 
-                : 
+                <AddOrUpdate product={product} partofcart={false}  user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+                
+                } */}
 
-                <AddOrUpdate   />
+                {handleCart()}
+
                 
-                }
+
+
+
               </div> 
             :
             null

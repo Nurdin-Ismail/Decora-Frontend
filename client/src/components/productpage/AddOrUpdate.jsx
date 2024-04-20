@@ -1,43 +1,84 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
-export default function AddOrUpdate(partofcart, quantity, product, user, setadd) {
+export default function AddOrUpdate({partofcart, quantity, product, user, setadd, counter, setcounter}) {
+   const [updatecounter, setupdatecounter] = useState(quantity)
+   const [patch, setpatch] = useState(false)
 
+
+  
+   
+
+
+   
 
   //handle quantity
   function handlecounter(target){
       console.log(target)
-      if(target == "−"){
-        if(counter > 1 ){
-          setcounter(counter-1)
+      if(partofcart){
+        if(target == "−"){
+          if(updatecounter > 1 ){
+            setupdatecounter(updatecounter-1)
+          }
         }
-      }
+  
+        if(target == '+' ){
+          if(product){
+            if(updatecounter < quantity){
+              setupdatecounter(updatecounter + 1)
+           }
 
-      if(target == '+' ){
-        if(product){
-          if(counter < product.quantity){
-            setcounter(counter + 1)
+           if(updatecounter == quantity){
+            setpatch(false)
          }
+          }
+  
+          
+  
+         
+           
+          
+          
         }
 
-        
-
-       
+      }else{
+        if(target == "−"){
+          if(counter > 1 ){
+            setcounter(counter-1)
+          }
+        }
+  
+        if(target == '+' ){
+          if(product){
+            if(counter < product.quantity){
+              setcounter(counter + 1)
+           }
+          }
+  
+          
+  
          
-        
-        
+           
+          
+          
+        }
       }
       
     }
 
   //handle add to cart post request
 
-  function handlePost(){
+  function handlePost(url){
+
+    console.log(url)
       if(product ){
-        const url = 'http://127.0.0.1:5555/carts'
+        // const url = 'http://127.0.0.1:5555/carts'
+
+        
 
         
 
         const PostData = async (url) => {
+          console.log('has been called');
           try {
                const promises = fetch(url, {
                       method: 'POST',
@@ -45,7 +86,7 @@ export default function AddOrUpdate(partofcart, quantity, product, user, setadd)
                       body: JSON.stringify({
                         user_id : user,
                         product_id: product.id,
-                        quantity: "1"
+                        quantity: counter
               
                       })
 
@@ -86,7 +127,7 @@ export default function AddOrUpdate(partofcart, quantity, product, user, setadd)
   function handlePatch(){
 
       if(product){
-        if(counter != product.quantity){
+        if(updatecounter != product.quantity){
 
         }
       }
@@ -101,19 +142,16 @@ export default function AddOrUpdate(partofcart, quantity, product, user, setadd)
                   <h1 className=' font-semibold text-lg'>Quantity</h1>
                   <div className='grid h-[50px] w-[250px] grid-cols-[40%_20%_40%] outline-1 border-black border-[1px]'>
                     <button className='minus ' onClick={() => handlecounter('−')}>−</button>
-                    <h1 className='place-self-center font-semibold text-xl'>{counter}</h1>
+                    <h1 className='place-self-center font-semibold text-xl'>{partofcart && updatecounter != 0 ? updatecounter: counter}</h1>
                     <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
                   </div>
-                  {partofcart?
-                  
-                  <button className='grid h-[50px] w-[250px] bg-[#d5d7fd] text-[#514c57] place-content-center text-xl cursor-not-allowed'  onClick={() => {
+                  {partofcart ? <button className='grid h-[50px] w-[250px] bg-[#d5d7fd] text-[#514c57] place-content-center text-xl cursor-not-allowed'  onClick={() => {
                     handlePatch()
-                    }}>Update Cart</button>
-                  
-                  : 
-                  
-                  <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => {
-                    handlePost()
+                    }}>Update Cart</button>: 
+                    
+                    <button className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'  onClick={() => {
+                    handlePost('http://127.0.0.1:5555/carts')
+                    
                     }}>Add To Cart</button>}
       </div>
           

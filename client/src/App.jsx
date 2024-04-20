@@ -4,7 +4,7 @@ import Navbar from '../src/components/Navbar';
 import Home from './components/Home';
 import { useEffect, useState } from 'react';
 import Footer from './components/Footer';
-import ProductPage from './components/ProductPage/ProductPage';
+import ProductPage from './components/productpage/ProductPage';
 import Store from './components/Store';
 import Cart from './components/Cart/Cart';
 import kanu from './1.jpg'
