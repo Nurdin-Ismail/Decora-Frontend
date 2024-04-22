@@ -255,16 +255,7 @@ function Store(props) {
     {/* Products */}
     <div className='besto grid grid-flow-col grid-cols-[125px_1585px_125px] '>
         
-        {/* <div className={filtero ? ' w-[274px] grid ' : 'filtery hidden'}>
-
-            <div className=' border-[1px] border-black kol px-[70px] py-[20px] mr-[-250px] cursor-pointer hover:bg-[#554586b4] hover:text-white' onClick={() => {
-
-            }}>
-                Price Range
-
-            </div>
-
-        </div> */}
+        
 
         <div className='grid min-w-[100px]'>
 
@@ -395,7 +386,7 @@ function Store(props) {
         
 
     
-    {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd} user={props.user}/>: null}
+    {props.is ? <Modal setis={props.setis} data={modaldata} is={props.is} setadd={props.setadd} user={props.user} cart={props.cart} patched={props.updated} setpatched={props.setupdated}/>: null}
     
     {props.add ? <CartModal setadd={props.setadd} count={props.counter} product={modaldata[0]}/>: null}
     

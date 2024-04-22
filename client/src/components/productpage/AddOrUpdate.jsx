@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from 'react'
 
-export default function AddOrUpdate({partofcart, quantity, product, user, setadd, counter, setcounter}) {
-   const [updatecounter, setupdatecounter] = useState(quantity)
-   const [patch, setpatch] = useState(false)
-
-
+export default function AddOrUpdate({partofcart, quantity, product, user, setadd, counter, setcounter, setpatched, patched}) {
+   
   
+  const [updatecounter, setupdatecounter] = useState(quantity)
+
+  //  console.log(quantity);
+  // useEffect(() => {
+  //   if(partofcart ===true && updatecounter === undefined){
+  //       setupdatecounter(product.quantity[1])
+  //   }
+
+  // }, [updatecounter])
+
+  useEffect(() => {
+    setupdatecounter(quantity)
+  }, [quantity])
    
 
+   
+   
 
    
 
@@ -15,6 +27,7 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
   function handlecounter(target){
       console.log(target)
       if(partofcart){
+
         if(target == "−"){
           if(updatecounter > 1 ){
             setupdatecounter(updatecounter-1)
@@ -23,13 +36,9 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
   
         if(target == '+' ){
           if(product){
-            if(updatecounter < quantity){
+            if(updatecounter < product.quantity[0]){
               setupdatecounter(updatecounter + 1)
            }
-
-           if(updatecounter == quantity){
-            setpatch(false)
-         }
           }
   
           
@@ -39,6 +48,9 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
           
           
         }
+        
+  
+        
 
       }else{
         if(target == "−"){
@@ -71,7 +83,7 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
 
     console.log(url)
       if(product ){
-        // const url = 'http://127.0.0.1:5555/carts'
+        const url = 'http://127.0.0.1:5555/carts'
 
         
 
@@ -94,13 +106,22 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
                 .then(response => {
                   if(response.ok){
                     setadd(true)
-                    window.location.reload()
+                    // window.location.reload()
+                    setpatched(patched + 1)
+
+                      
+                   
+
                     return response.json()
                     
                     
                   }
                 })
-                .then(res => console.log(res))
+                .then(res => {
+                  console.log(res)
+                     
+
+                })
                 
 
          
@@ -127,7 +148,57 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
   function handlePatch(){
 
       if(product){
-        if(updatecounter != product.quantity){
+        if(updatecounter != quantity){
+
+        const url = `http://127.0.0.1:5555/cart/${product.cart_id}`
+
+
+          const PatchData = async (url) => {
+          console.log('has been called');
+          try {
+               const promises = fetch(url, {
+                      method: 'PATCH',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        quantity: updatecounter
+              
+                      })
+
+                })
+                .then(response => {
+                  if(response.ok){
+                    setadd(true)
+                    // window.location.reload()
+                    setpatched(patched + 1)
+                    return response.json()
+                    
+                    
+                  }
+                })
+                .then(res => console.log(res))
+                
+
+         
+
+                
+                
+
+            
+
+           
+            
+              } catch (error) {
+                  console.error(error);
+          }
+          };
+        if(url){
+          PatchData(url)
+        }
+      
+
+
+
+
 
         }
       }
@@ -142,10 +213,10 @@ export default function AddOrUpdate({partofcart, quantity, product, user, setadd
                   <h1 className=' font-semibold text-lg'>Quantity</h1>
                   <div className='grid h-[50px] w-[250px] grid-cols-[40%_20%_40%] outline-1 border-black border-[1px]'>
                     <button className='minus ' onClick={() => handlecounter('−')}>−</button>
-                    <h1 className='place-self-center font-semibold text-xl'>{partofcart && updatecounter != 0 ? updatecounter: counter}</h1>
+                    <h1 className='place-self-center font-semibold text-xl'>{partofcart ? updatecounter: counter}</h1>
                     <button className='add text-3xl' onClick={() => handlecounter('+')}>+</button>
                   </div>
-                  {partofcart ? <button className='grid h-[50px] w-[250px] bg-[#d5d7fd] text-[#514c57] place-content-center text-xl cursor-not-allowed'  onClick={() => {
+                  {partofcart ? <button className={updatecounter === quantity  ? 'grid h-[50px] w-[250px] bg-[#d5d7fd] text-[#514c57] place-content-center text-xl cursor-not-allowed' : 'grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'}  onClick={() => {
                     handlePatch()
                     }}>Update Cart</button>: 
                     

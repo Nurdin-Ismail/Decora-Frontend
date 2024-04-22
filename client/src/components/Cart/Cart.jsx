@@ -4,7 +4,7 @@ import trash from '../../trash.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
-export default function ({user, cart, setcart }) {
+export default function Cart({user, cart, setcart}) {
 
     const navigate = useNavigate
 
@@ -17,7 +17,6 @@ export default function ({user, cart, setcart }) {
  
     console.log(changed)
 
-    console.log(cart)
 
     useEffect(() => {
         if(user){
@@ -34,11 +33,6 @@ export default function ({user, cart, setcart }) {
     
     }, [])
 
-
-
-    
-
-    
 
     useEffect(() => {
         setchanged(changed.filter((value, index) => changed.indexOf(value) === index))
@@ -116,7 +110,6 @@ export default function ({user, cart, setcart }) {
         
 
     }, [updated])
-
 
 
     useEffect(() => {

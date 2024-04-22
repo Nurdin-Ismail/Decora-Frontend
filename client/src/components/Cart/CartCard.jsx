@@ -6,7 +6,6 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
     const [counter, setcounter] = useState(item.quantity[1])
     const [quantity, setquantity] = useState(item.quantity[0])
     const [del_product, setdel_product] = useState(false)
-    console.log(del_product)
 
     useEffect(() => {
 
@@ -32,8 +31,8 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
     
 
     useEffect(() => {
-        if(counter !== item.quantity[1]){
-            let newCart = cart.map((item) => {
+        if(counter){
+        let newCart = cart.map((item) => {
             if(cart.indexOf(item) == index){
                 item.quantity[1] = counter
 
@@ -58,11 +57,7 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
     }, [counter])
 
 
-    
-
-    
-
-    
+ 
 
     function handlecounter(target, product){
         if(target === "−"){
@@ -82,10 +77,7 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
            }
           }
   
-          // if(counter < product.quantity){
-          //    setcounter(counter + 1)
-          // }
-          // console.log(product.quantity)
+          
   
          
            
@@ -94,6 +86,9 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
         }
         
     }
+
+
+
   return (
     <div className=' h-[160px]  grid  grid-cols-[60%_20%_10%_10%] border-b-[1px]'>
                     <div className=' grid grid-cols-[30%_70%]'>

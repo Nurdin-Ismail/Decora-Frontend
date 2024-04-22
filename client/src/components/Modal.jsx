@@ -7,67 +7,121 @@ import { Link, NavLink, useLocation, useNavigate} from 'react-router-dom';
 
 
 
-function Modal({setis, data, is, setadd, user}) {
+function Modal({setis, data, is, setadd, user, cart, patched, setpatched}) {
 
   const location = useLocation()
   const navigate = useNavigate()
 
-  const [post, setpost] = useState(false)
 
 
 
-    // useEffect(() => {
+   
 
-    //   if(data){
-    //     const url = 'http://127.0.0.1:5555/carts'
+
+    function handleCart(){
+
+      if(cart){
+
+        let incart
+
+        for(let i = 0; i < cart.length; i++){
+          if(cart[i].id == data[0].id){
+
+            incart = cart[i]
+
+            console.log(incart)
+
+            
+
+
+            
+            
+          }
+         }
+
+        if(incart){
+          return <button class="button-60" role="button"
+                    onClick={() => {
+                      window.location.replace('/cart')
+                    }}
+                    >View Cart</button>
+        }else{
+
+          return <button class="button-60" role="button"
+                    onClick={() => {
+                      handlePost('http://127.0.0.1:5555/carts')
+                      setis(false)
+
+                      
+                    }}
+                    >Add to Cart</button>
+
+
+
+        }
+
+        
+      }
+
+
+      
+    }
+
+    function handlePost(url){
+
+    console.log(url)
+      if(data){
+        const url = 'http://127.0.0.1:5555/carts'
 
         
 
-    //     const PostData = async (url) => {
-    //       try {
-    //            const promises = fetch(url, {
-    //                   method: 'POST',
-    //                   headers: { 'Content-Type': 'application/json' },
-    //                   body: JSON.stringify({
-    //                     user_id : user,
-    //                     product_id: data[0].id,
-    //                     quantity: "1"
-              
-    //                   })
+        
 
-    //             })
-    //             .then(response => {
-    //               if(response.ok){
-    //                 setadd(true)
-    //                 return response.json()
+        const PostData = async (url) => {
+          console.log('has been called');
+          try {
+               const promises = fetch(url, {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({
+                        user_id : user,
+                        product_id: data[0].id,
+                        quantity: 1
+              
+                      })
+
+                })
+                .then(response => {
+                  if(response.ok){
+                    setadd(true)
+                    setpatched(patched + 1)
+                    return response.json()
                     
-    //               }
-    //             })
-    //             .then(res => console.log(res))
+                    
+                  }
+                })
+                .then(res => console.log(res))
                 
 
          
 
                 
-                  
+                
 
             
 
            
             
-    //           } catch (error) {
-    //               console.error(error);
-    //       }
-    //       };
-    //     if(url){
-    //       PostData(url)
-    //     }
-    //   }
+              } catch (error) {
+                  console.error(error);
+          }
+          };
+        if(url){
+          PostData(url)
+        }
+      }
 
-      
-     
-
-    // }, [post])
+    }
 
 
   
@@ -90,11 +144,7 @@ function Modal({setis, data, is, setadd, user}) {
     }
   };
 
-  // const images = data[0].images
-
-  // console.log(images)
-
-  console.log(data)
+ 
   return (
     <div>
       <div
@@ -152,12 +202,7 @@ function Modal({setis, data, is, setadd, user}) {
                      <a href={`/products/${data[0].name.split(` `).join(`-`)}/${data[0].id}`}><button class="button-60"  role="button" onClick={() => {setis(!is)
                    }}>View Full Details</button></a>
                      
-                    <button class="button-60" role="button"
-                    onClick={() => {
-                      setis(false)
-                      setadd(true)
-                    }}
-                    >Add to Cart</button>
+                    {handleCart()}
 
                 </div>
 

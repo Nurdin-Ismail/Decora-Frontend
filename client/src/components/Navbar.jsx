@@ -8,8 +8,23 @@ import user from '../user2.png'
 
 
 
-function Navbar({products}){
+function Navbar({products, quantity}){
     const [isShown, setIsShown] = useState(false)
+    const [items, setitems] =  useState(0)
+
+    useEffect(() => {
+        if(quantity){
+
+        setitems(quantity)
+
+    }
+
+    })
+
+   
+
+    
+
     function getUniqueCategories(products) {
         let categories = []
         if(products){
@@ -64,6 +79,7 @@ function Navbar({products}){
       })
 
     }
+
     
     
     return <div>
@@ -107,7 +123,7 @@ function Navbar({products}){
                         <img src={user} alt="" className="cursor-pointer "/>
                         <div className="grid cart  ">
                             <a href="/cart"><img src={cartsmall} alt="" className="cursor-pointer"/></a>
-                            <h1 className="text-xs grid place-content-center rounded-full ml-1 w-[12px] h-[12px] bg-[#cbc0fa] ">12</h1>
+                            <h1 className="text-xs grid place-content-center rounded-full ml-1 w-[12px] h-[12px] bg-[#cbc0fa] ">{items}</h1>
                         </div>
                     </div>
                     {/* <h1 className=" text-lg font-medium text-cyan-900">Login</h1>

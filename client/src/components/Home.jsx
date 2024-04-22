@@ -13,7 +13,7 @@ import forward from '../forward.png'
 import arrow from '../arrow1.png'
 
 
-function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}){
+function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, cart, user, setpatched, patched}){
 
     const [slide, setslide] = useState(0)
     const [slide2, setslide2] = useState(0)
@@ -171,7 +171,7 @@ function Home({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd}
 
         </section>
 
-        {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
+        {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd} cart={cart} user={user} setpatched={setpatched} patched={patched}/>: null}
         
         {add ? <CartModal setadd={setadd} count={counter} product={product}/>: null}
 

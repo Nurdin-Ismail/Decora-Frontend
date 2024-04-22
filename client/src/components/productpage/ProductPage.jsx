@@ -15,7 +15,7 @@ import CartModal from '../CartModal';
 
 
 
-function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, user, cart}) {
+function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, setadd, user, cart, setupdated, updated}) {
     const params = useParams();
     const [product, setproduct] = useState()
     const [slides, setslides] = useState(0)
@@ -28,6 +28,21 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     const [changed, setchanged] = useState(false)
     
     const [incart, setincart] = useState()
+
+    const [patched, setpatched] = useState(0)
+    const [posted, setposted] = useState(0)
+
+    
+
+    useEffect(() => {
+
+      setupdated(updated + 1)
+
+
+
+    }, [patched])
+
+   
  
 
   
@@ -38,7 +53,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
     
 
     useEffect(() => {
-      if(cart){
+      if(cart && product){
 
         for(let i = 0; i < cart.length; i++){
           if(cart[i].id == product.id){
@@ -89,7 +104,6 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
         .then(res => res.json()) 
         .then(data => {
           setproduct(data)
-          console.log(data)
           setcards(data.images.length)
         
         })
@@ -156,10 +170,13 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
          }
 
         if(incart){
-          return <AddOrUpdate product={incart} partofcart={true} quantity={incart.quantity[1]} user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+          // console.log(incart.quantity[1]);
+          return <AddOrUpdate product={incart} partofcart={true} quantity={incart.quantity[1]} user={user} setadd={setadd} counter={counter} setcounter={setcounter} setpatched={setpatched} patched={patched}/>
         }else{
+          console.log('post');
 
-          return <AddOrUpdate product={product} partofcart={false}  user={user} setadd={setadd} counter={counter} setcounter={setcounter}/>
+
+          return <AddOrUpdate product={product}   user={user} setadd={setadd} counter={counter} setcounter={setcounter} setpatched={setpatched} patched={patched}/>
 
 
         }
@@ -398,7 +415,7 @@ function ProductPage({products,setcardinfo, handleis, is, setis, cardinfo, add, 
       </div>
 
 
-      {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd}/>: null}
+      {is? <Modal setis={setis} data={modaldata} is={is} setadd={setadd} cart={cart} user={user} setpatched={setpatched} patched={patched}/>: null}
         
       {add ? <CartModal setadd={setadd} count={counter} product={product}/>: null}
 
