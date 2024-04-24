@@ -7,8 +7,9 @@ import Footer from './components/Footer';
 import ProductPage from './components/productpage/ProductPage';
 import Store from './components/Store';
 import Cart from './components/Cart/Cart';
-import kanu from './1.jpg'
 import Exercise from './components/Exercise';
+
+import User from './components/user/User';
 
 function App() {
 
@@ -64,6 +65,8 @@ function App() {
         <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={user} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
         <Route path= '/exercise' element={<Exercise/>}></Route>
         <Route path= '/cart' element={<Cart user={user} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
+        <Route path= '/user' element={<User/>}></Route>
+
       </Routes>
       <Footer/>
 
