@@ -17,9 +17,11 @@ function App() {
   const [is, setis] = useState(false)
   const [cardinfo, setcardinfo] = useState()
   const [add, setadd] = useState()
-  const [user, setuser] = useState(1)
+  const [userid, setuserid] = useState(1)
   const [cart, setcart] = useState()
   const [updated, setupdated] = useState(0)
+  const [user,setuser] = useState()
+
 
 
   useEffect(() => {
@@ -30,11 +32,12 @@ function App() {
   }, [])
 
   useEffect(() => {
-    if(user){
-        fetch(`http://127.0.0.1:5555/user/${user}`)
+    if(userid){
+        fetch(`http://127.0.0.1:5555/user/${userid}`)
         .then(res => res.json()) 
         .then(data => {
             setcart(data.cart)
+            setuser(data)
         })
 
         
@@ -43,6 +46,8 @@ function App() {
 
 }, [updated])
   // console.log(products)
+
+  console.log(user);
 
   function handleis(is){
     setis(!is)
@@ -60,12 +65,12 @@ function App() {
       {cart && cart.length > 0 ? <Navbar products={products} quantity={cart.length}/> : <Navbar products={products} /> }
       <Routes>
         
-        <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={user} setpatched={setupdated} patched={updated} cart={cart}/>}></Route>
-        <Route path='/products/:name/:id' element={<ProductPage products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={user} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
-        <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={user} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
+        <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} setpatched={setupdated} patched={updated} cart={cart}/>}></Route>
+        <Route path='/products/:name/:id' element={<ProductPage products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
+        <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
         <Route path= '/exercise' element={<Exercise/>}></Route>
-        <Route path= '/cart' element={<Cart user={user} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
-        <Route path= '/user' element={<User/>}></Route>
+        <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
+        <Route path= '/user' element={<User user={user}/>}></Route>
 
       </Routes>
       <Footer/>

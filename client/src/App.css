@@ -982,3 +982,17 @@ font-family: 'Philosopher', sans-serif;
   place-content: center;
 }
 
+
+
+.item-center-end{
+  place-items: center end;
+}
+
+.item-center-start{
+  place-items: center start;
+}
+
+.smooth{
+    transition: all 1s ease-in-out;
+
+}
