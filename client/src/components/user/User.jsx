@@ -1,19 +1,280 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import forward from '../../forward.png'
+// import codes from '../../countryCodes.txt'
 
 export default function User({user}) {
   const [current, setcurrent] = useState('Account Information')
+  const [firstname, setfirstname] = useState()
+  const [lastname, setlastname] = useState()
+  const [passChecked, setpasschecked] = useState(false)
+  const [emailChecked, setemailchecked] = useState(false)
+  const [code, setcode] = useState('(+254)')
+  const [number, setnumber] = useState()
+  const [email, setemail] = useState()
+  const [password, setpassword] = useState()
+
+  console.log(number)
+  const countryCallingCodes = [
+    ["(+93)", "Afghanistan"],
+    ["(+355)", "Albania"],
+    ["(+213)", "Algeria"],
+    ["(+1684)", "American Samoa"],
+    ["(+376)", "Andorra"],
+    ["(+244)", "Angola"],
+    ["(+1264)", "Anguilla"],
+    ["(+672)", "Antarctica"],
+    ["(+1268)", "Antigua and Barbuda"],
+    ["(+54)", "Argentina"],
+    ["(+374)", "Armenia"],
+    ["(+297)", "Aruba"],
+    ["(+61)", "Australia"],
+    ["(+43)", "Austria"],
+    ["(+994)", "Azerbaijan"],
+    ["(+1242)", "Bahamas"],
+    ["(+973)", "Bahrain"],
+    ["(+880)", "Bangladesh"],
+    ["(+1246)", "Barbados"],
+    ["(+375)", "Belarus"],
+    ["(+32)", "Belgium"],
+    ["(+501)", "Belize"],
+    ["(+229)", "Benin"],
+    ["(+1441)", "Bermuda"],
+    ["(+975)", "Bhutan"],
+    ["(+591)", "Bolivia"],
+    ["(+387)", "Bosnia and Herzegovina"],
+    ["(+267)", "Botswana"],
+    ["(+55)", "Brazil"],
+    ["(+246)", "British Indian Ocean Territory"],
+    ["(+673)", "Brunei Darussalam"],
+    ["(+359)", "Bulgaria"],
+    ["(+226)", "Burkina Faso"],
+    ["(+257)", "Burundi"],
+    ["(+855)", "Cambodia"],
+    ["(+237)", "Cameroon"],
+    ["(+1)", "Canada"],
+    ["(+238)", "Cape Verde"],
+    ["(+1345)", "Cayman Islands"],
+    ["(+236)", "Central African Republic"],
+    ["(+235)", "Chad"],
+    ["(+56)", "Chile"],
+    ["(+86)", "China"],
+    ["(+61)", "Christmas Island"],
+    ["(+61)", "Cocos (Keeling) Islands"],
+    ["(+57)", "Colombia"],
+    ["(+269)", "Comoros"],
+    ["(+242)", "Democratic Republic of the Congo"],
+    ["(+243)", "Congo"],
+    ["(+682)", "Cook Islands"],
+    ["(+506)", "Costa Rica"],
+    ["(+225)", "Cote D'Ivoire"],
+    ["(+385)", "Croatia"],
+    ["(+53)", "Cuba"],
+    ["(+357)", "Cyprus"],
+    ["(+420)", "Czech Republic"],
+    ["(+45)", "Denmark"],
+    ["(+253)", "Djibouti"],
+    ["(+1767)", "Dominica"],
+    ["(+1809)", "Dominican Republic"],
+    ["(+593)", "Ecuador"],
+    ["(+20)", "Egypt"],
+    ["(+503)", "El Salvador"],
+    ["(+240)", "Equatorial Guinea"],
+    ["(+291)", "Eritrea"],
+    ["(+372)", "Estonia"],
+    ["(+251)", "Ethiopia"],
+    ["(+500)", "Falkland Islands (Malvinas)"],
+    ["(+298)", "Faroe Islands"],
+    ["(+679)", "Fiji"],
+    ["(+358)", "Finland"],
+    ["(+33)", "France"],
+    ["(+594)", "French Guiana"],
+    ["(+689)", "French Polynesia"],
+    ["(+241)", "Gabon"],
+    ["(+220)", "Gambia"],
+    ["(+995)", "Georgia"],
+    ["(+49)", "Germany"],
+    ["(+233)", "Ghana"],
+    ["(+350)", "Gibraltar"],
+    ["(+30)", "Greece"],
+    ["(+299)", "Greenland"],
+    ["(+1473)", "Grenada"],
+    ["(+590)", "Guadeloupe"],
+    ["(+1671)", "Guam"],
+    ["(+502)", "Guatemala"],
+    ["(+224)", "Guinea"],
+    ["(+245)", "Guinea-Bissau"],
+    ["(+592)", "Guyana"],
+    ["(+509)", "Haiti"],
+    ["(+39)", "Holy See (Vatican City State)"],
+    ["(+504)", "Honduras"],
+    ["(+852)", "Hong Kong"],
+    ["(+36)", "Hungary"],
+    ["(+354)", "Iceland"],
+    ["(+91)", "India"],
+    ["(+62)", "Indonesia"],
+    ["(+98)", "Islamic Republic of Iran"],
+    ["(+964)", "Iraq"],
+    ["(+353)", "Ireland"],
+    ["(+972)", "Israel"],
+    ["(+39)", "Italy"],
+    ["(+1876)", "Jamaica"],
+    ["(+81)", "Japan"],
+    ["(+962)", "Jordan"],
+    ["(+7)", "Kazakhstan"],
+    ["(+254)", "Kenya"],
+    ["(+686)", "Kiribati"],
+    ["(+383)", "Kosovo"],
+    ["(+850)", "Democratic People's Republic of Korea"],
+    ["(+82)", "Republic of Korea"],
+    ["(+965)", "Kuwait"],
+    ["(+996)", "Kyrgyzstan"],
+    ["(+856)", "Lao People's Democratic Republic"],
+    ["(+371)", "Latvia"],
+    ["(+961)", "Lebanon"],
+    ["(+266)", "Lesotho"],
+    ["(+231)", "Liberia"],
+    ["(+218)", "Libyan Arab Jamahiriya"],
+    ["(+423)", "Liechtenstein"],
+    ["(+370)", "Lithuania"],
+    ["(+352)", "Luxembourg"],
+    ["(+853)", "Macao"],
+    ["(+389)", "The Former Yugoslav Republic of Macedonia"],
+    ["(+261)", "Madagascar"],
+    ["(+265)", "Malawi"],
+    ["(+60)", "Malaysia"],
+    ["(+960)", "Maldives"],
+    ["(+223)", "Mali"],
+    ["(+356)", "Malta"],
+    ["(+692)", "Marshall Islands"],
+    ["(+596)", "Martinique"],
+    ["(+222)", "Mauritania"],
+    ["(+230)", "Mauritius"],
+    ["(+269)", "Mayotte"],
+    ["(+52)", "Mexico"],
+    ["(+691)", "Federated States of Micronesia"],
+    ["(+373)", "Moldova, Republic of"],
+    ["(+377)", "Monaco"],
+    ["(+976)", "Mongolia"],
+    ["(+382)", "Montenegro"],
+    ["(+1664)", "Montserrat"],
+    ["(+212)", "Morocco"],
+    ["(+258)", "Mozambique"],
+    ["(+95)", "Myanmar (Burma)"],
+    ["(+264)", "Namibia"],
+    ["(+674)", "Nauru"],
+    ["(+977)", "Nepal"],
+    ["(+31)", "Netherlands"],
+    ["(+599)", "Netherlands Antilles"],
+    ["(+687)", "New Caledonia"],
+    ["(+64)", "New Zealand"],
+    ["(+505)", "Nicaragua"],
+    ["(+227)", "Niger"],
+    ["(+234)", "Nigeria"],
+    ["(+683)", "Niue"],
+    ["(+672)", "Norfolk Island"],
+    ["(+1670)", "Northern Mariana Islands"],
+    ["(+47)", "Norway"],
+    ["(+968)", "Oman"],
+    ["(+92)", "Pakistan"],
+    ["(+680)", "Palau"],
+    ["(+970)", "State of Palestine"],
+    ["(+507)", "Panama"],
+    ["(+675)", "Papua New Guinea"],
+    ["(+595)", "Paraguay"],
+    ["(+51)", "Peru"],
+    ["(+63)", "Philippines"],
+    ["(+48)", "Poland"],
+    ["(+351)", "Portugal"],
+    ["(+1787)", "Puerto Rico"],
+    ["(+974)", "Qatar"],
+    ["(+262)", "Reunion"],
+    ["(+40)", "Romania"],
+    ["(+7)", "Russian Federation"],
+    ["(+250)", "Rwanda"],
+    ["(+290)", "Saint Helena"],
+    ["(+1869)", "Saint Kitts and Nevis"],
+    ["(+1758)", "Saint Lucia"],
+    ["(+508)", "Saint Pierre and Miquelon"],
+    ["(+1784)", "Saint Vincent and the Grenadines"],
+    ["(+685)", "Samoa"],
+    ["(+378)", "San Marino"],
+    ["(+239)", "Sao Tome and Principe"],
+    ["(+966)", "Saudi Arabia"],
+    ["(+221)", "Senegal"],
+    ["(+381)", "Serbia"],
+    ["(+248)", "Seychelles"],
+    ["(+232)", "Sierra Leone"],
+    ["(+65)", "Singapore"],
+    ["(+421)", "Slovakia"],
+    ["(+386)", "Slovenia"],
+    ["(+677)", "Solomon Islands"],
+    ["(+252)", "Somalia"],
+    ["(+27)", "South Africa"],
+    ["(+995)", "South Georgia and the South Sandwich Islands"],
+    ["(+34)", "Spain"],
+    ["(+94)", "Sri Lanka"],
+    ["(+249)", "Sudan"],
+    ["(+597)", "Suriname"],
+    ["(+47)", "Svalbard and Jan Mayen"],
+    ["(+268)", "Swaziland"],
+    ["(+46)", "Sweden"],
+    ["(+41)", "Switzerland"],
+    ["(+963)", "Syrian Arab Republic"],
+    ["(+886)", "Taiwan, Province of China"],
+    ["(+992)", "Tajikistan"],
+    ["(+255)", "Tanzania, United Republic of"],
+    ["(+66)", "Thailand"],
+    ["(+670)", "Timor-Leste"],
+    ["(+228)", "Togo"],
+    ["(+690)", "Tokelau"],
+    ["(+676)", "Tonga"],
+    ["(+1868)", "Trinidad and Tobago"],
+    ["(+216)", "Tunisia"],
+    ["(+90)", "Turkey"],
+    ["(+993)", "Turkmenistan"],
+    ["(+1649)", "Turks and Caicos Islands"],
+    ["(+688)", "Tuvalu"],
+    ["(+256)", "Uganda"],
+    ["(+380)", "Ukraine"],
+    ["(+971)", "United Arab Emirates"],
+    ["(+44)", "United Kingdom"],
+    ["(+1)", "United States"],
+    ["(+598)", "Uruguay"],
+    ["(+998)", "Uzbekistan"],
+    ["(+678)", "Vanuatu"],
+    ["(+58)", "Venezuela"],
+    ["(+84)", "Viet Nam"],
+    ["(+1284)", "Virgin Islands, British"],
+    ["(+1340)", "Virgin Islands, U.S."],
+    ["(+681)", "Wallis and Futuna"],
+    ["(+212)", "Western Sahara"],
+    ["(+967)", "Yemen"],
+    ["(+260)", "Zambia"],
+    ["(+263)", "Zimbabwe"]
+];
+
+
+
+  useEffect(() => {
+    if(user){
+      setfirstname(user.name.split(' ')[0])
+      setlastname(user.name.split(' ')[1])
+      setemail(user.email.replace('example.net', 'gmail.com'))
+      setpassword(user.passord)
+    }
+
+  }, [user])
 
   function handleButtonChange(target){
     if(target == 'Account Information' && user){
-      return <div className=' mx-6  bg-gray-100 grid h-[490px] grid-rows-[10%_40%_40%]'>
+      return <div className=' px-8  bg-gray-100 grid h-[490px] grid-rows-[20%_30%_50%]'>
 
-        <h1 className=' text-4xl font-[200]'>Account Information</h1>
+        <h1 className=' text-4xl font-[200] grid center-start '>Account Information</h1>
 
         <div className=' grid grid-cols-2 border-black border-b-[1px]'>
 
-          <div className='flex flex-col center-start'>
+          <div className='flex flex-col '>
 
             <h1 className=' font-semibold text-xl'>Contact Information</h1>
             <h1 className=' text-[17px]'>{user.name}</h1>
@@ -26,7 +287,7 @@ export default function User({user}) {
 
           </div>
 
-          <div className='flex flex-col center-start'>
+          <div className='flex flex-col '>
 
             <h1 className='font-semibold text-xl'>Newsletter</h1>
             <p>You aren't subscribed to our newsletter</p>
@@ -36,7 +297,7 @@ export default function User({user}) {
           </div>
 
         </div>
-        <div className=' grid-rows-2'>
+        <div className=' border-black border-b-[1px]'>
 
           <div className='my-5 flex items-center justify-between'>
                       <h1 className=' text-4xl font-[200]  '>Address Book</h1>
@@ -45,7 +306,7 @@ export default function User({user}) {
           </div>
 
 
-          <div className='grid grid-cols-2'>
+          <div className='grid grid-cols-2  '>
             <div className='flex flex-col center-start'>
 
               <h1 className=' font-semibold text-xl'>Default Billing Adress</h1>
@@ -76,20 +337,126 @@ export default function User({user}) {
 
       </div>
 
-    }else if(target == 'Adress'){
+    }else if(target == 'Adress' && user){
       return <h1>
         Adress
       </h1>
 
-    }else if(target == 'Edit Information'){
-      return <h1>
-        Edit Information
-      </h1>
+    }else if(target == 'Edit Information' && user){
+      return <div className='bg-gray-100 h-[470px]'>
+
+        <div>
+          <div className=' flex justify-evenly pt-5'>
+            <input type="text" value={firstname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setfirstname(e.target.value)}/>
+            <input type="text" value={lastname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setlastname(e.target.value)}/>
+          </div>
+
+          <div className=' flex flex-col mx-20 mt-5 '>
+            <div className='flex justify-around w-[14%] items-center'>
+            <input type="checkbox" id='email' className=' w-4 h-4' checked={emailChecked} onChange={() => setemailchecked(!emailChecked)} />
+            <label htmlFor="email">Change Email</label>
+            </div>
+
+            <div className='flex justify-around w-[17%] items-center'>
+            <input type="checkbox"  className=' w-4 h-4'  id='password' checked={passChecked} onChange={() => {
+              setpasschecked(!passChecked)
+            }}/>
+            <label htmlFor="password">Change Password</label>
+            </div>
+          </div>
+
+          <div className=' flex items-center justify-between mx-6 mt-8'>
+            {countryCallingCodes ? 
+
+            <select name="" id="" value={code} className='text-center py-4 px-3 border-black border-b-[2px] outline-none focus:outline-none ' onChange={(e) => {
+              setcode(e.target.value)
+            }}>
+              {countryCallingCodes.map((item) => {
+                return <option className='text-center' value={item[0]}>{ item[1]}</option>
+              })}
+            </select>
+            
+            :
+          
+            null}
+
+            <div className='flex items-center '>
+              <h1 className=' pr-2 mr-3 ml-20  border-black border-b-[2px] pb-2 pt-2 text-lg font-semibold'>{code.replace('(', '').replace(')', '')}</h1>
+              <input type="tel" maxlength='11' placeholder='Mobile Number'  className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' value={number}  onChange={(e) => {
+              
+               
+                  setnumber(e.target.value)
+                
+              
+              }}/>
+          </div>
+
+          
+
+          </div>
+
+          <div>
+            {emailChecked ? 
+
+            passChecked ? 
+
+            // Are both checked? Do this
+
+            <div>
+
+              <div>
+                <input type="email" placeholder=''/>
+              </div>
+              <div></div>
+
+            </div>
+            
+            : 
+
+            // Is only one checked? Do this
+
+            <div className=' mt-5'>
+
+              <h1 className='ml-6 mb-2 font-extralight text-2xl'>Change Email</h1>
+              <div className=' flex justify-between mx-6'>
+                <input 
+                type="email" 
+                placeholder='Change email' 
+                required 
+                className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                value={email}
+                onChange={(e) => {
+                  setemail(e.target.value)
+                }}
+                />
+                <input type="password" value={password} placeholder='Enter Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'/>
+              </div>
+
+            </div>
+            : 
+            passChecked ?
+
+            // is passowrd checked? do this 
+
+            <div>
+              <h1>only password</h1>
+
+            </div>
+            
+            : 
+            
+            null
+            }
+          </div>
+        </div>
+
+
+      </div>
       
-    }else if(target == 'Orders'){
+    }else if(target == 'Orders' && user){
       return <h1>Orders</h1>
       
-    }else if(target == 'Wishlist'){
+    }else if(target == 'Wishlist' && user){
       return <h1>Wishlist</h1>
       
     }
@@ -115,7 +482,6 @@ export default function User({user}) {
                  <img src={forward} alt="" className={current == 'Account Information' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
 
                 <div className={current == 'Account Information' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  console.log(current) 
                   setcurrent('Account Information')
 
                         }}>
@@ -132,7 +498,6 @@ export default function User({user}) {
 
                 <div className={current == 'Adress' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
                   setcurrent('Adress')
-                  console.log(current) 
 
                         }}>
                         Adress
@@ -148,7 +513,6 @@ export default function User({user}) {
 
                 <div className={current == 'Edit Information' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
                   setcurrent('Edit Information')
-                  console.log(current) 
 
                         }}>
                         Edit Information
@@ -164,7 +528,6 @@ export default function User({user}) {
 
                 <div className={current == 'Orders' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
                   setcurrent('Orders')
-                  console.log(current) 
 
                         }}>
                         Orders
@@ -180,7 +543,6 @@ export default function User({user}) {
 
                 <div className={current == 'Wishlist' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
                   setcurrent('Wishlist')
-                  console.log(current) 
 
                         }}>
                         Wishlist
@@ -198,7 +560,7 @@ export default function User({user}) {
         <div className='  grid mt-[15vh]'>
 
 
-          <div className=' bg-gray-100 w-[90%] h-[60%]'>
+          <div className='  w-[1070px] h-[70%]'>
             {handleButtonChange(current)}
 
 
