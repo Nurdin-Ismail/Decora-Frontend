@@ -6,7 +6,7 @@
 *{
   margin: 0;
   padding: 0;
-  font-family: "Poppins", sans-serif;
+  /* font-family: "Poppins", sans-serif; */
   /* transition: all 1s ease-in-out; */
 
 
@@ -992,7 +992,15 @@ font-family: 'Philosopher', sans-serif;
   place-items: center start;
 }
 
+.item-start-end{
+  place-items: start end;
+}
+
 .smooth{
     transition: all 1s ease-in-out;
 
+}
+
+.center-start{
+  place-self: center start;
 }
