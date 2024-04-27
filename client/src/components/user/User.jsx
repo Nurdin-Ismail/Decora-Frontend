@@ -13,6 +13,9 @@ export default function User({user}) {
   const [number, setnumber] = useState()
   const [email, setemail] = useState()
   const [password, setpassword] = useState()
+  const [confirm, setconfirm] = useState()
+  const [newPassword, setNewPassword] = useState()
+  const [confirmNewPassword, setConfirmNewPassword] = useState()
 
   console.log(number)
   const countryCallingCodes = [
@@ -279,7 +282,12 @@ export default function User({user}) {
             <h1 className=' font-semibold text-xl'>Contact Information</h1>
             <h1 className=' text-[17px]'>{user.name}</h1>
             <h1>{user.email.replace('example.net', 'gmail.com')}</h1>
-            <h1 className='  text-sky-600 cursor-pointer select-none w-9' onClick={() => setcurrent('Edit Information')}>Edit</h1>
+            <h1 className='  text-sky-600 cursor-pointer select-none w-9' 
+            onClick={() => {
+              setcurrent('Edit Information')
+              setemailchecked(true)
+            }
+            }>Edit</h1>
 
 
 
@@ -297,11 +305,13 @@ export default function User({user}) {
           </div>
 
         </div>
-        <div className=' border-black border-b-[1px]'>
+        <div className=' '>
 
           <div className='my-5 flex items-center justify-between'>
                       <h1 className=' text-4xl font-[200]  '>Address Book</h1>
-                      <h1 className='  text-sky-600 cursor-pointer select-none  w-24' onClick={() => setcurrent('Adress')}>View all</h1>
+                      <h1 className='  text-sky-600 cursor-pointer select-none  w-24' 
+                      onClick={() => setcurrent('Adress')
+                      }>View all</h1>
 
           </div>
 
@@ -345,7 +355,11 @@ export default function User({user}) {
     }else if(target == 'Edit Information' && user){
       return <div className='bg-gray-100 h-[470px]'>
 
-        <div>
+        <form onSubmit={(e) => {
+          e.preventDefault()
+
+          console.log("submitted")
+        } }>
           <div className=' flex justify-evenly pt-5'>
             <input type="text" value={firstname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setfirstname(e.target.value)}/>
             <input type="text" value={lastname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setlastname(e.target.value)}/>
@@ -404,16 +418,49 @@ export default function User({user}) {
 
             <div>
 
+                            <h1 className='ml-6 my-5 font-extralight text-2xl'>Change Email & Password</h1>
+
+
               <div>
-                <input type="email" placeholder=''/>
+                <div className=' flex justify-between mx-6'>
+                <input 
+                type="email" 
+                placeholder='Change email' 
+                required 
+                className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                value={email}
+                onChange={(e) => {
+                  setemail(e.target.value)
+                }}
+                />
+                <input type="password" value={confirm} placeholder='Confirm Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setconfirm(e.target.value)
+
+                }}/>
               </div>
-              <div></div>
+              </div>
+              <div className='grid  grid-cols-2 mx-6 gap-6'>
+                <input type="password" value={newPassword} placeholder='New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setNewPassword(e.target.value)
+
+                }}/>
+              <input type="password" value={confirmNewPassword} placeholder='Confirm New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setConfirmNewPassword(e.target.value)
+
+                }}/>
+              </div>
+
+               
+              
 
             </div>
             
             : 
 
-            // Is only one checked? Do this
+            // Is only email checked? Do this
 
             <div className=' mt-5'>
 
@@ -429,7 +476,11 @@ export default function User({user}) {
                   setemail(e.target.value)
                 }}
                 />
-                <input type="password" value={password} placeholder='Enter Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'/>
+                <input type="password" value={confirm} placeholder='Confirm Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setconfirm(e.target.value)
+
+                }}/>
               </div>
 
             </div>
@@ -438,8 +489,29 @@ export default function User({user}) {
 
             // is passowrd checked? do this 
 
-            <div>
-              <h1>only password</h1>
+            <div className=''>
+
+                                          <h1 className='ml-6 my-5 font-extralight text-2xl'>Change Email & Password</h1>
+
+
+              <div className='grid  grid-cols-2 mx-6'>
+                <input type="password" value={confirm} placeholder='Current Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setconfirm(e.target.value)
+
+                }}/>
+              <input type="password" value={newPassword} placeholder='New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setNewPassword(e.target.value)
+
+                }}/>
+              <input type="password" value={confirmNewPassword} placeholder='Confirm New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
+                onChange={(e) => {
+                  setConfirmNewPassword(e.target.value)
+
+                }}/>
+              </div>
+              
 
             </div>
             
@@ -447,8 +519,12 @@ export default function User({user}) {
             
             null
             }
+
+            <button 
+               className='button-23 my-10 mx-6 '
+               > <input type="submit" value={'Save'}  /></button>
           </div>
-        </div>
+        </form>
 
 
       </div>
@@ -468,7 +544,7 @@ export default function User({user}) {
 
 
   return (
-    <div>
+    <div className='italiana'>
       <div className='h-[100vh] grid grid-cols-[30%_70%] gap-5'>
 
         <div className=' grid item-center-end'>
