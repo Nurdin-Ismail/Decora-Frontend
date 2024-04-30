@@ -70,7 +70,7 @@ function App() {
         <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
         <Route path= '/exercise' element={<Exercise/>}></Route>
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
-        <Route path= '/user' element={<User user={user}/>}></Route>
+        <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated}/>}></Route>
 
       </Routes>
       <Footer/>

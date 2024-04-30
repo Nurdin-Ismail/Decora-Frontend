@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import forward from '../../forward.png'
 // import codes from '../../countryCodes.txt'
 
-export default function User({user}) {
+export default function User({user, updated, setupdated}) {
   const [current, setcurrent] = useState('Account Information')
   const [firstname, setfirstname] = useState()
   const [lastname, setlastname] = useState()
@@ -17,7 +17,6 @@ export default function User({user}) {
   const [newPassword, setNewPassword] = useState()
   const [confirmNewPassword, setConfirmNewPassword] = useState()
 
-  console.log(number)
   const countryCallingCodes = [
     ["(+93)", "Afghanistan"],
     ["(+355)", "Albania"],
@@ -264,10 +263,145 @@ export default function User({user}) {
       setfirstname(user.name.split(' ')[0])
       setlastname(user.name.split(' ')[1])
       setemail(user.email.replace('example.net', 'gmail.com'))
-      setpassword(user.passord)
+      setpassword(user.password)
     }
 
   }, [user])
+
+  function handleSubmit(e){
+    e.preventDefault()
+    let inputs = [firstname, lastname, email, confirm, newPassword, confirmNewPassword]
+    let changed = inputs.map((input) => {
+      if(input == firstname){
+
+        if(firstname != user.name.split(' ')[0]){
+          return input
+
+        }
+
+      }else if(input == lastname){
+
+        if(lastname != user.name.split(' ')[1]){
+          return input
+
+        }
+
+        
+      }else if(input == email){
+
+        if(email != user.email.replace('example.net', 'gmail.com')){
+          return input
+        }
+        
+      }else if(input == confirm){
+
+        if(input){
+          return input
+
+        }
+        
+      }else if(input == newPassword){
+
+        if(input){
+          return input
+
+        }
+
+
+        
+      }else if(input == confirmNewPassword){
+
+        if(input){
+          return input
+
+        }
+        
+      }
+    })
+
+    let changed2 = changed.filter((item) => item != undefined )
+
+    // console.log(changed2);
+
+    function handleEmail(){
+
+      if(confirm == user.password){
+        //patch request
+        fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              email: email,
+  
+            })
+
+         })
+        .then(response => {
+            if(response.ok){
+
+              // setupdated(updated + 1)
+
+              return response.json()
+        
+        
+            }
+        })
+        .then(res => console.log(res))
+      }else{
+        //incorrect password
+      }
+
+    }
+
+    function handlePasssword(){
+
+      if(confirm == user.passwd){
+        if(newPassword === confirmNewPassword){
+          //patch request
+        }else{
+          //passwords don't match
+        }
+        
+      }else{
+        //incorrect password
+      }
+
+
+
+    }
+
+    function handleEmailAndPassword(){
+
+      if(confirm == user.passwd){
+        if(newPassword === confirmNewPassword){
+          //patch request
+
+        }else{
+          //passwords don't match
+        }
+        
+      }else{
+        //incorrect password
+      }
+
+
+
+    }
+
+
+    if(emailChecked && passChecked){
+      handleEmailAndPassword()
+    }else if(emailChecked){
+      handleEmail()
+    }else if(passChecked){
+      handlePasssword()
+    }else{
+
+    }
+
+
+
+  }
 
   function handleButtonChange(target){
     if(target == 'Account Information' && user){
@@ -356,9 +490,9 @@ export default function User({user}) {
       return <div className='bg-gray-100 h-[470px]'>
 
         <form onSubmit={(e) => {
-          e.preventDefault()
+          
 
-          console.log("submitted")
+          handleSubmit(e)
         } }>
           <div className=' flex justify-evenly pt-5'>
             <input type="text" value={firstname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setfirstname(e.target.value)}/>
