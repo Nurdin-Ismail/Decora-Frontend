@@ -270,7 +270,7 @@ export default function User({user, updated, setupdated}) {
 
   function handleSubmit(e){
     e.preventDefault()
-    let inputs = [firstname, lastname, email, confirm, newPassword, confirmNewPassword]
+    let inputs = [firstname, lastname, email, confirm, newPassword, confirmNewPassword, number]
     let changed = inputs.map((input) => {
       if(input == firstname){
 
@@ -316,86 +316,142 @@ export default function User({user, updated, setupdated}) {
 
         }
         
+      }else if(input == number){
+        return input
       }
     })
 
     let changed2 = changed.filter((item) => item != undefined )
 
-    // console.log(changed2);
+    console.log(changed2);
 
-    function handleEmail(){
+    // function handleEmail(){
 
-      if(confirm == user.password){
-        //patch request
-        fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              email: email,
+    //   if(confirm == user.password){
+    //     //patch request
+    //     fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+    //         method: 'PATCH',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //           email: email,
   
-            })
+    //         })
 
-         })
-        .then(response => {
-            if(response.ok){
+    //      })
+    //     .then(response => {
+    //         if(response.ok){
 
-              // setupdated(updated + 1)
+    //           // setupdated(updated + 1)
 
-              return response.json()
+    //           return response.json()
         
         
-            }
-        })
-        .then(res => console.log(res))
-      }else{
-        //incorrect password
-      }
+    //         }
+    //     })
+    //     .then(res => console.log(res))
+    //   }else{
+    //     //incorrect password
+    //   }
 
-    }
+    // }
 
-    function handlePasssword(){
+    // function handlePasssword(){
 
-      if(confirm == user.passwd){
-        if(newPassword === confirmNewPassword){
-          //patch request
-        }else{
-          //passwords don't match
-        }
+    //   if(confirm == user.password){
+    //     if(newPassword === confirmNewPassword){
+    //       //patch request
+    //       fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+    //         method: 'PATCH',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //           password: newPassword,
+  
+    //         })
+
+    //      })
+    //     .then(response => {
+    //         if(response.ok){
+
+    //           // setupdated(updated + 1)
+
+    //           return response.json()
         
-      }else{
-        //incorrect password
-      }
-
-
-
-    }
-
-    function handleEmailAndPassword(){
-
-      if(confirm == user.passwd){
-        if(newPassword === confirmNewPassword){
-          //patch request
-
-        }else{
-          //passwords don't match
-        }
         
-      }else{
-        //incorrect password
-      }
+    //         }
+    //     })
+    //     .then(res => console.log(res))
+
+    //     }else{
+    //       //passwords don't match
+    //       console.log("passwords don't match");
+    //     }
+        
+    //   }else{
+    //     //incorrect password
+    //       console.log("incorrect password");
+
+    //   }
 
 
 
-    }
+    // }
+
+    // function handleEmailAndPassword(){
+
+    //   if(confirm == user.password){
+    //     if(newPassword === confirmNewPassword){
+    //       //patch request
+    //       fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+    //         method: 'PATCH',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({
+    //           email: email,
+    //           password: newPassword
+  
+    //         })
+
+    //      })
+    //     .then(response => {
+    //         if(response.ok){
+
+    //           // setupdated(updated + 1)
+
+    //           return response.json()
+        
+        
+    //         }
+    //     })
+    //     .then(res => console.log(res))
+
+
+    //     }else{
+    //       //passwords don't match
+    //     }
+        
+    //   }else{
+    //     //incorrect password
+    //   }
+
+
+
+    // }
 
 
     if(emailChecked && passChecked){
-      handleEmailAndPassword()
+      // handleEmailAndPassword()
+      console.log(changed2, 'both checked')
     }else if(emailChecked){
-      handleEmail()
+      // handleEmail()
+      console.log(changed2, 'only email')
+
     }else if(passChecked){
-      handlePasssword()
+      // handlePasssword()
+      console.log(changed2, 'only password')
+
     }else{
+
+            console.log(changed2, 'either names or contacts or both')
+
 
     }
 
