@@ -264,6 +264,7 @@ export default function User({user, updated, setupdated}) {
       setlastname(user.name.split(' ')[1])
       setemail(user.email.replace('example.net', 'gmail.com'))
       setpassword(user.password)
+      setnumber(user.contacts)
     }
 
   }, [user])
@@ -296,6 +297,8 @@ export default function User({user, updated, setupdated}) {
         
       }else if(Object.values(input)[0] == number){
         return input
+      }else if(Object.values(input)[0] == newPassword){
+        return input
       }
     })
 
@@ -322,10 +325,11 @@ export default function User({user, updated, setupdated}) {
     })
     
 
-        console.log(changed)
+        console.log(changed, obj)
 
 
     function handleEmail(obj){
+      console.log(confirm)
 
       if(confirm == user.password){
         //patch request
@@ -338,7 +342,7 @@ export default function User({user, updated, setupdated}) {
         .then(response => {
             if(response.ok){
 
-              // setupdated(updated + 1)
+              setupdated(updated + 1)
 
               return response.json()
         
@@ -450,7 +454,7 @@ export default function User({user, updated, setupdated}) {
         .then(response => {
             if(response.ok){
 
-              // setupdated(updated + 1)
+              setupdated(updated + 1)
 
               return response.json()
         
