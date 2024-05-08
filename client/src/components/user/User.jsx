@@ -16,6 +16,35 @@ export default function User({user, updated, setupdated}) {
   const [confirm, setconfirm] = useState()
   const [newPassword, setNewPassword] = useState()
   const [confirmNewPassword, setConfirmNewPassword] = useState()
+  const [address, setadress] = useState({})
+  const [landmark, setlandmark] = useState()
+  const [street, setstreet] = useState()
+  const [regionorlocation, setregionorlocation] = useState()
+  const [buildingname, setbuildingname] = useState() 
+  const [floorornumber, setfloorornumber] = useState()
+  const [isOpen, setIsOpen] = useState(false);
+  const [selectedCityorCounty, setselectedCityorCounty] = useState(null);
+  const options = [
+    "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo Marakwet", "Embu", "Garissa", "Homabay", "Isiolo", 
+    "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale",
+    "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Muranga", 
+    "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita",
+    "Tana River", "Tharaka Nithi", "Trans Nzoia (Kitale)", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
+  ];
+
+  const onSelect = (option) => {
+    setselectedCityorCounty(option);
+  };
+
+   const toggleOptions = () => {
+    setIsOpen(!isOpen);
+  };
+
+  const handleOptionClick = (option) => {
+    setselectedCityorCounty(option);
+    setIsOpen(false);
+    onSelect(option);
+  };
 
   const countryCallingCodes = [
     ["(+93)", "Afghanistan"],
@@ -474,6 +503,49 @@ export default function User({user, updated, setupdated}) {
 
   }
 
+  function handleSubmitAdress(e){
+    e.preventDefault()
+
+    let inputs = [{county : selectedCityorCounty}, {regionOrLocation : regionorlocation}, {buildingName : buildingname}, {floorOrApartmentNumber : floorornumber}, {streetName : street}, {landmark : landmark}]
+    let changed = inputs.map((input) => {
+      return input
+    })
+
+    let changed2 = changed.filter((item) => {
+      if(item != undefined){
+        if(Object.values(item)[0] != undefined ){
+
+          if(Object.values(item)[0] != ""){
+            return item
+          }
+          
+        }
+      }
+    } )
+
+    let obj ={
+
+    }
+
+    changed2.map((item) => {
+      if(Object.keys(item)[0] == 'firstname' || Object.keys(item)[0] == 'lastname'){
+        Object.assign(obj, {username: firstname + ' ' + lastname})
+
+      }else{
+        Object.assign(obj, item)
+      }
+      
+    })
+    console.log(obj)
+
+    if(selectedCityorCounty != undefined){
+      let kanu = String(obj)
+
+      console.log(kanu)
+    }
+
+  }
+
   function handleButtonChange(target){
     if(target == 'Account Information' && user){
       return <div className=' px-8  bg-gray-100 grid h-[490px] grid-rows-[20%_30%_50%]'>
@@ -553,9 +625,84 @@ export default function User({user, updated, setupdated}) {
       </div>
 
     }else if(target == 'Adress' && user){
-      return <h1>
-        Adress
-      </h1>
+      return <div className=' h-[80%] w-[80%] border-black border-[1px]'>
+
+      <div>
+                <h1 className=' text-2xl font-[200] mt-[2%] grid center-start ml-[5%]'>Billing & Shipping Adress</h1>
+
+        
+        <form className=' ' onSubmit={(e) => handleSubmitAdress(e)}>
+
+          <div  className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[5%]' >
+
+            <div>
+              <label htmlFor="County" className='text-[#2e2d2d] text-lg font-serif italic'>County/City</label>
+              <div className='' id='County'></div>
+
+              <div className="custom-select">
+                <div className="selected-option border-[#d3d3d3] border-[1px] h-[4vh] grid content-center pl-2  font-serif italic " onClick={toggleOptions}>
+                  {selectedCityorCounty ? selectedCityorCounty : 'Select an County/City'}
+                  <span className={`arrow ${isOpen ? 'open' : ''}`}></span>
+                </div>
+                {isOpen && (
+                  <ul className="options h-[30vh] overflow-y-scroll ">
+                    {options.map((option, index) => (
+                      <li className='pl-2' key={index} onClick={() => handleOptionClick(option)}>
+                        {option}
+                      </li>
+                    ))}
+                  </ul>
+                )}
+              </div>
+              
+
+            </div>
+
+            
+
+              <input type="text" value={regionorlocation} onChange={(e) => setregionorlocation(e.target.value) } required className=' h-[4vh] border-[#d3d3d3] border-[1px] mt-[9%] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif ' placeholder='Region/Town/Location' />
+
+            
+            
+            
+          </div>
+
+          <div className='grid mx-[10%] '>
+
+            <div className='grid grid-cols-2 gap-[40px]'>
+              <input type="text" required onChange={(e) => setbuildingname(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={buildingname} placeholder='Building name/Villa name' />
+              <input type="text"  onChange={(e) => setfloorornumber(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={floorornumber} placeholder='Floor/Apartment No.' />
+              
+
+
+            </div>
+
+            <div className=' grid grid-cols-2 gap-[40px] mt-[5%] '>
+
+              
+
+              <input type="text" required onChange={(e) => setstreet(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2' value={street} placeholder='Streetname' />
+
+              <input type="text" onChange={(e) => setlandmark(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={landmark} placeholder='Landmark(Optional)' /> 
+
+
+
+
+              </div>
+            
+
+          </div>
+
+          <button 
+               className='button-23 my-10 ml-[10%] '
+               > <input type="submit" value={'Save'}  /></button>
+
+
+
+        </form>
+      </div>
+      
+      </div>
 
     }else if(target == 'Edit Information' && user){
       return <div className='bg-gray-100 h-[470px]'>
