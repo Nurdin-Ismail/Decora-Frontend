@@ -294,6 +294,14 @@ export default function User({user, updated, setupdated}) {
       setemail(user.email.replace('example.net', 'gmail.com'))
       setpassword(user.password)
       setnumber(user.contacts)
+      setadress(user.address)
+      setregionorlocation(user.address.regionOrLocation)
+      setbuildingname(user.address.buildingName)
+      setfloorornumber(user.address.floorOrApartmentNumber)
+      setstreet(user.address.streetName)
+      setlandmark(user.address.landmark)
+      setselectedCityorCounty(user.address.county)
+
     }
 
   }, [user])
@@ -539,9 +547,29 @@ export default function User({user, updated, setupdated}) {
     console.log(obj)
 
     if(selectedCityorCounty != undefined){
-      let kanu = String(obj)
+      let stringifiedAddress = JSON.stringify(obj)
 
-      console.log(kanu)
+      fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+            method: 'PATCH',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              address : stringifiedAddress
+            })
+
+         })
+        .then(response => {
+            if(response.ok){
+
+              setupdated(updated + 1)
+
+              return response.json()
+        
+        
+            }
+        })
+        .then(res => console.log(res))
+
+      
     }
 
   }
