@@ -1074,3 +1074,7 @@ font-family: 'Philosopher', sans-serif;
   cursor: not-allowed;
   opacity: 1;
 }
+
+.start-end{
+  place-content: start end;
+}

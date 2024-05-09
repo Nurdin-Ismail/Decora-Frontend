@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import CartCard from './CartCard'
-import trash from '../../trash.png'
+import trash from '../../trashnormal.png'
+import trashhover from '../../trashhover.png'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 
@@ -14,8 +15,10 @@ export default function Cart({user, cart, setcart}) {
     const [updated, setupdated] = useState()
     const [changed, setchanged] = useState([])
     const [delete_cart, setdelete_cart] = useState()
+    const [hover, sethover] = useState()
+
+    
  
-    console.log(changed)
 
 
     useEffect(() => {
@@ -157,6 +160,8 @@ export default function Cart({user, cart, setcart}) {
     
     }, [delete_cart])
 
+    console.log(changed)
+
     
 
     
@@ -186,7 +191,7 @@ export default function Cart({user, cart, setcart}) {
             let total = cart.map((item) => {
                 return item.quantity[1] * item.price
             })
-            console.log(total)
+            // console.log(total)
 
             let sum = 0;
 
@@ -194,7 +199,7 @@ export default function Cart({user, cart, setcart}) {
                 sum += number;
             });
 
-            console.log(sum);
+            // console.log(sum);
 
             return `Ksh ${sum.toLocaleString()}`
 
@@ -221,18 +226,20 @@ export default function Cart({user, cart, setcart}) {
                     
                 </div>
 
-                <div className='grid grid-cols-[80%_20%]  h-[10vh]'>
+                <div className='grid start-end grid-flow-col h-[10vh]   mt-3 gap-6'>
 
-                    <div className=''>
-                        <div className='grid grid-cols-[85%_15%]'>
-                            <img src={trash} alt="" className='grid place-self-end' onClick={() => setdelete_cart(true)}/>
-                        <h1 className='grid place-self-end'>Empty Cart</h1>
+                    <div className=' h-16 grid place-content-center '>
+                        <div className='grid grid-flow-col hover:text-[#51409b] cursor-pointer ' onMouseEnter={() => sethover(true)} onMouseLeave={() => sethover(false)} onClick={() => setdelete_cart(true)}>
+                            <img src={hover ? trashhover : trash} alt="" className='grid place-self-center ' />
+                            <h1 className='grid place-self-start'>Empty Cart</h1>
                         </div>
                         
                     </div>
-                    <div>
-                        <button className='border-solid border-black border-[1px]' onClick={() => setupdated(cart)}>Update Cart</button>
+                    <div className='grid place-content-center'>
+                        <button className={changed.length == 0 ?'border-solid border-black border-[1px] py-2 px-4 rounded-md bg-[#D5D7FD] cursor-not-allowed' : 'border-solid border-black border-[1px] py-2 px-4 rounded-md bg-[#554586] text-white '} onClick={() => setupdated(cart)}>Update Cart</button>
                     </div>
+
+                    
                     
                     
                 </div>

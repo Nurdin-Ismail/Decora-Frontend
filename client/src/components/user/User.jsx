@@ -1,11 +1,25 @@
 import React, { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom';
 
 import forward from '../../forward.png'
 // import codes from '../../countryCodes.txt'
 import Alert from '@mui/material/Alert';
 
-export default function User({user, updated, setupdated}) {
-  const [current, setcurrent] = useState('Account Information')
+export default function User({user, updated, setupdated, current, setcurrent}) {
+ 
+  const [isLogged, setIsLogged] = useState(false)
+  const navigate = useNavigate()
+  if(isLogged != true){
+    navigate('/')
+  }
+
+
+
+
+
+
+
+
   const [firstname, setfirstname] = useState()
   const [lastname, setlastname] = useState()
   const [passChecked, setpasschecked] = useState(false)
@@ -689,24 +703,26 @@ export default function User({user, updated, setupdated}) {
 
           <div  className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[3%]' >
 
-            <div>
+            <div className=' '>
               <label htmlFor="County" className='text-[#2e2d2d] text-lg font-serif italic'>County/City</label>
-              <div className='' id='County'></div>
 
-              <div className="custom-select">
+              <div className="custom-select" id='County'>
                 <div className="selected-option border-[#d3d3d3] border-[1px] h-[4vh] grid content-center pl-2  font-serif italic " onClick={toggleOptions}>
                   {selectedCityorCounty ? selectedCityorCounty : 'Select an County/City'}
                   <span className={`arrow ${isOpen ? 'open' : ''}`}></span>
                 </div>
-                {isOpen && (
-                  <ul className="options h-[30vh] overflow-y-scroll ">
+                <div className=' grid absolute'>
+                  {isOpen && (
+                  <ul className="options  bg-white  h-[30vh] overflow-y-scroll ">
                     {options.map((option, index) => (
-                      <li className='pl-2' key={index} onClick={() => handleOptionClick(option)}>
+                      <li className='pl-2 pr-[158px]' key={index} onClick={() => handleOptionClick(option)}>
                         {option}
                       </li>
                     ))}
                   </ul>
                 )}
+                </div>
+                
               </div>
               
 

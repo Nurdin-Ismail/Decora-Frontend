@@ -5,10 +5,11 @@ import logo from '../7.png'
 import cartsmall from '../cartsmall.png'
 import cartbig from '../cartbig.png'
 import user from '../user2.png'
+import logout from '../logout.png'
 
 
 
-function Navbar({products, quantity}){
+function Navbar({products, quantity, setcurrent}){
     const [isShown, setIsShown] = useState(false)
     const [items, setitems] =  useState(0)
     const [isAccountClicked, setIsAccountClicked] = useState(false)
@@ -166,13 +167,15 @@ function Navbar({products, quantity}){
             {
                 isAccountClicked ?
 
-                <div className="grid absolute  top-[7%] left-[76%] ">
+                <div className="grid absolute  top-[7%] left-[88.7%] ">
                     <div className="">
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-md">
-                            <p className="text-gray-800">Your speech bubble content goes here...</p>
+                        <div className="absolute grid  w-[160px] top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-md shadow-black   z-[2]">
+                            <a href="/user"><h1 onClick={() => setcurrent('Account Information')}>My Profile</h1></a>
+                            {/* <a href="/user" ><h1 onClick={() => setcurrent('Wishlist')}>Wishlist</h1></a> */}
+                            <a href="/user" ><h1 className="flex place-items-center gap-1">Logout <span><img src={logout} alt="" className="" /></span></h1></a>
                         </div>
-                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -mt-1">
-                            <div className="w-6 h-6 bg-white border-t-4 border-l-4 border-transparent transform rotate-45"></div>
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -mt-1 ">
+                            <div className="w-6 h-6 bg-white border-t-4 border-l-4 border-transparent transform rotate-45 shadow-sm  shadow-black relative z-[-2]"></div>
                         </div>
                     </div>
 

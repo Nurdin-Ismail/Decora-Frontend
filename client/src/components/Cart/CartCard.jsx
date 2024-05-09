@@ -31,13 +31,13 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
     
 
     useEffect(() => {
-        if(counter){
+        if(counter && counter != item.quantity[1]){
         let newCart = cart.map((item) => {
             if(cart.indexOf(item) == index){
                 item.quantity[1] = counter
 
 
-                if(!(id in changed)){
+                if(!changed.includes(id)){
                     setchanged([...changed, id])
                 }
                     
@@ -51,6 +51,29 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
 
 
         setcart(newCart)
+        }else if(counter && counter ==item.quantity[1]){
+
+          let newCart = cart.map((item) => {
+            if(cart.indexOf(item) == index){
+                item.quantity[1] = counter
+
+
+                if(changed.includes(id)){
+                  let arr = changed.filter((item) => item != id)
+                    setchanged(arr)
+                }
+                    
+                
+                return item
+            }else{
+                return item
+            }
+        })
+
+
+
+        setcart(newCart)
+          
         }
         
 
@@ -115,7 +138,7 @@ export default function CartCard({item, key, index, cart, setcart, changed, setc
                     </div>
 
                     <div className='grid place-content-center'>
-                      <button onClick={() => setdel_product(true)}>X</button>
+                      <button className='hover:text-red-500' onClick={() => setdel_product(true)}>X</button>
                     </div>
 
     </div>

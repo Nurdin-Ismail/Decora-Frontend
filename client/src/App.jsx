@@ -21,6 +21,8 @@ function App() {
   const [cart, setcart] = useState()
   const [updated, setupdated] = useState(0)
   const [user,setuser] = useState()
+  const [current, setcurrent] = useState('Account Information')
+
 
 
 
@@ -62,7 +64,7 @@ function App() {
     <div className=" overflow-x-clip">
       {/* <img src={kanu} alt="" /> */}
 
-      {cart && cart.length > 0 ? <Navbar products={products} quantity={cart.length}/> : <Navbar products={products} /> }
+      {cart && cart.length > 0 ? <Navbar products={products} quantity={cart.length} setcurrent={setcurrent}/> : <Navbar products={products} setcurrent={setcurrent}  /> }
       <Routes>
         
         <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} setpatched={setupdated} patched={updated} cart={cart}/>}></Route>
@@ -70,7 +72,7 @@ function App() {
         <Route path= '/product-category/:category/:sub_categ' element={<Store products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} cart={cart} setupdated={setupdated} updated={updated}/>}></Route>
         <Route path= '/exercise' element={<Exercise/>}></Route>
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
-        <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated}/>}></Route>
+        <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated} current={current} setcurrent={setcurrent} />}></Route>
 
       </Routes>
       <Footer/>
