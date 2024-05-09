@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 import forward from '../../forward.png'
 // import codes from '../../countryCodes.txt'
+import Alert from '@mui/material/Alert';
 
 export default function User({user, updated, setupdated}) {
   const [current, setcurrent] = useState('Account Information')
@@ -17,6 +18,8 @@ export default function User({user, updated, setupdated}) {
   const [newPassword, setNewPassword] = useState()
   const [confirmNewPassword, setConfirmNewPassword] = useState()
   const [address, setadress] = useState({})
+  const [orders, setorders] = useState()
+  const [wishlist,setwishlist] = useState()
   const [landmark, setlandmark] = useState()
   const [street, setstreet] = useState()
   const [regionorlocation, setregionorlocation] = useState()
@@ -626,7 +629,18 @@ export default function User({user, updated, setupdated}) {
 
               <h1 className=' font-semibold text-xl'>Default Billing Adress</h1>
 
+              {address ? 
+              <div className='flex flex-col font-serif italic '>
+                <h1>{address.county}</h1>
+                <h1>{address.regionOrLocation}</h1>
+                <h1>{address.streetName}</h1>
+                <h1>{address.buildingName}</h1>
+                
+
+              </div>
+              :
               <p>You have not set a default billing adress</p>
+              }
               <h1 className='  text-sky-600 cursor-pointer select-none  w-24' onClick={() => setcurrent('Adress')}>Edit Adress</h1>
 
 
@@ -639,7 +653,19 @@ export default function User({user, updated, setupdated}) {
 
             <h1 className=' font-semibold text-xl'>Default Shipping Adress</h1>
 
+            {address ? 
+              <div className='flex flex-col font-serif italic '>
+                <h1>{address.county}</h1>
+                <h1>{address.regionOrLocation}</h1>
+                <h1>{address.streetName}</h1>
+                <h1>{address.buildingName}</h1>
+                
+
+              </div>
+              :
+
               <p>You have not set a default shipping adress</p>
+            }
               <h1 className='  text-sky-600 cursor-pointer select-none  w-24' onClick={() => setcurrent('Adress')}>Edit Adress</h1>
 
 
@@ -661,7 +687,7 @@ export default function User({user, updated, setupdated}) {
         
         <form className=' ' onSubmit={(e) => handleSubmitAdress(e)}>
 
-          <div  className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[5%]' >
+          <div  className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[3%]' >
 
             <div>
               <label htmlFor="County" className='text-[#2e2d2d] text-lg font-serif italic'>County/City</label>
@@ -687,9 +713,11 @@ export default function User({user, updated, setupdated}) {
             </div>
 
             
+              <div className='grid'>
+              <label htmlFor="region" className='text-[#2e2d2d] text-lg font-serif italic' >Region/Town/Location</label>
+              <input type="text" id='region' value={regionorlocation} onChange={(e) => setregionorlocation(e.target.value) } required className=' h-[4vh] border-[#d3d3d3] border-[1px]  focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif ' placeholder='e.g Lavington' />
 
-              <input type="text" value={regionorlocation} onChange={(e) => setregionorlocation(e.target.value) } required className=' h-[4vh] border-[#d3d3d3] border-[1px] mt-[9%] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif ' placeholder='Region/Town/Location' />
-
+              </div>
             
             
             
@@ -698,8 +726,19 @@ export default function User({user, updated, setupdated}) {
           <div className='grid mx-[10%] '>
 
             <div className='grid grid-cols-2 gap-[40px]'>
-              <input type="text" required onChange={(e) => setbuildingname(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={buildingname} placeholder='Building name/Villa name' />
-              <input type="text"  onChange={(e) => setfloorornumber(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={floorornumber} placeholder='Floor/Apartment No.' />
+              <div className='grid'>
+              <label htmlFor="buildingname" className='text-[#2e2d2d] text-lg font-serif italic' >Building name/Villa name</label>
+
+                <input type="text" id='buildingname' required onChange={(e) => setbuildingname(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={buildingname} placeholder='e.g Kamo heights' />
+
+              </div>
+
+              <div className='grid'>
+              <label htmlFor="floorornumber" className='text-[#2e2d2d] text-lg font-serif italic' >Floor/Apartment No.</label>
+
+                <input type="text" id='floorornumber' onChange={(e) => setfloorornumber(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={floorornumber} placeholder='e.g 6th floor/B4' />
+
+              </div>
               
 
 
@@ -708,10 +747,21 @@ export default function User({user, updated, setupdated}) {
             <div className=' grid grid-cols-2 gap-[40px] mt-[5%] '>
 
               
+              <div className='grid'>
+              <label htmlFor="street" className='text-[#2e2d2d] text-lg font-serif italic' >Streetname</label>
 
-              <input type="text" required onChange={(e) => setstreet(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2' value={street} placeholder='Streetname' />
+                <input type="text" id='street' required onChange={(e) => setstreet(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2' value={street} placeholder='e.g ngong rd' />
 
-              <input type="text" onChange={(e) => setlandmark(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={landmark} placeholder='Landmark(Optional)' /> 
+              </div>
+
+              <div className='grid'>
+              <label htmlFor="landmark" className='text-[#2e2d2d] text-lg font-serif italic' >Landmark(Optional)</label>
+
+                <input type="text" id='landmark' onChange={(e) => setlandmark(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={landmark} placeholder='e.g Mosque' /> 
+ 
+
+              </div>
+
 
 
 
@@ -733,7 +783,7 @@ export default function User({user, updated, setupdated}) {
       </div>
 
     }else if(target == 'Edit Information' && user){
-      return <div className='bg-gray-100 h-[470px]'>
+      return <div className='bg-[#f8f8f8] h-[470px]'>
 
         <form onSubmit={(e) => {
           
@@ -910,10 +960,32 @@ export default function User({user, updated, setupdated}) {
       </div>
       
     }else if(target == 'Orders' && user){
-      return <h1>Orders</h1>
+      return <div>
+        {
+          orders 
+
+          ? 
+
+          null
+
+          :
+
+          <Alert severity="info">You don't have any orders yet.</Alert>
+
+        }
+      </div>
       
     }else if(target == 'Wishlist' && user){
-      return <h1>Wishlist</h1>
+      return <div>
+        {wishlist ?
+        null
+        
+      :
+      <Alert severity="info">You don't have any products in your wishlist yet.</Alert>
+
+      
+      }
+      </div>
       
     }
 

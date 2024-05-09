@@ -11,6 +11,7 @@ import user from '../user2.png'
 function Navbar({products, quantity}){
     const [isShown, setIsShown] = useState(false)
     const [items, setitems] =  useState(0)
+    const [isAccountClicked, setIsAccountClicked] = useState(false)
 
     useEffect(() => {
         if(quantity){
@@ -120,10 +121,10 @@ function Navbar({products, quantity}){
                 <div className=" signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 ">
 
                     <div className="grid grid-cols-[30px_32px]">
-                        <img src={user} alt="" className="cursor-pointer "/>
+                        <img src={user} alt="" className="cursor-pointer grid self-center mb-[-6px] " onClick={() => {setIsAccountClicked(!isAccountClicked)}}/>
                         <div className="grid cart  ">
-                            <a href="/cart"><img src={cartsmall} alt="" className="cursor-pointer"/></a>
-                            <h1 className="text-xs grid place-content-center rounded-full ml-1 w-[12px] h-[12px] bg-[#cbc0fa] ">{items}</h1>
+                            <a href="/cart" className="grid place-content-center"><img src={cartsmall} alt="" className="cursor-pointer "/></a>
+                            <h1 className="text-xs grid place-content-center rounded-full pt-[1px]   w-[16px] h-[15px] bg-[#cbc0fa] mb-[-5px]">{items}</h1>
                         </div>
                     </div>
                     {/* <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
@@ -160,6 +161,27 @@ function Navbar({products, quantity}){
                     return <a href={'/product-category/' + name3 + '/-'}><h1 className="">{name3}</h1></a>
                 }): null}
             </div>
+
+
+            {
+                isAccountClicked ?
+
+                <div className="grid absolute  top-[7%] left-[76%] ">
+                    <div className="">
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-md">
+                            <p className="text-gray-800">Your speech bubble content goes here...</p>
+                        </div>
+                        <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -mt-1">
+                            <div className="w-6 h-6 bg-white border-t-4 border-l-4 border-transparent transform rotate-45"></div>
+                        </div>
+                    </div>
+
+                </div>
+
+                :
+
+                null
+            }
 
                 
 
