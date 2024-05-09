@@ -8,23 +8,35 @@ import ProductPage from './components/productpage/ProductPage';
 import Store from './components/Store';
 import Cart from './components/Cart/Cart';
 import Exercise from './components/Exercise';
+import Signup from './components/Sign-In/SignupOrLogin';
 
 import User from './components/user/User';
 
 function App() {
 
+  const [isloggedIn, setisLoggedIn] = useState()
+
   const [products, setproducts] = useState()
   const [is, setis] = useState(false)
   const [cardinfo, setcardinfo] = useState()
   const [add, setadd] = useState()
-  const [userid, setuserid] = useState(1)
+  const [userid, setuserid] = useState()
   const [cart, setcart] = useState()
   const [updated, setupdated] = useState(0)
   const [user,setuser] = useState()
   const [current, setcurrent] = useState('Account Information')
 
 
+  useEffect(() => {
+    setisLoggedIn(JSON.parse(localStorage.getItem('isloggedIn')))
+    setuser(JSON.parse(localStorage.getItem('user')))
+    setuserid(JSON.parse(localStorage.getItem('userid')))
+    
 
+  }, [userid])
+
+  console.log(userid)
+  console.log(user)
 
   useEffect(() => {
     fetch('http://127.0.0.1:5555/products')
@@ -33,8 +45,10 @@ function App() {
 
   }, [])
 
+
   useEffect(() => {
     if(userid){
+      console.log(userid)
         fetch(`http://127.0.0.1:5555/user/${userid}`)
         .then(res => res.json()) 
         .then(data => {
@@ -49,12 +63,14 @@ function App() {
 }, [updated])
   // console.log(products)
 
-  console.log(user);
+  // console.log(user);
 
   function handleis(is){
     setis(!is)
 
 }
+
+
 
   
 
@@ -64,7 +80,7 @@ function App() {
     <div className=" overflow-x-clip">
       {/* <img src={kanu} alt="" /> */}
 
-      {cart && cart.length > 0 ? <Navbar products={products} quantity={cart.length} setcurrent={setcurrent}/> : <Navbar products={products} setcurrent={setcurrent}  /> }
+      {cart && cart.length > 0 ? <Navbar products={products} quantity={cart.length} setcurrent={setcurrent} isloggedIn={isloggedIn}/> : <Navbar products={products} setcurrent={setcurrent}  isloggedIn={isloggedIn}/> }
       <Routes>
         
         <Route exact path='/' element={<Home products={products} cardinfo={cardinfo} setcardinfo={setcardinfo} handleis={handleis} is={is} setis={setis} add={add} setadd={setadd} user={userid} setpatched={setupdated} patched={updated} cart={cart}/>}></Route>
@@ -73,6 +89,7 @@ function App() {
         <Route path= '/exercise' element={<Exercise/>}></Route>
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
         <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated} current={current} setcurrent={setcurrent} />}></Route>
+        <Route path= '/signupOrLogin' element={<Signup user={user} setuser={setuser} setuserid={setuserid} isloggedIn={isloggedIn} setisLoggedIn={setisLoggedIn} />}></Route>
 
       </Routes>
       <Footer/>

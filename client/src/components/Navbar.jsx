@@ -9,7 +9,7 @@ import logout from '../logout.png'
 
 
 
-function Navbar({products, quantity, setcurrent}){
+function Navbar({products, quantity, setcurrent, isloggedIn}){
     const [isShown, setIsShown] = useState(false)
     const [items, setitems] =  useState(0)
     const [isAccountClicked, setIsAccountClicked] = useState(false)
@@ -22,6 +22,8 @@ function Navbar({products, quantity, setcurrent}){
     }
 
     })
+
+    console.log(isloggedIn)
 
    
 
@@ -119,18 +121,35 @@ function Navbar({products, quantity, setcurrent}){
 
                
 
-                <div className=" signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 ">
+               
 
-                    <div className="grid grid-cols-[30px_32px]">
-                        <img src={user} alt="" className="cursor-pointer grid self-center mb-[-6px] " onClick={() => {setIsAccountClicked(!isAccountClicked)}}/>
-                        <div className="grid cart  ">
-                            <a href="/cart" className="grid place-content-center"><img src={cartsmall} alt="" className="cursor-pointer "/></a>
-                            <h1 className="text-xs grid place-content-center rounded-full pt-[1px]   w-[16px] h-[15px] bg-[#cbc0fa] mb-[-5px]">{items}</h1>
+                    {isloggedIn == true ?
+
+                    <div className="signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 ">
+                        <div className="grid grid-cols-[30px_32px]">
+                            <img src={user} alt="" className="cursor-pointer grid self-center mb-[-6px] " onClick={() => {setIsAccountClicked(!isAccountClicked)}}/>
+                            <div className="grid cart  ">
+                                <a href="/cart" className="grid place-content-center"><img src={cartsmall} alt="" className="cursor-pointer "/></a>
+                                <h1 className="text-xs grid place-content-center rounded-full pt-[1px]   w-[16px] h-[15px] bg-[#cbc0fa] mb-[-5px]">{items}</h1>
+                            </div>
                         </div>
+
                     </div>
-                    {/* <h1 className=" text-lg font-medium text-cyan-900">Login</h1>
-                    <h1 className=" text-lg font-medium h-[5vh] bg-[#47367cec] flex items-center w-[5vw] justify-center text-white">Signup</h1> */}
-                </div>
+
+                    :
+                    <div className="signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 ">
+                        <a href="/signupOrLogin"><button 
+                className='button-23 my-7 hover:bg-[#101011] hover:text-white '
+                > Sign-in</button></a>
+                    </div>
+
+                    
+                    
+                }
+
+                   
+                   
+            
 
 
 
@@ -172,7 +191,7 @@ function Navbar({products, quantity, setcurrent}){
                         <div className="absolute grid  w-[160px] top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-md shadow-black   z-[2]">
                             <a href="/user"><h1 onClick={() => setcurrent('Account Information')}>My Profile</h1></a>
                             {/* <a href="/user" ><h1 onClick={() => setcurrent('Wishlist')}>Wishlist</h1></a> */}
-                            <a href="/user" ><h1 className="flex place-items-center gap-1">Logout <span><img src={logout} alt="" className="" /></span></h1></a>
+                            <a href="/signupOrLogin" onClick={() => localStorage.setItem('isloggedIn', false)}><h1 className="flex place-items-center gap-1">Logout <span><img src={logout} alt="" className="" /></span></h1></a>
                         </div>
                         <div className="absolute top-0 left-1/2 transform -translate-x-1/2 -mt-1 ">
                             <div className="w-6 h-6 bg-white border-t-4 border-l-4 border-transparent transform rotate-45 shadow-sm  shadow-black relative z-[-2]"></div>

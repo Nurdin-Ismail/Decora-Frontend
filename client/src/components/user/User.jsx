@@ -7,11 +7,8 @@ import Alert from '@mui/material/Alert';
 
 export default function User({user, updated, setupdated, current, setcurrent}) {
  
-  const [isLogged, setIsLogged] = useState(false)
-  const navigate = useNavigate()
-  if(isLogged != true){
-    navigate('/')
-  }
+  // const [isLogged, setIsLogged] = useState(false)
+  
 
 
 
@@ -306,18 +303,23 @@ export default function User({user, updated, setupdated, current, setcurrent}) {
 
   useEffect(() => {
     if(user){
-      setfirstname(user.name.split(' ')[0])
-      setlastname(user.name.split(' ')[1])
+      setfirstname(user.username.split(' ')[0])
+      setlastname(user.username.split(' ')[1])
       setemail(user.email.replace('example.net', 'gmail.com'))
       setpassword(user.password)
-      setnumber(user.contacts)
-      setadress(user.address)
+      if(user.contacts){
+        setnumber(user.contacts)
+      }
+
+      if(user.address){
+        setadress(user.address)
       setregionorlocation(user.address.regionOrLocation)
       setbuildingname(user.address.buildingName)
       setfloorornumber(user.address.floorOrApartmentNumber)
       setstreet(user.address.streetName)
       setlandmark(user.address.landmark)
       setselectedCityorCounty(user.address.county)
+      }
 
     }
 
@@ -602,8 +604,8 @@ export default function User({user, updated, setupdated, current, setcurrent}) {
           <div className='flex flex-col '>
 
             <h1 className=' font-semibold text-xl'>Contact Information</h1>
-            <h1 className=' text-[17px]'>{user.name}</h1>
-            <h1>{user.email.replace('example.net', 'gmail.com')}</h1>
+            <h1 className=' text-[17px]'>{user.username}</h1>
+            <h1>{user.email.includes('example.net') ? user.email.replace('example.net', 'gmail.com') : user.email}</h1>
             <h1 className='  text-sky-600 cursor-pointer select-none w-9' 
             onClick={() => {
               setcurrent('Edit Information')
