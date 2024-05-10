@@ -34,7 +34,6 @@ export default function SignupOrLogin({ setuser, setuserid, isloggedIn, setisLog
         
         localStorage.setItem('isloggedIn', true)
         localStorage.setItem('userid',JSON.stringify(user[0].id))
-        localStorage.setItem('user',JSON.stringify(user[0]))
         window.location.replace('/user')
       }
     }

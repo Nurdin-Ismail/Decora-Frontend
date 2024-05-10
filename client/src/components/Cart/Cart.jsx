@@ -17,6 +17,8 @@ export default function Cart({user, cart, setcart}) {
     const [delete_cart, setdelete_cart] = useState()
     const [hover, sethover] = useState()
 
+    console.log(user)
+
     
  
 
@@ -34,7 +36,7 @@ export default function Cart({user, cart, setcart}) {
         }
         
     
-    }, [])
+    }, [user])
 
 
     useEffect(() => {

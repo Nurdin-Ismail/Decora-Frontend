@@ -29,11 +29,10 @@ function App() {
 
   useEffect(() => {
     setisLoggedIn(JSON.parse(localStorage.getItem('isloggedIn')))
-    setuser(JSON.parse(localStorage.getItem('user')))
     setuserid(JSON.parse(localStorage.getItem('userid')))
     
 
-  }, [userid])
+  }, [])
 
   console.log(userid)
   console.log(user)
@@ -60,8 +59,8 @@ function App() {
     }
     
 
-}, [updated])
-  // console.log(products)
+}, [updated,userid])
+  console.log(cart)
 
   // console.log(user);
 
