@@ -89,7 +89,7 @@ function App() {
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
         <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated} current={current} setcurrent={setcurrent} />}></Route>
         <Route path= '/signupOrLogin' element={<Signup user={user} setuser={setuser} setuserid={setuserid} isloggedIn={isloggedIn} setisLoggedIn={setisLoggedIn} />}></Route>
-        <Route path='/checkout'  element={<Checkout/>}  ></Route>
+        <Route path='/checkout'  element={<Checkout cart={cart}/>}  ></Route>
 
       </Routes>
       <Footer/>
