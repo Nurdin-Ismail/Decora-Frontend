@@ -25,11 +25,13 @@ function App() {
   const [updated, setupdated] = useState(0)
   const [user,setuser] = useState()
   const [current, setcurrent] = useState('Account Information')
+  const [order, setorder] = useState()
 
 
   useEffect(() => {
     setisLoggedIn(JSON.parse(localStorage.getItem('isloggedIn')))
     setuserid(JSON.parse(localStorage.getItem('userid')))
+    setorder(JSON.parse(localStorage.getItem('order')))
     
 
   }, [])
@@ -68,6 +70,7 @@ function App() {
     setis(!is)
 
 }
+console.log(order)
 
 
 
@@ -89,7 +92,7 @@ function App() {
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
         <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated} current={current} setcurrent={setcurrent} />}></Route>
         <Route path= '/signupOrLogin' element={<Signup user={user} setuser={setuser} setuserid={setuserid} isloggedIn={isloggedIn} setisLoggedIn={setisLoggedIn} />}></Route>
-        <Route path='/checkout'  element={<Checkout cart={cart}/>}  ></Route>
+        <Route path='/checkout'  element={<Checkout cart={cart} id={userid} order={order} setorder={setorder}/>}></Route>
 
       </Routes>
       <Footer/>
