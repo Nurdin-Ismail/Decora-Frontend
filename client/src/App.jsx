@@ -9,8 +9,9 @@ import Store from './components/Store';
 import Cart from './components/Cart/Cart';
 import Exercise from './components/Exercise';
 import Signup from './components/Sign-In/SignupOrLogin';
-import Checkout from './components/checkout/Checkout';
+import Details from './components/checkout/Details';
 import User from './components/user/User';
+import Checkout from './components/checkout/Checkout';
 
 function App() {
 
@@ -92,6 +93,7 @@ console.log(order)
         <Route path= '/cart' element={<Cart user={userid} cart={cart} setcart={setcart} setpatched={setupdated} patched={updated}/>}></Route>
         <Route path= '/user' element={<User user={user} setupdated={setupdated} updated={updated} current={current} setcurrent={setcurrent} />}></Route>
         <Route path= '/signupOrLogin' element={<Signup user={user} setuser={setuser} setuserid={setuserid} isloggedIn={isloggedIn} setisLoggedIn={setisLoggedIn} />}></Route>
+        <Route path='/billingDetails'  element={<Details cart={cart} id={userid} order={order} setorder={setorder}/>}></Route>
         <Route path='/checkout'  element={<Checkout cart={cart} id={userid} order={order} setorder={setorder}/>}></Route>
 
       </Routes>

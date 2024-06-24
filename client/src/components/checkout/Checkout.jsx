@@ -1,407 +1,88 @@
 import React, { useState } from "react";
-import mpesa from "../../mpesa.png";
-import cardpayment from "../../cardpayment.png";
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+import Alert from "@mui/material/Alert";
+import axios from "axios";
 
 export default function Checkout({ cart, id, order, setorder }) {
-  const [Mpesa, setmpesa] = useState(true);
-  const [card, setcard] = useState();
-  const [age, setAge] = useState("");
-
-  const [name, setname] = useState();
   const [number, setnumber] = useState();
-  const [email, setemail] = useState();
-  const [region, setregion] = useState();
-  const [street, setstreet] = useState();
-  const [building, setbuilding] = useState();
-  const [floororapartment, setfloororapartment] = useState();
-  const [notes, setnotes] = useState();
 
+  const [amount, setAmount] = useState(1);
+  const [message, setMessage] = useState("");
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
-  };
-
-  function handleTotal() {
-    if (cart) {
-      let total = cart.map((item) => {
-        return item.quantity[1] * item.price;
-      });
-      // console.log(total)
-
-      let sum = 0;
-
-      total.forEach(function (number) {
-        sum += number;
-      });
-
-      // console.log(sum);
-
-      return `Ksh ${sum.toLocaleString()}`;
-    }
-  }
-
-  function handleSubmit(e) {
+  const handlePayment = async (e) => {
     e.preventDefault();
-    console.log(name, notes, number, email, region, street);
-    let inputs = [
-      { fullname: name },
-      { contacts: number },
-      { email: email },
-      { region: region },
-      { street: street },
-      { building: building },
-      { floororapartment: floororapartment },
-      { county: age },
-      { notes: notes },
-    ];
-    let changed = inputs.map((input) => {
-      if (Object.values(input)[0] == name) {
-        return input;
-      } else if (Object.values(input)[0] == email) {
-        return input;
-      } else if (Object.values(input)[0] == region) {
-        return input;
-      } else if (Object.values(input)[0] == street) {
-        return input;
-      } else if (Object.values(input)[0] == building) {
-        return input;
-      } else if (Object.values(input)[0] == floororapartment) {
-        return input;
-      } else if (Object.values(input)[0] == age) {
-        return input;
-      } else if (Object.values(input)[0] == number) {
-        return input;
-      } else if (Object.values(input)[0] == notes) {
-        return input;
+
+    try {
+      const response = await fetch("http://localhost:5555/mpesa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ number, amount }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setMessage(
+          "Payment request sent. Please complete the payment on your phone."
+        );
+      } else {
+        setMessage("Payment failed. Please try again.");
       }
-    });
-
-    let changed2 = changed.filter((item) => {
-      if (item != undefined) {
-        if (Object.values(item)[0] != undefined) {
-          if(Object.values(item)[0] != "" && Object.values(item)[0] != " "){
-            return item;
-          }
-          
-        }
-      }
-    });
-    let obj = {};
-
-    changed2.map((item) => {
-      Object.assign(obj, item);
-    });
-
-    console.log(changed, obj);
-    let cart2 = [...cart]
-
-    let products = cart2.map((item) => {
-      delete item.cart_id
-      let quantity= item['quantity'][1]
-      item['quantity'] = quantity
-      return item
-    })
-    console.log(products)
-
-    
-    let orderOverview = JSON.stringify({billingDetails: obj, products: products})
-    
-
-    
-    if(order == '' && undefined){
-      if(orderOverview){
-        fetch('http://127.0.0.1:5555/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            user_id: id,
-            overview: orderOverview
-          })
-  
-        })
-        .then((response) => {
-          if(response.ok){
-            
-            return response.json()
-          }
-          
-        })
-        .then((res) => {
-          if(res){
-            localStorage.setItem('order', JSON.stringify(res))
-          }
-        })
-        .catch((e) => console.log(e))
-  
-      }
-
-    }else{
-      // window.location.replace('/')
-      console.log('kanu');
+    } catch (error) {
+      console.error("Error processing payment:", error);
+      setMessage("Payment failed. Please try again.");
     }
-    
 
+    // let headers = new Headers();
+    // headers.append("Content-Type", "application/json");
+    // headers.append("Authorization", "Bearer CGqkxpi7GLTiRrW8LlYGkA7HcHSl");
 
-
-
-    // console.log(changed);
-  }
-  
-
+    // fetch("https://sandbox.safaricom.co.ke/mpesa/stkpush/v1/processrequest", {
+    //   method: "POST",
+    //   headers,
+    //   body: JSON.stringify({
+    //     BusinessShortCode: 174379,
+    //     Password:
+    //       "MTc0Mzc5YmZiMjc5ZjlhYTliZGJjZjE1OGU5N2RkNzFhNDY3Y2QyZTBjODkzMDU5YjEwZjc4ZTZiNzJhZGExZWQyYzkxOTIwMjQwNjIzMjE0ODIz",
+    //     Timestamp: "20240623214823",
+    //     TransactionType: "CustomerPayBillOnline",
+    //     Amount: 1,
+    //     PartyA: 254114800794,
+    //     PartyB: 174379,
+    //     PhoneNumber: 254114800794,
+    //     CallBackURL: "https://mydomain.com/path",
+    //     AccountReference: "CompanyXLTD",
+    //     TransactionDesc: "Payment of X",
+    //   }),
+    // })
+    //   .then((response) => response.text())
+    //   .then((result) => console.log(result))
+    //   .catch((error) => console.log(error));
+  };
   return (
-    <div className="grid ">
-      <form
-        className="grid place-self-center grid-cols-[70%_30%] w-[78%] my-[20vh]"
-        onSubmit={(e) => handleSubmit(e)}
-      >
-        <div className=" border-dotted border-r-[1px] border-r-black ">
-          <h1 className="font-[200] text-3xl">Billing Details</h1>
-          <div className="grid pt-20 gap-10 mr-5">
-            <div className="grid grid-cols-2 gap-5 ">
-              <div className="flex flex-col">
-                <label htmlFor="name">Full Name</label>
-                <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="name"
-                  required
-                  value={name}
-                  onChange={(e) => setname(e.target.value)}
-                />
-              </div>
+    <div className='grid h-[34.6vh]'>
+      <div className='grid place-content-center'>
+        <Alert severity='warning'>
+          This is a sample site. For the purpose of testing this site's Mpesa
+          integration, the ammount is set to Ksh 1. Enter a number and you'll
+          recieve a STK push.
+        </Alert>
+      </div>
+      <div className='grid place-self-center'>
+        <form onSubmit={handlePayment} className='grid gap-2'>
+          <input
+            type='tel'
+            value={number}
+            onChange={(e) => setnumber(e.target.value)}
+            className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+          />
+          <button className='button-23' type='submit'>
+            Submit
+          </button>
 
-              <div className="flex flex-col">
-                <label htmlFor="tel">Number</label>
-                <input
-                  type="tel"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="tel"
-                  required
-                  value={number}
-                  onChange={(e) => setnumber(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="email">Email</label>
-                <input
-                  type="email"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="email"
-                  required
-                  value={email}
-                  onChange={(e) => setemail(e.target.value)}
-                />
-              </div>
-
-              <div className=" pt-[20px]">
-                <FormControl fullWidth>
-                  <InputLabel
-                    id="demo-simple-select-label"
-                    sx={{ axHeight: 40 }}
-                  >
-                    County/City
-                  </InputLabel>
-                  <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
-                    value={age}
-                    label="County/City"
-                    onChange={handleChange}
-                    sx={{
-                      maxHeight: 40,
-                      "& .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "black",
-                      },
-                      "&:hover .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "purple",
-                      },
-                      "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                        borderColor: "black",
-                      },
-                    }}
-                  >
-                    <MenuItem value={10}>Ten</MenuItem>
-                    <MenuItem value={20}>Twenty</MenuItem>
-                    <MenuItem value={30}>Thirty</MenuItem>
-                  </Select>
-                </FormControl>
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="region">Region</label>
-                <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="region"
-                  required
-                  value={region}
-                  onChange={(e) => setregion(e.target.value)}
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="street">Street</label>
-                <input
-                  type="tel"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="street"
-                  value={street}
-                  onChange={(e) => setstreet(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="building">Building Name</label>
-                <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="building"
-                  value={building}
-                  onChange={(e) => setbuilding(e.target.value)}
-                />
-              </div>
-
-              <div className="flex flex-col">
-                <label htmlFor="floor">Apartment No.</label>
-                <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="floor"
-                  value={floororapartment}
-                  onChange={(e) => setfloororapartment(e.target.value)}
-                />
-              </div>
-            </div>
-            <div className="grid ">
-              <textarea
-                name=""
-                id=""
-                value={notes}
-                onChange={(e) => setnotes(e.target.value)}
-                className="h-[10vh] border-[#d3d3d3] border-[1px] focus:outline-dotted  focus:border-none placeholder:text-sm pl-2 pt-3 placeholder:italic placeholder:font-serif"
-                placeholder="Additional notes"
-              ></textarea>
-            </div>
-          </div>
-        </div>
-
-        <div className=" grid px-5">
-          <div className="flex flex-col">
-            <h1 className="font-sans text-[#733d88] text-xl font-semibold">
-              Your Order
-            </h1>
-            <div className="grid grid-flow-row">
-              <div className="flex justify-between h-[5vh] place-items-center pb-2 border-b-[1px] border-[#a5a2a2]">
-                <h1>Product</h1>
-                <h1>Price</h1>
-              </div>
-              {cart
-                ? cart.map((item) => {
-                    return (
-                      <div className="grid grid-flow-col h-[8vh] border-b-[1px] border-[#a5a2a2]">
-                        <h1 className="  grid center-start pr-24">
-                          {item.name} X{item.quantity[1]}
-                        </h1>
-                        <h1 className="grid center-end">
-                          KSH{item.price * item.quantity[1]}
-                        </h1>
-                      </div>
-                    );
-                  })
-                : null}
-
-              <div className="flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]">
-                <h1>Subtotal</h1>
-                <h1>{handleTotal()}</h1>
-              </div>
-
-              <div className="flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]">
-                <h1 className="display text-lg font-extralight">Total</h1>
-                <h1>{handleTotal()}</h1>
-              </div>
-            </div>
-            <div className="flex flex-col mt-10">
-              <div>
-                <div className=" flex gap-3">
-                  <div class="checkbox-wrapper-12">
-                    <div class="cbx">
-                      <input
-                        id="cbx-12"
-                        type="checkbox"
-                        checked={Mpesa}
-                        onChange={(e) => {
-                          setcard(Mpesa);
-
-                          setmpesa(!Mpesa);
-                        }}
-                      />
-                      <label for="cbx-12"></label>
-                      <svg
-                        width="15"
-                        height="14"
-                        viewbox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <label htmlFor="cbx-12">MPESA PAYEMENT</label>
-                </div>
-                <img src={mpesa} alt="" className="ml-8" />
-              </div>
-
-              <div>
-                <div className=" flex gap-3">
-                  <div class="checkbox-wrapper-12">
-                    <div class="cbx">
-                      <input
-                        id="cbx-12"
-                        type="checkbox"
-                        checked={card}
-                        onChange={(e) => {
-                          setmpesa(!Mpesa);
-                          setcard(!card);
-                        }}
-                      />
-                      <label for="cbx-12"></label>
-                      <svg
-                        width="15"
-                        height="14"
-                        viewbox="0 0 15 14"
-                        fill="none"
-                      >
-                        <path d="M2 8.36364L6.23077 12L13 2"></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <label htmlFor="cbx-12">CARD PAYEMENT</label>
-                </div>
-                <img src={cardpayment} alt="" className="ml-8" />
-              </div>
-
-              <p>
-                Your personal data will be used to process your order, support
-                your experience throughout this website, and for other purposes
-                described in our privacy policy.
-              </p>
-
-              <button className="button-23 my-10 ml-[10%] hover:bg-[#341952] hover:text-white">
-                Place Order
-              </button>
-            </div>
-          </div>
-        </div>
-      </form>
+          {message ? <Alert severity='info'>{message}</Alert> : null}
+        </form>
+      </div>
     </div>
   );
 }
