@@ -12,7 +12,7 @@ export default function Checkout({ cart, id, order, setorder }) {
     e.preventDefault();
 
     try {
-      const response = await fetch("http://localhost:5555/mpesa", {
+      const response = await fetch("http://127.0.0.1:5000/mpesa", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

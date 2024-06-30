@@ -1,56 +1,95 @@
-import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-import forward from '../../forward.png'
+import forward from "../../forward.png";
 // import codes from '../../countryCodes.txt'
-import Alert from '@mui/material/Alert';
+import Alert from "@mui/material/Alert";
 
-export default function User({user, updated, setupdated, current, setcurrent}) {
- 
+export default function User({
+  user,
+  updated,
+  setupdated,
+  current,
+  setcurrent,
+}) {
   // const [isLogged, setIsLogged] = useState(false)
-  
 
-
-
-
-
-
-
-
-  const [firstname, setfirstname] = useState()
-  const [lastname, setlastname] = useState()
-  const [passChecked, setpasschecked] = useState(false)
-  const [emailChecked, setemailchecked] = useState(false)
-  const [code, setcode] = useState('(+254)')
-  const [number, setnumber] = useState()
-  const [email, setemail] = useState()
-  const [password, setpassword] = useState()
-  const [confirm, setconfirm] = useState()
-  const [newPassword, setNewPassword] = useState()
-  const [confirmNewPassword, setConfirmNewPassword] = useState()
-  const [address, setadress] = useState({})
-  const [orders, setorders] = useState()
-  const [wishlist,setwishlist] = useState()
-  const [landmark, setlandmark] = useState()
-  const [street, setstreet] = useState()
-  const [regionorlocation, setregionorlocation] = useState()
-  const [buildingname, setbuildingname] = useState() 
-  const [floorornumber, setfloorornumber] = useState()
+  const [firstname, setfirstname] = useState();
+  const [lastname, setlastname] = useState();
+  const [passChecked, setpasschecked] = useState(false);
+  const [emailChecked, setemailchecked] = useState(false);
+  const [code, setcode] = useState("(+254)");
+  const [number, setnumber] = useState();
+  const [email, setemail] = useState();
+  const [password, setpassword] = useState();
+  const [confirm, setconfirm] = useState();
+  const [newPassword, setNewPassword] = useState();
+  const [confirmNewPassword, setConfirmNewPassword] = useState();
+  const [address, setadress] = useState({});
+  const [orders, setorders] = useState();
+  const [wishlist, setwishlist] = useState();
+  const [landmark, setlandmark] = useState();
+  const [street, setstreet] = useState();
+  const [regionorlocation, setregionorlocation] = useState();
+  const [buildingname, setbuildingname] = useState();
+  const [floorornumber, setfloorornumber] = useState();
   const [isOpen, setIsOpen] = useState(false);
   const [selectedCityorCounty, setselectedCityorCounty] = useState(null);
   const options = [
-    "Baringo", "Bomet", "Bungoma", "Busia", "Elgeyo Marakwet", "Embu", "Garissa", "Homabay", "Isiolo", 
-    "Kajiado", "Kakamega", "Kericho", "Kiambu", "Kilifi", "Kirinyaga", "Kisii", "Kisumu", "Kitui", "Kwale",
-    "Laikipia", "Lamu", "Machakos", "Makueni", "Mandera", "Marsabit", "Meru", "Migori", "Mombasa", "Muranga", 
-    "Nairobi", "Nakuru", "Nandi", "Narok", "Nyamira", "Nyandarua", "Nyeri", "Samburu", "Siaya", "Taita",
-    "Tana River", "Tharaka Nithi", "Trans Nzoia (Kitale)", "Turkana", "Uasin Gishu", "Vihiga", "Wajir", "West Pokot"
+    "Baringo",
+    "Bomet",
+    "Bungoma",
+    "Busia",
+    "Elgeyo Marakwet",
+    "Embu",
+    "Garissa",
+    "Homabay",
+    "Isiolo",
+    "Kajiado",
+    "Kakamega",
+    "Kericho",
+    "Kiambu",
+    "Kilifi",
+    "Kirinyaga",
+    "Kisii",
+    "Kisumu",
+    "Kitui",
+    "Kwale",
+    "Laikipia",
+    "Lamu",
+    "Machakos",
+    "Makueni",
+    "Mandera",
+    "Marsabit",
+    "Meru",
+    "Migori",
+    "Mombasa",
+    "Muranga",
+    "Nairobi",
+    "Nakuru",
+    "Nandi",
+    "Narok",
+    "Nyamira",
+    "Nyandarua",
+    "Nyeri",
+    "Samburu",
+    "Siaya",
+    "Taita",
+    "Tana River",
+    "Tharaka Nithi",
+    "Trans Nzoia (Kitale)",
+    "Turkana",
+    "Uasin Gishu",
+    "Vihiga",
+    "Wajir",
+    "West Pokot",
   ];
 
   const onSelect = (option) => {
     setselectedCityorCounty(option);
   };
 
-   const toggleOptions = () => {
+  const toggleOptions = () => {
     setIsOpen(!isOpen);
   };
 
@@ -296,826 +335,925 @@ export default function User({user, updated, setupdated, current, setcurrent}) {
     ["(+212)", "Western Sahara"],
     ["(+967)", "Yemen"],
     ["(+260)", "Zambia"],
-    ["(+263)", "Zimbabwe"]
-];
-
-
+    ["(+263)", "Zimbabwe"],
+  ];
 
   useEffect(() => {
-    if(user){
-      setfirstname(user.username.split(' ')[0])
-      setlastname(user.username.split(' ')[1])
-      setemail(user.email.replace('example.net', 'gmail.com'))
-      setpassword(user.password)
-      if(user.contacts){
-        setnumber(user.contacts)
+    if (user) {
+      setfirstname(user.username.split(" ")[0]);
+      setlastname(user.username.split(" ")[1]);
+      setemail(user.email.replace("example.net", "gmail.com"));
+      setpassword(user.password);
+      if (user.contacts) {
+        setnumber(user.contacts);
       }
 
-      if(user.address){
-        setadress(user.address)
-      setregionorlocation(user.address.regionOrLocation)
-      setbuildingname(user.address.buildingName)
-      setfloorornumber(user.address.floorOrApartmentNumber)
-      setstreet(user.address.streetName)
-      setlandmark(user.address.landmark)
-      setselectedCityorCounty(user.address.county)
+      if (user.address) {
+        let address = JSON.parse(user.address);
+        setadress(address);
+        setregionorlocation(address.regionOrLocation);
+        setbuildingname(address.buildingName);
+        setfloorornumber(address.floorOrApartmentNumber);
+        setstreet(address.streetName);
+        setlandmark(address.landmark);
+        setselectedCityorCounty(address.county);
       }
-
     }
+  }, [user]);
+  function handleSubmit(e) {
+    e.preventDefault();
 
-  }, [user])
-
-  function handleSubmit(e){
-    e.preventDefault()
-
-    let inputs = [{firstname : firstname}, {lastname : lastname}, {email : email}, {contacts : number}, {password : newPassword}]
+    let inputs = [
+      { firstname: firstname },
+      { lastname: lastname },
+      { email: email },
+      { contacts: number },
+      { password: newPassword },
+    ];
     let changed = inputs.map((input) => {
-      if(Object.values(input)[0] == firstname){
-
-        if(firstname != user.name.split(' ')[0]){
-          return input
-
+      if (Object.values(input)[0] == firstname) {
+        if (firstname != user.name.split(" ")[0]) {
+          return input;
         }
-
-      }else if(Object.values(input)[0] == lastname){
-
-        if(lastname != user.name.split(' ')[1]){
-          return input
-
+      } else if (Object.values(input)[0] == lastname) {
+        if (lastname != user.name.split(" ")[1]) {
+          return input;
         }
-
-        
-      }else if(Object.values(input)[0] == email){
-
-        if(email != user.email.replace('example.net', 'gmail.com')){
-          return input
+      } else if (Object.values(input)[0] == email) {
+        if (email != user.email.replace("example.net", "gmail.com")) {
+          return input;
         }
-        
-      }else if(Object.values(input)[0] == number){
-        return input
-      }else if(Object.values(input)[0] == newPassword){
-        return input
+      } else if (Object.values(input)[0] == number) {
+        return input;
+      } else if (Object.values(input)[0] == newPassword) {
+        return input;
       }
-    })
+    });
 
     let changed2 = changed.filter((item) => {
-      if(item != undefined){
-        if(Object.values(item)[0] != undefined){
-          return item
+      if (item != undefined) {
+        if (Object.values(item)[0] != undefined) {
+          return item;
         }
       }
-    } )
+    });
 
-    let obj ={
-
-    }
+    let obj = {};
 
     changed2.map((item) => {
-      if(Object.keys(item)[0] == 'firstname' || Object.keys(item)[0] == 'lastname'){
-        Object.assign(obj, {username: firstname + ' ' + lastname})
-
-      }else{
-        Object.assign(obj, item)
+      if (
+        Object.keys(item)[0] == "firstname" ||
+        Object.keys(item)[0] == "lastname"
+      ) {
+        Object.assign(obj, { username: firstname + " " + lastname });
+      } else {
+        Object.assign(obj, item);
       }
-      
-    })
-    
+    });
 
-        console.log(changed, obj)
+    console.log(changed, obj);
 
+    function handleEmail(obj) {
+      console.log(confirm);
 
-    function handleEmail(obj){
-      console.log(confirm)
-
-      if(confirm == user.password){
+      if (confirm == user.password) {
         //patch request
         fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
-
-         })
-        .then(response => {
-            if(response.ok){
-
-              setupdated(updated + 1)
-
-              return response.json()
-        
-        
-            }
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(obj),
         })
-        .then(res => console.log(res))
-      }else{
-        //incorrect password
-        console.log('incorrect password')
-      }
+          .then((response) => {
+            if (response.ok) {
+              setupdated(updated + 1);
 
+              return response.json();
+            }
+          })
+          .then((res) => console.log(res));
+      } else {
+        //incorrect password
+        console.log("incorrect password");
+      }
     }
 
-    function handlePasssword(obj){
-
-      if(confirm == user.password){
-        if(newPassword === confirmNewPassword){
+    function handlePasssword(obj) {
+      if (confirm == user.password) {
+        if (newPassword === confirmNewPassword) {
           //patch request
           fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(obj),
+          })
+            .then((response) => {
+              if (response.ok) {
+                setupdated(updated + 1);
 
-         })
-        .then(response => {
-            if(response.ok){
-
-              setupdated(updated + 1)
-
-              return response.json()
-        
-        
-            }
-        })
-        .then(res => console.log(res))
-
-        }else{
+                return response.json();
+              }
+            })
+            .then((res) => console.log(res));
+        } else {
           //passwords don't match
           console.log("passwords don't match");
         }
-        
-      }else{
+      } else {
         //incorrect password
-          console.log("incorrect password");
-
+        console.log("incorrect password");
       }
-
-
-
     }
 
-    function handleEmailAndPassword(obj){
-
-      if(confirm == user.password){
-        if(newPassword === confirmNewPassword){
+    function handleEmailAndPassword(obj) {
+      if (confirm == user.password) {
+        if (newPassword === confirmNewPassword) {
           //patch request
           fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(obj),
+          })
+            .then((response) => {
+              if (response.ok) {
+                setupdated(updated + 1);
 
-         })
-        .then(response => {
-            if(response.ok){
-
-              setupdated(updated + 1)
-
-              return response.json()
-        
-        
-            }
-        })
-        .then(res => console.log(res))
-
-
-        }else{
+                return response.json();
+              }
+            })
+            .then((res) => console.log(res));
+        } else {
           //passwords don't match
         }
-        
-      }else{
+      } else {
         //incorrect password
       }
-
-
-
     }
 
-
-    if(emailChecked && passChecked){
-      handleEmailAndPassword(obj)
-      console.log(obj, 'both checked')
-    }else if(emailChecked){
-      handleEmail(obj)
-      console.log(obj, 'only email')
-
-    }else if(passChecked){
-      handlePasssword(obj)
-      console.log(obj, 'only password')
-
-    }else{
-
+    if (emailChecked && passChecked) {
+      handleEmailAndPassword(obj);
+      console.log(obj, "both checked");
+    } else if (emailChecked) {
+      handleEmail(obj);
+      console.log(obj, "only email");
+    } else if (passChecked) {
+      handlePasssword(obj);
+      console.log(obj, "only password");
+    } else {
       fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(obj)
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(obj),
+      })
+        .then((response) => {
+          if (response.ok) {
+            setupdated(updated + 1);
 
-         })
-        .then(response => {
-            if(response.ok){
-
-              setupdated(updated + 1)
-
-              return response.json()
-        
-        
-            }else{
-              return response
-            }
+            return response.json();
+          } else {
+            return response;
+          }
         })
-        .then(res => console.log(res))
+        .then((res) => console.log(res));
 
-            console.log(obj, 'either names or contacts or both')
-
-
+      console.log(obj, "either names or contacts or both");
     }
-
-
-
   }
 
-  function handleSubmitAdress(e){
-    e.preventDefault()
+  function handleSubmitAdress(e) {
+    e.preventDefault();
 
-    let inputs = [{county : selectedCityorCounty}, {regionOrLocation : regionorlocation}, {buildingName : buildingname}, {floorOrApartmentNumber : floorornumber}, {streetName : street}, {landmark : landmark}]
+    let inputs = [
+      { county: selectedCityorCounty },
+      { regionOrLocation: regionorlocation },
+      { buildingName: buildingname },
+      { floorOrApartmentNumber: floorornumber },
+      { streetName: street },
+      { landmark: landmark },
+    ];
     let changed = inputs.map((input) => {
-      return input
-    })
+      return input;
+    });
 
     let changed2 = changed.filter((item) => {
-      if(item != undefined){
-        if(Object.values(item)[0] != undefined ){
-
-          if(Object.values(item)[0] != ""){
-            return item
+      if (item != undefined) {
+        if (Object.values(item)[0] != undefined) {
+          if (Object.values(item)[0] != "") {
+            return item;
           }
-          
         }
       }
-    } )
+    });
 
-    let obj ={
-
-    }
+    let obj = {};
 
     changed2.map((item) => {
-      if(Object.keys(item)[0] == 'firstname' || Object.keys(item)[0] == 'lastname'){
-        Object.assign(obj, {username: firstname + ' ' + lastname})
-
-      }else{
-        Object.assign(obj, item)
+      if (
+        Object.keys(item)[0] == "firstname" ||
+        Object.keys(item)[0] == "lastname"
+      ) {
+        Object.assign(obj, { username: firstname + " " + lastname });
+      } else {
+        Object.assign(obj, item);
       }
-      
-    })
-    console.log(obj)
+    });
+    console.log(obj);
 
-    if(selectedCityorCounty != undefined){
-      let stringifiedAddress = JSON.stringify(obj)
+    if (selectedCityorCounty != undefined) {
+      let stringifiedAddress = JSON.stringify(obj);
 
       fetch(`http://127.0.0.1:5555/user/${user.id}`, {
-            method: 'PATCH',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              address : stringifiedAddress
-            })
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          address: stringifiedAddress,
+        }),
+      })
+        .then((response) => {
+          if (response.ok) {
+            setupdated(updated + 1);
 
-         })
-        .then(response => {
-            if(response.ok){
-
-              setupdated(updated + 1)
-
-              return response.json()
-        
-        
-            }
+            return response.json();
+          }
         })
-        .then(res => console.log(res))
-
-      
+        .then((res) => console.log(res));
     }
-
   }
 
-  function handleButtonChange(target){
-    if(target == 'Account Information' && user){
-      return <div className=' px-8  bg-gray-100 grid h-[490px] grid-rows-[20%_30%_50%]'>
+  function handleButtonChange(target) {
+    if (target == "Account Information" && user) {
+      return (
+        <div className=' px-8  bg-gray-100 grid h-[490px] grid-rows-[20%_30%_50%]'>
+          <h1 className=' text-4xl font-[200] grid center-start '>
+            Account Information
+          </h1>
 
-        <h1 className=' text-4xl font-[200] grid center-start '>Account Information</h1>
+          <div className=' grid grid-cols-2 border-black border-b-[1px]'>
+            <div className='flex flex-col '>
+              <h1 className=' font-semibold text-xl'>Contact Information</h1>
+              <h1 className=' text-[17px]'>{user.username}</h1>
+              <h1>
+                {user.email.includes("example.net")
+                  ? user.email.replace("example.net", "gmail.com")
+                  : user.email}
+              </h1>
+              <h1
+                className='  text-sky-600 cursor-pointer select-none w-9'
+                onClick={() => {
+                  setcurrent("Edit Information");
+                  setemailchecked(true);
+                }}
+              >
+                Edit
+              </h1>
+            </div>
 
-        <div className=' grid grid-cols-2 border-black border-b-[1px]'>
-
-          <div className='flex flex-col '>
-
-            <h1 className=' font-semibold text-xl'>Contact Information</h1>
-            <h1 className=' text-[17px]'>{user.username}</h1>
-            <h1>{user.email.includes('example.net') ? user.email.replace('example.net', 'gmail.com') : user.email}</h1>
-            <h1 className='  text-sky-600 cursor-pointer select-none w-9' 
-            onClick={() => {
-              setcurrent('Edit Information')
-              setemailchecked(true)
-            }
-            }>Edit</h1>
-
-
-
-            
-
+            <div className='flex flex-col '>
+              <h1 className='font-semibold text-xl'>Newsletter</h1>
+              <p>You aren't subscribed to our newsletter</p>
+              <h1
+                className='  text-sky-600 cursor-pointer select-none w-9'
+                onClick={() => setcurrent("Edit Information")}
+              >
+                Edit
+              </h1>
+            </div>
           </div>
+          <div className=' '>
+            <div className='my-5 flex items-center justify-between'>
+              <h1 className=' text-4xl font-[200]  '>Address Book</h1>
+              <h1
+                className='  text-sky-600 cursor-pointer select-none  w-24'
+                onClick={() => setcurrent("Adress")}
+              >
+                View all
+              </h1>
+            </div>
 
-          <div className='flex flex-col '>
+            <div className='grid grid-cols-2  '>
+              <div className='flex flex-col center-start'>
+                <h1 className=' font-semibold text-xl'>
+                  Default Billing Adress
+                </h1>
 
-            <h1 className='font-semibold text-xl'>Newsletter</h1>
-            <p>You aren't subscribed to our newsletter</p>
-            <h1 className='  text-sky-600 cursor-pointer select-none w-9' onClick={() => setcurrent('Edit Information')}>Edit</h1>
-
-
-          </div>
-
-        </div>
-        <div className=' '>
-
-          <div className='my-5 flex items-center justify-between'>
-                      <h1 className=' text-4xl font-[200]  '>Address Book</h1>
-                      <h1 className='  text-sky-600 cursor-pointer select-none  w-24' 
-                      onClick={() => setcurrent('Adress')
-                      }>View all</h1>
-
-          </div>
-
-
-          <div className='grid grid-cols-2  '>
-            <div className='flex flex-col center-start'>
-
-              <h1 className=' font-semibold text-xl'>Default Billing Adress</h1>
-
-              {address ? 
-              <div className='flex flex-col font-serif italic '>
-                <h1>{address.county}</h1>
-                <h1>{address.regionOrLocation}</h1>
-                <h1>{address.streetName}</h1>
-                <h1>{address.buildingName}</h1>
-                
-
-              </div>
-              :
-              <p>You have not set a default billing adress</p>
-              }
-              <h1 className='  text-sky-600 cursor-pointer select-none  w-24' onClick={() => setcurrent('Adress')}>Edit Adress</h1>
-
-
-
-            
-
-          </div>
-
-          <div className='flex flex-col center-start'>
-
-            <h1 className=' font-semibold text-xl'>Default Shipping Adress</h1>
-
-            {address ? 
-              <div className='flex flex-col font-serif italic '>
-                <h1>{address.county}</h1>
-                <h1>{address.regionOrLocation}</h1>
-                <h1>{address.streetName}</h1>
-                <h1>{address.buildingName}</h1>
-                
-
-              </div>
-              :
-
-              <p>You have not set a default shipping adress</p>
-            }
-              <h1 className='  text-sky-600 cursor-pointer select-none  w-24' onClick={() => setcurrent('Adress')}>Edit Adress</h1>
-
-
-
-
-          </div>
-          </div>
-
-        </div>
-
-      </div>
-
-    }else if(target == 'Adress' && user){
-      return <div className=' h-[80%] w-[80%] border-black border-[1px]'>
-
-      <div>
-                <h1 className=' text-2xl font-[200] mt-[2%] grid center-start ml-[5%]'>Billing & Shipping Adress</h1>
-
-        
-        <form className=' ' onSubmit={(e) => handleSubmitAdress(e)}>
-
-          <div  className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[3%]' >
-
-            <div className=' '>
-              <label htmlFor="County" className='text-[#2e2d2d] text-lg font-serif italic'>County/City</label>
-
-              <div className="custom-select" id='County'>
-                <div className="selected-option border-[#d3d3d3] border-[1px] h-[4vh] grid content-center pl-2  font-serif italic " onClick={toggleOptions}>
-                  {selectedCityorCounty ? selectedCityorCounty : 'Select an County/City'}
-                  <span className={`arrow ${isOpen ? 'open' : ''}`}></span>
-                </div>
-                <div className=' grid absolute'>
-                  {isOpen && (
-                  <ul className="options  bg-white  h-[30vh] overflow-y-scroll ">
-                    {options.map((option, index) => (
-                      <li className='pl-2 pr-[158px]' key={index} onClick={() => handleOptionClick(option)}>
-                        {option}
-                      </li>
-                    ))}
-                  </ul>
+                {address ? (
+                  <div className='flex flex-col font-serif italic '>
+                    <h1>{address.county}</h1>
+                    <h1>{address.regionOrLocation}</h1>
+                    <h1>{address.streetName}</h1>
+                    <h1>{address.buildingName}</h1>
+                  </div>
+                ) : (
+                  <p>You have not set a default billing adress</p>
                 )}
-                </div>
-                
-              </div>
-              
-
-            </div>
-
-            
-              <div className='grid'>
-              <label htmlFor="region" className='text-[#2e2d2d] text-lg font-serif italic' >Region/Town/Location</label>
-              <input type="text" id='region' value={regionorlocation} onChange={(e) => setregionorlocation(e.target.value) } required className=' h-[4vh] border-[#d3d3d3] border-[1px]  focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif ' placeholder='e.g Lavington' />
-
-              </div>
-            
-            
-            
-          </div>
-
-          <div className='grid mx-[10%] '>
-
-            <div className='grid grid-cols-2 gap-[40px]'>
-              <div className='grid'>
-              <label htmlFor="buildingname" className='text-[#2e2d2d] text-lg font-serif italic' >Building name/Villa name</label>
-
-                <input type="text" id='buildingname' required onChange={(e) => setbuildingname(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={buildingname} placeholder='e.g Kamo heights' />
-
+                <h1
+                  className='  text-sky-600 cursor-pointer select-none  w-24'
+                  onClick={() => setcurrent("Adress")}
+                >
+                  Edit Adress
+                </h1>
               </div>
 
-              <div className='grid'>
-              <label htmlFor="floorornumber" className='text-[#2e2d2d] text-lg font-serif italic' >Floor/Apartment No.</label>
+              <div className='flex flex-col center-start'>
+                <h1 className=' font-semibold text-xl'>
+                  Default Shipping Adress
+                </h1>
 
-                <input type="text" id='floorornumber' onChange={(e) => setfloorornumber(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={floorornumber} placeholder='e.g 6th floor/B4' />
-
+                {address ? (
+                  <div className='flex flex-col font-serif italic '>
+                    <h1>{address.county}</h1>
+                    <h1>{address.regionOrLocation}</h1>
+                    <h1>{address.streetName}</h1>
+                    <h1>{address.buildingName}</h1>
+                  </div>
+                ) : (
+                  <p>You have not set a default shipping adress</p>
+                )}
+                <h1
+                  className='  text-sky-600 cursor-pointer select-none  w-24'
+                  onClick={() => setcurrent("Adress")}
+                >
+                  Edit Adress
+                </h1>
               </div>
-              
-
-
-            </div>
-
-            <div className=' grid grid-cols-2 gap-[40px] mt-[5%] '>
-
-              
-              <div className='grid'>
-              <label htmlFor="street" className='text-[#2e2d2d] text-lg font-serif italic' >Streetname</label>
-
-                <input type="text" id='street' required onChange={(e) => setstreet(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2' value={street} placeholder='e.g ngong rd' />
-
-              </div>
-
-              <div className='grid'>
-              <label htmlFor="landmark" className='text-[#2e2d2d] text-lg font-serif italic' >Landmark(Optional)</label>
-
-                <input type="text" id='landmark' onChange={(e) => setlandmark(e.target.value) } className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif' value={landmark} placeholder='e.g Mosque' /> 
- 
-
-              </div>
-
-
-
-
-
-              </div>
-            
-
-          </div>
-
-          <button 
-               className='button-23 my-10 ml-[10%] '
-               > <input type="submit" value={'Save'}  /></button>
-
-
-
-        </form>
-      </div>
-      
-      </div>
-
-    }else if(target == 'Edit Information' && user){
-      return <div className='bg-[#f8f8f8] h-[470px]'>
-
-        <form onSubmit={(e) => {
-          
-
-          handleSubmit(e)
-        } }>
-          <div className=' flex justify-evenly pt-5'>
-            <input type="text" value={firstname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setfirstname(e.target.value)}/>
-            <input type="text" value={lastname} className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none' onChange={(e) => setlastname(e.target.value)}/>
-          </div>
-
-          <div className=' flex flex-col mx-20 mt-5 '>
-            <div className='flex justify-around w-[14%] items-center'>
-            <input type="checkbox" id='email' className=' w-4 h-4' checked={emailChecked} onChange={() => setemailchecked(!emailChecked)} />
-            <label htmlFor="email">Change Email</label>
-            </div>
-
-            <div className='flex justify-around w-[17%] items-center'>
-            <input type="checkbox"  className=' w-4 h-4'  id='password' checked={passChecked} onChange={() => {
-              setpasschecked(!passChecked)
-            }}/>
-            <label htmlFor="password">Change Password</label>
             </div>
           </div>
-
-          <div className=' flex items-center justify-between mx-6 mt-8'>
-            {countryCallingCodes ? 
-
-            <select name="" id="" value={code} className='text-center py-4 px-3 border-black border-b-[2px] outline-none focus:outline-none ' onChange={(e) => {
-              setcode(e.target.value)
-            }}>
-              {countryCallingCodes.map((item) => {
-                return <option className='text-center' value={item[0]}>{ item[1]}</option>
-              })}
-            </select>
-            
-            :
-          
-            null}
-
-            <div className='flex items-center '>
-              <h1 className=' pr-2 mr-3 ml-20  border-black border-b-[2px] pb-2 pt-2 text-lg font-semibold'>{code.replace('(', '').replace(')', '')}</h1>
-              <input type="tel" maxlength='11' placeholder='Mobile Number'  className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' value={number}  onChange={(e) => {
-              
-               
-                  setnumber(e.target.value)
-                
-              
-              }}/>
-          </div>
-
-          
-
-          </div>
-
+        </div>
+      );
+    } else if (target == "Adress" && user) {
+      return (
+        <div className=' h-[80%] w-[80%] border-black border-[1px]'>
           <div>
-            {emailChecked ? 
+            <h1 className=' text-2xl font-[200] mt-[2%] grid center-start ml-[5%]'>
+              Billing & Shipping Adress
+            </h1>
 
-            passChecked ? 
+            <form className=' ' onSubmit={(e) => handleSubmitAdress(e)}>
+              <div className='grid grid-cols-2 w-[80%] gap-[40px] mx-[10%] mt-[5%] mb-[3%]'>
+                <div className=' '>
+                  <label
+                    htmlFor='County'
+                    className='text-[#2e2d2d] text-lg font-serif italic'
+                  >
+                    County/City
+                  </label>
 
-            // Are both checked? Do this
+                  <div className='custom-select' id='County'>
+                    <div
+                      className='selected-option border-[#d3d3d3] border-[1px] h-[4vh] grid content-center pl-2  font-serif italic '
+                      onClick={toggleOptions}
+                    >
+                      {selectedCityorCounty
+                        ? selectedCityorCounty
+                        : "Select an County/City"}
+                      <span className={`arrow ${isOpen ? "open" : ""}`}></span>
+                    </div>
+                    <div className=' grid absolute'>
+                      {isOpen && (
+                        <ul className='options  bg-white  h-[30vh] overflow-y-scroll '>
+                          {options.map((option, index) => (
+                            <li
+                              className='pl-2 pr-[158px]'
+                              key={index}
+                              onClick={() => handleOptionClick(option)}
+                            >
+                              {option}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </div>
+                  </div>
+                </div>
+
+                <div className='grid'>
+                  <label
+                    htmlFor='region'
+                    className='text-[#2e2d2d] text-lg font-serif italic'
+                  >
+                    Region/Town/Location
+                  </label>
+                  <input
+                    type='text'
+                    id='region'
+                    value={regionorlocation}
+                    onChange={(e) => setregionorlocation(e.target.value)}
+                    required
+                    className=' h-[4vh] border-[#d3d3d3] border-[1px]  focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif '
+                    placeholder='e.g Lavington'
+                  />
+                </div>
+              </div>
+
+              <div className='grid mx-[10%] '>
+                <div className='grid grid-cols-2 gap-[40px]'>
+                  <div className='grid'>
+                    <label
+                      htmlFor='buildingname'
+                      className='text-[#2e2d2d] text-lg font-serif italic'
+                    >
+                      Building name/Villa name
+                    </label>
+
+                    <input
+                      type='text'
+                      id='buildingname'
+                      required
+                      onChange={(e) => setbuildingname(e.target.value)}
+                      className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                      value={buildingname}
+                      placeholder='e.g Kamo heights'
+                    />
+                  </div>
+
+                  <div className='grid'>
+                    <label
+                      htmlFor='floorornumber'
+                      className='text-[#2e2d2d] text-lg font-serif italic'
+                    >
+                      Floor/Apartment No.
+                    </label>
+
+                    <input
+                      type='text'
+                      id='floorornumber'
+                      onChange={(e) => setfloorornumber(e.target.value)}
+                      className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                      value={floorornumber}
+                      placeholder='e.g 6th floor/B4'
+                    />
+                  </div>
+                </div>
+
+                <div className=' grid grid-cols-2 gap-[40px] mt-[5%] '>
+                  <div className='grid'>
+                    <label
+                      htmlFor='street'
+                      className='text-[#2e2d2d] text-lg font-serif italic'
+                    >
+                      Streetname
+                    </label>
+
+                    <input
+                      type='text'
+                      id='street'
+                      required
+                      onChange={(e) => setstreet(e.target.value)}
+                      className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2'
+                      value={street}
+                      placeholder='e.g ngong rd'
+                    />
+                  </div>
+
+                  <div className='grid'>
+                    <label
+                      htmlFor='landmark'
+                      className='text-[#2e2d2d] text-lg font-serif italic'
+                    >
+                      Landmark(Optional)
+                    </label>
+
+                    <input
+                      type='text'
+                      id='landmark'
+                      onChange={(e) => setlandmark(e.target.value)}
+                      className=' h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                      value={landmark}
+                      placeholder='e.g Mosque'
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <button className='button-23 my-10 ml-[10%] '>
+                {" "}
+                <input type='submit' value={"Save"} />
+              </button>
+            </form>
+          </div>
+        </div>
+      );
+    } else if (target == "Edit Information" && user) {
+      return (
+        <div className='bg-[#f8f8f8] h-[470px]'>
+          <form
+            onSubmit={(e) => {
+              handleSubmit(e);
+            }}
+          >
+            <div className=' flex justify-evenly pt-5'>
+              <input
+                type='text'
+                value={firstname}
+                className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none'
+                onChange={(e) => setfirstname(e.target.value)}
+              />
+              <input
+                type='text'
+                value={lastname}
+                className=' bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-medium outline-none'
+                onChange={(e) => setlastname(e.target.value)}
+              />
+            </div>
+
+            <div className=' flex flex-col mx-20 mt-5 '>
+              <div className='flex justify-around w-[14%] items-center'>
+                <input
+                  type='checkbox'
+                  id='email'
+                  className=' w-4 h-4'
+                  checked={emailChecked}
+                  onChange={() => setemailchecked(!emailChecked)}
+                />
+                <label htmlFor='email'>Change Email</label>
+              </div>
+
+              <div className='flex justify-around w-[17%] items-center'>
+                <input
+                  type='checkbox'
+                  className=' w-4 h-4'
+                  id='password'
+                  checked={passChecked}
+                  onChange={() => {
+                    setpasschecked(!passChecked);
+                  }}
+                />
+                <label htmlFor='password'>Change Password</label>
+              </div>
+            </div>
+
+            <div className=' flex items-center justify-between mx-6 mt-8'>
+              {countryCallingCodes ? (
+                <select
+                  name=''
+                  id=''
+                  value={code}
+                  className='text-center py-4 px-3 border-black border-b-[2px] outline-none focus:outline-none '
+                  onChange={(e) => {
+                    setcode(e.target.value);
+                  }}
+                >
+                  {countryCallingCodes.map((item) => {
+                    return (
+                      <option className='text-center' value={item[0]}>
+                        {item[1]}
+                      </option>
+                    );
+                  })}
+                </select>
+              ) : null}
+
+              <div className='flex items-center '>
+                <h1 className=' pr-2 mr-3 ml-20  border-black border-b-[2px] pb-2 pt-2 text-lg font-semibold'>
+                  {code.replace("(", "").replace(")", "")}
+                </h1>
+                <input
+                  type='tel'
+                  maxlength='11'
+                  placeholder='Mobile Number'
+                  className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                  value={number}
+                  onChange={(e) => {
+                    setnumber(e.target.value);
+                  }}
+                />
+              </div>
+            </div>
 
             <div>
+              {emailChecked ? (
+                passChecked ? (
+                  // Are both checked? Do this
 
-                            <h1 className='ml-6 my-5 font-extralight text-2xl'>Change Email & Password</h1>
+                  <div>
+                    <h1 className='ml-6 my-5 font-extralight text-2xl'>
+                      Change Email & Password
+                    </h1>
 
+                    <div>
+                      <div className=' flex justify-between mx-6'>
+                        <input
+                          type='email'
+                          placeholder='Change email'
+                          required
+                          className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                          value={email}
+                          onChange={(e) => {
+                            setemail(e.target.value);
+                          }}
+                        />
+                        <input
+                          type='password'
+                          value={confirm}
+                          placeholder='Confirm Password'
+                          required
+                          className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                          onChange={(e) => {
+                            setconfirm(e.target.value);
+                          }}
+                        />
+                      </div>
+                    </div>
+                    <div className='grid  grid-cols-2 mx-6 gap-6'>
+                      <input
+                        type='password'
+                        value={newPassword}
+                        placeholder='New Password'
+                        required
+                        className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                        onChange={(e) => {
+                          setNewPassword(e.target.value);
+                        }}
+                      />
+                      <input
+                        type='password'
+                        value={confirmNewPassword}
+                        placeholder='Confirm New Password'
+                        required
+                        className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                        onChange={(e) => {
+                          setConfirmNewPassword(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                ) : (
+                  // Is only email checked? Do this
 
-              <div>
-                <div className=' flex justify-between mx-6'>
-                <input 
-                type="email" 
-                placeholder='Change email' 
-                required 
-                className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
-                value={email}
-                onChange={(e) => {
-                  setemail(e.target.value)
-                }}
-                />
-                <input type="password" value={confirm} placeholder='Confirm Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setconfirm(e.target.value)
+                  <div className=' mt-5'>
+                    <h1 className='ml-6 mb-2 font-extralight text-2xl'>
+                      Change Email
+                    </h1>
+                    <div className=' flex justify-between mx-6'>
+                      <input
+                        type='email'
+                        placeholder='Change email'
+                        required
+                        className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                        value={email}
+                        onChange={(e) => {
+                          setemail(e.target.value);
+                        }}
+                      />
+                      <input
+                        type='password'
+                        value={confirm}
+                        placeholder='Confirm Password'
+                        required
+                        className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                        onChange={(e) => {
+                          setconfirm(e.target.value);
+                        }}
+                      />
+                    </div>
+                  </div>
+                )
+              ) : passChecked ? (
+                // is passowrd checked? do this
 
-                }}/>
-              </div>
-              </div>
-              <div className='grid  grid-cols-2 mx-6 gap-6'>
-                <input type="password" value={newPassword} placeholder='New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setNewPassword(e.target.value)
+                <div className=''>
+                  <h1 className='ml-6 my-5 font-extralight text-2xl'>
+                    Change Email & Password
+                  </h1>
 
-                }}/>
-              <input type="password" value={confirmNewPassword} placeholder='Confirm New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setConfirmNewPassword(e.target.value)
+                  <div className='grid  grid-cols-2 mx-6'>
+                    <input
+                      type='password'
+                      value={confirm}
+                      placeholder='Current Password'
+                      required
+                      className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                      onChange={(e) => {
+                        setconfirm(e.target.value);
+                      }}
+                    />
+                    <input
+                      type='password'
+                      value={newPassword}
+                      placeholder='New Password'
+                      required
+                      className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                      onChange={(e) => {
+                        setNewPassword(e.target.value);
+                      }}
+                    />
+                    <input
+                      type='password'
+                      value={confirmNewPassword}
+                      placeholder='Confirm New Password'
+                      required
+                      className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
+                      onChange={(e) => {
+                        setConfirmNewPassword(e.target.value);
+                      }}
+                    />
+                  </div>
+                </div>
+              ) : null}
 
-                }}/>
-              </div>
-
-               
-              
-
+              <button className='button-23 my-10 mx-6 '>
+                {" "}
+                <input type='submit' value={"Save"} />
+              </button>
             </div>
-            
-            : 
-
-            // Is only email checked? Do this
-
-            <div className=' mt-5'>
-
-              <h1 className='ml-6 mb-2 font-extralight text-2xl'>Change Email</h1>
-              <div className=' flex justify-between mx-6'>
-                <input 
-                type="email" 
-                placeholder='Change email' 
-                required 
-                className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none'
-                value={email}
-                onChange={(e) => {
-                  setemail(e.target.value)
-                }}
-                />
-                <input type="password" value={confirm} placeholder='Confirm Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setconfirm(e.target.value)
-
-                }}/>
-              </div>
-
-            </div>
-            : 
-            passChecked ?
-
-            // is passowrd checked? do this 
-
-            <div className=''>
-
-                                          <h1 className='ml-6 my-5 font-extralight text-2xl'>Change Email & Password</h1>
-
-
-              <div className='grid  grid-cols-2 mx-6'>
-                <input type="password" value={confirm} placeholder='Current Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setconfirm(e.target.value)
-
-                }}/>
-              <input type="password" value={newPassword} placeholder='New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setNewPassword(e.target.value)
-
-                }}/>
-              <input type="password" value={confirmNewPassword} placeholder='Confirm New Password' required className='bg-transparent w-[500px] border-black border-b-[2px] pb-2 pt-2 text-lg font-thin outline-none' 
-                onChange={(e) => {
-                  setConfirmNewPassword(e.target.value)
-
-                }}/>
-              </div>
-              
-
-            </div>
-            
-            : 
-            
-            null
-            }
-
-            <button 
-               className='button-23 my-10 mx-6 '
-               > <input type="submit" value={'Save'}  /></button>
-          </div>
-        </form>
-
-
-      </div>
-      
-    }else if(target == 'Orders' && user){
-      return <div>
-        {
-          orders 
-
-          ? 
-
-          null
-
-          :
-
-          <Alert severity="info">You don't have any orders yet.</Alert>
-
-        }
-      </div>
-      
-    }else if(target == 'Wishlist' && user){
-      return <div>
-        {wishlist ?
-        null
-        
-      :
-      <Alert severity="info">You don't have any products in your wishlist yet.</Alert>
-
-      
-      }
-      </div>
-      
+          </form>
+        </div>
+      );
+    } else if (target == "Orders" && user) {
+      return (
+        <div>
+          {orders ? null : (
+            <Alert severity='info'>You don't have any orders yet.</Alert>
+          )}
+        </div>
+      );
+    } else if (target == "Wishlist" && user) {
+      return (
+        <div>
+          {wishlist ? null : (
+            <Alert severity='info'>
+              You don't have any products in your wishlist yet.
+            </Alert>
+          )}
+        </div>
+      );
     }
-
   }
-
-
-
-
 
   return (
     <div className='italiana'>
       <div className='h-[100vh] grid grid-cols-[30%_70%] gap-5'>
-
         <div className=' grid item-center-end'>
-
           <div className='  h-[70%] w-[50%] sticky top-4 overflow-x-hidden '>
             <ul className=' grid gap-2 select-none'>
-              <li className='grid grid-cols-[20%_80%] smooth'
-              style={current == 'Account Information' ? {transform: `translate(-${0}%)`} : {transform: `translate(-${20}%)`}}
-              
+              <li
+                className='grid grid-cols-[20%_80%] smooth'
+                style={
+                  current == "Account Information"
+                    ? { transform: `translate(-${0}%)` }
+                    : { transform: `translate(-${20}%)` }
+                }
               >
-                 <img src={forward} alt="" className={current == 'Account Information' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
+                <img
+                  src={forward}
+                  alt=''
+                  className={
+                    current == "Account Information"
+                      ? " w-[24px] grid place-self-center"
+                      : "invisible"
+                  }
+                />
 
-                <div className={current == 'Account Information' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  setcurrent('Account Information')
-
-                        }}>
-                        Account Information
-
-                    </div>
+                <div
+                  className={
+                    current == "Account Information"
+                      ? " grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white"
+                      : " grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white"
+                  }
+                  onClick={() => {
+                    setcurrent("Account Information");
+                  }}
+                >
+                  Account Information
+                </div>
               </li>
 
-              <li className='grid grid-cols-[20%_80%] smooth'
-              style={current == 'Adress' ? {transform: `translate(-${0}%)`} : {transform: `translate(-${20}%)`}}
-              
+              <li
+                className='grid grid-cols-[20%_80%] smooth'
+                style={
+                  current == "Adress"
+                    ? { transform: `translate(-${0}%)` }
+                    : { transform: `translate(-${20}%)` }
+                }
               >
-                 <img src={forward} alt="" className={current == 'Adress' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
+                <img
+                  src={forward}
+                  alt=''
+                  className={
+                    current == "Adress"
+                      ? " w-[24px] grid place-self-center"
+                      : "invisible"
+                  }
+                />
 
-                <div className={current == 'Adress' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  setcurrent('Adress')
-
-                        }}>
-                        Adress
-
-                    </div>
+                <div
+                  className={
+                    current == "Adress"
+                      ? " grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white"
+                      : " grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white"
+                  }
+                  onClick={() => {
+                    setcurrent("Adress");
+                  }}
+                >
+                  Adress
+                </div>
               </li>
 
-              <li className='grid grid-cols-[20%_80%] smooth'
-              style={current == 'Edit Information' ? {transform: `translate(-${0}%)`} : {transform: `translate(-${20}%)`}}
-              
+              <li
+                className='grid grid-cols-[20%_80%] smooth'
+                style={
+                  current == "Edit Information"
+                    ? { transform: `translate(-${0}%)` }
+                    : { transform: `translate(-${20}%)` }
+                }
               >
-                 <img src={forward} alt="" className={current == 'Edit Information' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
+                <img
+                  src={forward}
+                  alt=''
+                  className={
+                    current == "Edit Information"
+                      ? " w-[24px] grid place-self-center"
+                      : "invisible"
+                  }
+                />
 
-                <div className={current == 'Edit Information' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  setcurrent('Edit Information')
-
-                        }}>
-                        Edit Information
-
-                    </div>
+                <div
+                  className={
+                    current == "Edit Information"
+                      ? " grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white"
+                      : " grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white"
+                  }
+                  onClick={() => {
+                    setcurrent("Edit Information");
+                  }}
+                >
+                  Edit Information
+                </div>
               </li>
 
-              <li className='grid grid-cols-[20%_80%] smooth'
-              style={current == 'Orders' ? {transform: `translate(-${0}%)`} : {transform: `translate(-${20}%)`}}
-              
+              <li
+                className='grid grid-cols-[20%_80%] smooth'
+                style={
+                  current == "Orders"
+                    ? { transform: `translate(-${0}%)` }
+                    : { transform: `translate(-${20}%)` }
+                }
               >
-                 <img src={forward} alt="" className={current == 'Orders' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
+                <img
+                  src={forward}
+                  alt=''
+                  className={
+                    current == "Orders"
+                      ? " w-[24px] grid place-self-center"
+                      : "invisible"
+                  }
+                />
 
-                <div className={current == 'Orders' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  setcurrent('Orders')
-
-                        }}>
-                        Orders
-
-                    </div>
+                <div
+                  className={
+                    current == "Orders"
+                      ? " grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white"
+                      : " grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white"
+                  }
+                  onClick={() => {
+                    setcurrent("Orders");
+                  }}
+                >
+                  Orders
+                </div>
               </li>
 
-              <li className='grid grid-cols-[20%_80%] smooth'
-              style={current == 'Wishlist' ? {transform: `translate(-${0}%)`} : {transform: `translate(-${20}%)`}}
-              
+              <li
+                className='grid grid-cols-[20%_80%] smooth'
+                style={
+                  current == "Wishlist"
+                    ? { transform: `translate(-${0}%)` }
+                    : { transform: `translate(-${20}%)` }
+                }
               >
-                 <img src={forward} alt="" className={current == 'Wishlist' ? ' w-[24px] grid place-self-center' : 'invisible'}/>
+                <img
+                  src={forward}
+                  alt=''
+                  className={
+                    current == "Wishlist"
+                      ? " w-[24px] grid place-self-center"
+                      : "invisible"
+                  }
+                />
 
-                <div className={current == 'Wishlist' ? ' grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white': ' grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white'} onClick={() => { 
-                  setcurrent('Wishlist')
-
-                        }}>
-                        Wishlist
-
-                    </div>
+                <div
+                  className={
+                    current == "Wishlist"
+                      ? " grid place-content-center border-[1px] border-white w-[100%] h-[60px] cursor-pointer bg-[#2f215ecc] text-white"
+                      : " grid place-content-center border-[1px] border-black hover:border-white w-[100%] h-[60px] cursor-pointer hover:bg-[#2f215ecc] hover:text-white"
+                  }
+                  onClick={() => {
+                    setcurrent("Wishlist");
+                  }}
+                >
+                  Wishlist
+                </div>
               </li>
-
-              
             </ul>
-
           </div>
-
         </div>
 
         <div className='  grid mt-[15vh]'>
-
-
           <div className='  w-[1070px] h-[70%]'>
             {handleButtonChange(current)}
-
-
           </div>
-
         </div>
-
-
       </div>
     </div>
-  )
+  );
 }

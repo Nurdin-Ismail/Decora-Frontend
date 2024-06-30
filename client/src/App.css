@@ -147,11 +147,10 @@ font-family: 'Philosopher', sans-serif;
 }
 .kanu{
   
-  height: 80vh;
+  height: 90vh;
   width: 100vw;
   background:rgba(0, 0, 0, 0.24);
   background-blend-mode: darken;
-  background-image: url('bgimg.avif');
   background-size: 100vw 80vh;
   background-repeat: no-repeat;
 

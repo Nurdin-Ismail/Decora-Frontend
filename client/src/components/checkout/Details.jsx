@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from "@mui/material/LinearProgress";
 import mpesa from "../../mpesa.png";
 import cardpayment from "../../cardpayment.png";
 import Box from "@mui/material/Box";
@@ -13,7 +13,7 @@ export default function Details({ cart, id, order, setorder }) {
   const [Mpesa, setmpesa] = useState(true);
   const [progress, setProgress] = React.useState(70);
 
-  const [card, setcard] = useState()
+  const [card, setcard] = useState();
   const [age, setAge] = useState("");
 
   const [name, setname] = useState();
@@ -24,7 +24,6 @@ export default function Details({ cart, id, order, setorder }) {
   const [building, setbuilding] = useState();
   const [floororapartment, setfloororapartment] = useState();
   const [notes, setnotes] = useState();
-
 
   const handleChange = (event) => {
     setAge(event.target.value);
@@ -88,10 +87,9 @@ export default function Details({ cart, id, order, setorder }) {
     let changed2 = changed.filter((item) => {
       if (item != undefined) {
         if (Object.values(item)[0] != undefined) {
-          if(Object.values(item)[0] != "" && Object.values(item)[0] != " "){
+          if (Object.values(item)[0] != "" && Object.values(item)[0] != " ") {
             return item;
           }
-          
         }
       }
     });
@@ -102,7 +100,7 @@ export default function Details({ cart, id, order, setorder }) {
     });
 
     console.log(changed, obj);
-    let cart2 = [...cart]
+    let cart2 = [...cart];
 
     // let products = cart2.map((item) => {
     //   delete item.cart_id
@@ -110,118 +108,108 @@ export default function Details({ cart, id, order, setorder }) {
     //   item['quantity'] = quantity
     //   return item
     // })
-    let products = cart2
-    console.log(products)
+    let products = cart2;
+    console.log(products);
 
-    
-    let orderOverview = JSON.stringify({billingDetails: obj, products: products})
-    
+    let orderOverview = JSON.stringify({
+      billingDetails: obj,
+      products: products,
+    });
 
-    
-    if(order == '' && undefined){
-      if(orderOverview){
-        fetch('http://127.0.0.1:5555/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
+    if (order == "" && undefined) {
+      if (orderOverview) {
+        fetch("https://decora-backend.onrender.com/orders", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             user_id: id,
-            overview: orderOverview
+            overview: orderOverview,
+          }),
+        })
+          .then((response) => {
+            if (response.ok) {
+              return response.json();
+            }
           })
-  
-        })
-        .then((response) => {
-          if(response.ok){
-            
-            return response.json()
-          }
-          
-        })
-        .then((res) => {
-          if(res){
-            localStorage.setItem('order', JSON.stringify(res))
-          }
-        })
-        .catch((e) => console.log(e))
-  
+          .then((res) => {
+            if (res) {
+              localStorage.setItem("order", JSON.stringify(res));
+            }
+          })
+          .catch((e) => console.log(e));
       }
-
-    }else{
+    } else {
       // window.location.replace('/')
-      console.log('kanu');
+      console.log("kanu");
     }
-    
-
-
-
 
     // console.log(changed);
   }
-  
 
   return (
-    <div className="grid "> 
-    <div className="h-10">
-    <LinearProgress variant="determinate" value={progress}/>    </div>
-      
+    <div className='grid '>
+      <div className='h-10'>
+        <LinearProgress variant='determinate' value={progress} />{" "}
+      </div>
+
       <form
-        className="grid place-self-center grid-cols-[70%_30%] w-[78%] my-[20vh]"
+        className='grid place-self-center grid-cols-[70%_30%] w-[78%] my-[20vh]'
         onSubmit={(e) => handleSubmit(e)}
       >
-        <div className=" border-dotted border-r-[1px] border-r-black ">
-         
-          <h1 className="font-[200] text-3xl">Billing Details</h1>
-          <div className="grid pt-20 gap-10 mr-5">
-            <div className="grid grid-cols-2 gap-5 ">
-              <div className="flex flex-col">
-                <label htmlFor="name">Full Name</label>
+        <div className=' border-dotted border-r-[1px] border-r-black '>
+          <h1 className='font-[200] text-3xl'>Billing Details</h1>
+          <div className='grid pt-20 gap-10 mr-5'>
+            <div className='grid grid-cols-2 gap-5 '>
+              <div className='flex flex-col'>
+                <label htmlFor='name'>Full Name</label>
                 <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="name"
+                  type='text'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='name'
                   required
                   value={name}
                   onChange={(e) => setname(e.target.value)}
                 />
               </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="tel">Number</label>
+              <div className='flex flex-col'>
+                <label htmlFor='tel'>Number</label>
                 <input
-                  type="tel"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="tel"
+                  type='tel'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='tel'
                   required
                   value={number}
                   onChange={(e) => setnumber(e.target.value)}
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="email">Email</label>
+            <div className='grid grid-cols-2 gap-5'>
+              <div className='flex flex-col'>
+                <label htmlFor='email'>Email</label>
                 <input
-                  type="email"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="email"
+                  type='email'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='email'
                   required
                   value={email}
                   onChange={(e) => setemail(e.target.value)}
                 />
               </div>
 
-              <div className=" pt-[20px]">
+              <div className=' pt-[20px]'>
                 <FormControl fullWidth>
                   <InputLabel
-                    id="demo-simple-select-label"
+                    id='demo-simple-select-label'
                     sx={{ axHeight: 40 }}
                   >
                     County/City
                   </InputLabel>
                   <Select
-                    labelId="demo-simple-select-label"
-                    id="demo-simple-select"
+                    labelId='demo-simple-select-label'
+                    id='demo-simple-select'
                     value={age}
-                    label="County/City"
+                    label='County/City'
                     onChange={handleChange}
                     sx={{
                       maxHeight: 40,
@@ -243,84 +231,84 @@ export default function Details({ cart, id, order, setorder }) {
                 </FormControl>
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="region">Region</label>
+            <div className='grid grid-cols-2 gap-5'>
+              <div className='flex flex-col'>
+                <label htmlFor='region'>Region</label>
                 <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="region"
+                  type='text'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='region'
                   required
                   value={region}
                   onChange={(e) => setregion(e.target.value)}
                 />
               </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="street">Street</label>
+              <div className='flex flex-col'>
+                <label htmlFor='street'>Street</label>
                 <input
-                  type="tel"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="street"
+                  type='tel'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='street'
                   value={street}
                   onChange={(e) => setstreet(e.target.value)}
                 />
               </div>
             </div>
-            <div className="grid grid-cols-2 gap-5">
-              <div className="flex flex-col">
-                <label htmlFor="building">Building Name</label>
+            <div className='grid grid-cols-2 gap-5'>
+              <div className='flex flex-col'>
+                <label htmlFor='building'>Building Name</label>
                 <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="building"
+                  type='text'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='building'
                   value={building}
                   onChange={(e) => setbuilding(e.target.value)}
                 />
               </div>
 
-              <div className="flex flex-col">
-                <label htmlFor="floor">Apartment No.</label>
+              <div className='flex flex-col'>
+                <label htmlFor='floor'>Apartment No.</label>
                 <input
-                  type="text"
-                  className="h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif"
-                  id="floor"
+                  type='text'
+                  className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+                  id='floor'
                   value={floororapartment}
                   onChange={(e) => setfloororapartment(e.target.value)}
                 />
               </div>
             </div>
-            <div className="grid ">
+            <div className='grid '>
               <textarea
-                name=""
-                id=""
+                name=''
+                id=''
                 value={notes}
                 onChange={(e) => setnotes(e.target.value)}
-                className="h-[10vh] border-[#d3d3d3] border-[1px] focus:outline-dotted  focus:border-none placeholder:text-sm pl-2 pt-3 placeholder:italic placeholder:font-serif"
-                placeholder="Additional notes"
+                className='h-[10vh] border-[#d3d3d3] border-[1px] focus:outline-dotted  focus:border-none placeholder:text-sm pl-2 pt-3 placeholder:italic placeholder:font-serif'
+                placeholder='Additional notes'
               ></textarea>
             </div>
           </div>
         </div>
 
-        <div className=" grid px-5">
-          <div className="flex flex-col">
-            <h1 className="font-sans text-[#733d88] text-xl font-semibold">
+        <div className=' grid px-5'>
+          <div className='flex flex-col'>
+            <h1 className='font-sans text-[#733d88] text-xl font-semibold'>
               Your Order
             </h1>
-            <div className="grid grid-flow-row">
-              <div className="flex justify-between h-[5vh] place-items-center pb-2 border-b-[1px] border-[#a5a2a2]">
+            <div className='grid grid-flow-row'>
+              <div className='flex justify-between h-[5vh] place-items-center pb-2 border-b-[1px] border-[#a5a2a2]'>
                 <h1>Product</h1>
                 <h1>Price</h1>
               </div>
               {cart
                 ? cart.map((item) => {
                     return (
-                      <div className="grid grid-flow-col h-[8vh] border-b-[1px] border-[#a5a2a2]">
-                        <h1 className="  grid center-start pr-24">
+                      <div className='grid grid-flow-col h-[8vh] border-b-[1px] border-[#a5a2a2]'>
+                        <h1 className='  grid center-start pr-24'>
                           {item.name} X{item.quantity[1]}
                         </h1>
-                        <h1 className="grid center-end">
+                        <h1 className='grid center-end'>
                           KSH{item.price * item.quantity[1]}
                         </h1>
                       </div>
@@ -328,24 +316,24 @@ export default function Details({ cart, id, order, setorder }) {
                   })
                 : null}
 
-              <div className="flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]">
+              <div className='flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]'>
                 <h1>Subtotal</h1>
                 <h1>{handleTotal()}</h1>
               </div>
 
-              <div className="flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]">
-                <h1 className="display text-lg font-extralight">Total</h1>
+              <div className='flex justify-between h-[6vh]  place-items-end pb-3 border-b-[1px] border-[#a5a2a2]'>
+                <h1 className='display text-lg font-extralight'>Total</h1>
                 <h1>{handleTotal()}</h1>
               </div>
             </div>
-            <div className="flex flex-col mt-10">
+            <div className='flex flex-col mt-10'>
               <div>
-                <div className=" flex gap-3">
-                  <div class="checkbox-wrapper-12">
-                    <div class="cbx">
+                <div className=' flex gap-3'>
+                  <div class='checkbox-wrapper-12'>
+                    <div class='cbx'>
                       <input
-                        id="cbx-12"
-                        type="checkbox"
+                        id='cbx-12'
+                        type='checkbox'
                         checked={Mpesa}
                         onChange={(e) => {
                           setcard(Mpesa);
@@ -353,49 +341,49 @@ export default function Details({ cart, id, order, setorder }) {
                           setmpesa(!Mpesa);
                         }}
                       />
-                      <label for="cbx-12"></label>
+                      <label for='cbx-12'></label>
                       <svg
-                        width="15"
-                        height="14"
-                        viewbox="0 0 15 14"
-                        fill="none"
+                        width='15'
+                        height='14'
+                        viewbox='0 0 15 14'
+                        fill='none'
                       >
-                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                        <path d='M2 8.36364L6.23077 12L13 2'></path>
                       </svg>
                     </div>
                   </div>
-                  <label htmlFor="cbx-12">MPESA PAYEMENT</label>
+                  <label htmlFor='cbx-12'>MPESA PAYEMENT</label>
                 </div>
-                <img src={mpesa} alt="" className="ml-8" />
+                <img src={mpesa} alt='' className='ml-8' />
               </div>
 
               <div>
-                <div className=" flex gap-3">
-                  <div class="checkbox-wrapper-12">
-                    <div class="cbx">
+                <div className=' flex gap-3'>
+                  <div class='checkbox-wrapper-12'>
+                    <div class='cbx'>
                       <input
-                        id="cbx-12"
-                        type="checkbox"
+                        id='cbx-12'
+                        type='checkbox'
                         checked={card}
                         onChange={(e) => {
                           setmpesa(!Mpesa);
                           setcard(!card);
                         }}
                       />
-                      <label for="cbx-12"></label>
+                      <label for='cbx-12'></label>
                       <svg
-                        width="15"
-                        height="14"
-                        viewbox="0 0 15 14"
-                        fill="none"
+                        width='15'
+                        height='14'
+                        viewbox='0 0 15 14'
+                        fill='none'
                       >
-                        <path d="M2 8.36364L6.23077 12L13 2"></path>
+                        <path d='M2 8.36364L6.23077 12L13 2'></path>
                       </svg>
                     </div>
                   </div>
-                  <label htmlFor="cbx-12">CARD PAYEMENT</label>
+                  <label htmlFor='cbx-12'>CARD PAYEMENT</label>
                 </div>
-                <img src={cardpayment} alt="" className="ml-8" />
+                <img src={cardpayment} alt='' className='ml-8' />
               </div>
 
               <p>
@@ -404,7 +392,7 @@ export default function Details({ cart, id, order, setorder }) {
                 described in our privacy policy.
               </p>
 
-              <button className="button-23 my-10 ml-[10%] hover:bg-[#341952] hover:text-white">
+              <button className='button-23 my-10 ml-[10%] hover:bg-[#341952] hover:text-white'>
                 Place Order
               </button>
             </div>
