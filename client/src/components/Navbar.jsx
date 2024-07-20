@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
-import cart from "../cart2.png";
-import Search from "./Search";
-import logo from "../7.png";
-import cartsmall from "../cartsmall.png";
-import cartbig from "../cartbig.png";
-import user from "../user2.png";
+import searcho from "../search.svg";
+import user from "../user.svg";
+import signup from "../signup.svg";
+import cart from "../cart.svg";
+import logo from "../logo.svg";
 import logout from "../logout.png";
+
+import Search from "./Search";
+
+import Skeleton from "@mui/material/Skeleton";
 
 function Navbar({ products, quantity, setcurrent, isloggedIn }) {
   const [isShown, setIsShown] = useState(false);
   const [items, setitems] = useState(0);
   const [isAccountClicked, setIsAccountClicked] = useState(false);
+  const [is, setis] = useState(false);
 
   useEffect(() => {
     if (quantity) {
@@ -18,7 +22,15 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
     }
   });
 
-  console.log(isloggedIn);
+  // console.log(isloggedIn);
+
+  function handleIcon() {
+    if (isloggedIn) {
+      return user;
+    } else {
+      return signup;
+    }
+  }
 
   function getUniqueCategories(products) {
     let categories = [];
@@ -31,6 +43,11 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
     }
 
     return categories;
+  }
+
+  let mostSearchedProducts;
+  if (products) {
+    mostSearchedProducts = [products[55], products[33]];
   }
 
   // Example usage
@@ -50,94 +67,92 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
       }
     });
   }
+  // console.log(searchData);
+
+  let categ = [1, 2, 3, 4, 5, 6];
+
+  // console.log(uniqueCategories);
 
   return (
     <div>
       <nav className=''>
-        <div className=' topnav  bg-white h-[9vh] flex justify-between '>
-          <div className='search-dropdown  '>
-            <Search
-              search={search}
-              setsearch={setsearch}
-              onsearch={onSearchChange}
-            />
-            <div className=' kon   max-h-[30vh]  overflow-x-clip flex-wrap  overflow-auto ml-[4vw]  relative z-10'>
-              {search === ""
-                ? null
-                : searchData.map((item) => {
-                    return (
-                      <div className=' '>
-                        <div className='dropdown  flex bg-white w-[22vw]    pt-1 h-[60px] '>
-                          <div className=' flex ml-2 h-[50px] w-[50px] items-center'>
-                            <img
-                              src={
-                                "https://decora-backend.onrender.com" +
-                                item.images[0]
-                              }
-                              alt=''
-                              className='max-h-[50px]  max-w-[50px]  '
-                            />
-                          </div>
-                          <div className=' flex  w-[33vw] justify-between h-[50px] items-center  '>
-                            <h1 className=' ml-5'>{item.name}</h1>
-                            <h1 className=' me-2 text-red-500'>
-                              Ksh {item.price}
-                            </h1>
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
-            </div>
-          </div>
-          <div className=' logo  ml-[]'>
-            <a href='/'>
-              <img
-                src={logo}
-                alt=''
-                className=' h-[18vh] w-[10vw] mt-[-40px] '
-              />
-            </a>
+        <div className=' topnav  bg-white h-[9vh] grid grid-cols-[15%_85%] mx-[210px]'>
+          <div>
+            <img src={logo} alt='' />
           </div>
 
-          {isloggedIn == true ? (
-            <div className='signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 '>
-              <div className='grid grid-cols-[30px_32px]'>
-                <img
-                  src={user}
-                  alt=''
-                  className='cursor-pointer grid self-center mb-[-6px] '
+          <div className=' grid grid-cols-2'>
+            <div className=' grid center-end  '>
+              <ul className='flex gap-10 text-lg montserrat'>
+                <li
+                  className=' cursor-pointer'
                   onClick={() => {
-                    setIsAccountClicked(!isAccountClicked);
+                    window.location.replace("/");
                   }}
-                />
-                <div className='grid cart  '>
-                  <a href='/cart' className='grid place-content-center'>
-                    <img src={cartsmall} alt='' className='cursor-pointer ' />
-                  </a>
-                  <h1 className='text-xs grid place-content-center rounded-full pt-[1px]   w-[16px] h-[15px] bg-[#cbc0fa] mb-[-5px]'>
+                >
+                  Home
+                </li>
+                <li className=' cursor-pointer'>Shop</li>
+                <li className=' cursor-pointer'>About</li>
+                <li className=' cursor-pointer'>Contact</li>
+              </ul>
+            </div>
+            <div className=' grid center-end mr-10 '>
+              <ul className='flex h-12 gap-10 place-items-center'>
+                <li>
+                  <img
+                    src={handleIcon()}
+                    alt=''
+                    className='cursor-pointer h-[20px]'
+                    onClick={() => {
+                      if (isloggedIn) {
+                        setIsAccountClicked(!isAccountClicked);
+                      } else {
+                        window.location.replace("/signupOrLogin");
+                      }
+                    }}
+                  />
+                </li>
+                <li>
+                  <img
+                    src={searcho}
+                    alt=''
+                    className='cursor-pointer h-[22px]'
+                    onClick={() => setis(!is)}
+                  />
+                </li>
+
+                <li className=' grid cart h-12 place-items-center'>
+                  <img
+                    src={cart}
+                    alt=''
+                    onClick={() => {
+                      if (isloggedIn) {
+                        window.location.replace("/cart");
+                      } else {
+                        window.location.replace("/signupOrLogin");
+                      }
+                    }}
+                    className='cursor-pointer h-[20px] '
+                  />
+                  <h1
+                    className={
+                      items
+                        ? "text-xs grid place-content-center rounded-full pt-[1px]   w-[16px] h-[15px] bg-[#cbc0fa] mb-[-5px]"
+                        : "hidden"
+                    }
+                  >
                     {items}
                   </h1>
-                </div>
-              </div>
+                </li>
+              </ul>
             </div>
-          ) : (
-            <div className='signup flex justify-evenly items-center w-[16vw] mr-10 ml-20 '>
-              <a href='/signupOrLogin'>
-                <button className='button-23 my-7 hover:bg-[#101011] hover:text-white '>
-                  {" "}
-                  Sign-in
-                </button>
-              </a>
-            </div>
-          )}
+          </div>
         </div>
 
-        <div className=' lower-nav relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-black font-semibold text-md font-serif '>
-          {uniqueCategories
+        <div className=' lower-nav relative z-2 h-[6vh] w-full flex justify-evenly items-center px-[9%] text-white bg-black font-semibold text-md montserrat '>
+          {uniqueCategories.length > 0
             ? uniqueCategories.map((item) => {
-                // let name = item.toLowerCase().charAt(0).toUpperCase() + item.toLowerCase().slice(1)
-
                 let name1 = item.toLowerCase().split(" ");
                 let name2 = name1.map((item1) => {
                   if (item1.length > 1) {
@@ -159,11 +174,22 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
                   </a>
                 );
               })
-            : null}
+            : categ.map((item) => {
+                return (
+                  <div className='bg-black '>
+                    <Skeleton
+                      sx={{ bgcolor: "grey.800" }}
+                      variant='rounded'
+                      width={160}
+                      height={15}
+                    />
+                  </div>
+                );
+              })}
         </div>
 
         {isAccountClicked ? (
-          <div className='grid absolute  top-[7%] left-[88.7%] '>
+          <div className='grid absolute  top-[7%] left-[79.7%] '>
             <div className=''>
               <div className='absolute grid  w-[160px] top-0 left-1/2 transform -translate-x-1/2 bg-white p-4 rounded-lg shadow-md shadow-black   z-[2]'>
                 <a href='/user'>
@@ -191,6 +217,17 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
           </div>
         ) : null}
       </nav>
+
+      {is ? (
+        <Search
+          setis={setis}
+          is={is}
+          search={search}
+          setsearch={setsearch}
+          mostSearched={mostSearchedProducts}
+          searchData={searchData}
+        />
+      ) : null}
     </div>
   );
 }

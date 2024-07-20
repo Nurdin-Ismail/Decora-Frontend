@@ -12,7 +12,7 @@ function Modal({ setis, data, is, setadd, user, cart, patched, setpatched }) {
       let incart;
 
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id == data[0].id) {
+        if (cart[i].product.id == data[0].id) {
           incart = cart[i];
 
           console.log(incart);

@@ -110,24 +110,26 @@ function ProductPage({
       let incart;
 
       for (let i = 0; i < cart.length; i++) {
-        if (cart[i].id == product.id) {
+        console.log(cart[i].product.id, product.id);
+
+        if (cart[i].product.id == product.id) {
           incart = cart[i];
         }
       }
-
+      console.log(incart);
       if (incart) {
-        // console.log(incart.quantity[1]);
         return (
           <AddOrUpdate
-            product={incart}
+            product={incart.product}
             partofcart={true}
-            quantity={incart.quantity[1]}
+            quantity={incart.quantity}
             user={user}
             setadd={setadd}
             counter={counter}
             setcounter={setcounter}
             setpatched={setpatched}
             patched={patched}
+            id={incart.id}
           />
         );
       } else {
@@ -291,9 +293,11 @@ function ProductPage({
       </div>
 
       <div className=' similar-products mb-20 mt-40 overflow-x-hidden'>
-        <h1 className='ml-[255px] mb-6 text-2xl font-semibold'>
-          Related Products
-        </h1>
+        {similar_products ? (
+          <h1 className='ml-[255px] mb-6 text-2xl font-semibold'>
+            Related Products
+          </h1>
+        ) : null}
 
         {similar_products ? (
           <div className=' grid grid-cols-[255px_1320px_255px] '>

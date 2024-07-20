@@ -4,6 +4,7 @@ import "react-multi-carousel/lib/styles.css";
 import Card from "./Card";
 import "animate.css";
 import { action } from "@storybook/addon-actions";
+import Skeleton from "@mui/material/Skeleton";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
@@ -73,7 +74,7 @@ function Popular(props) {
 
   popular_products.pop();
 
-  console.log(popular_products.length);
+  // console.log(popular_products.length);
   if (popular_products.length > 0) {
     props.setcards(popular_products.length);
   }
@@ -83,23 +84,37 @@ function Popular(props) {
       className='flex best'
       style={{ transform: `translate(-${props.slide * 25.65}%)` }}
     >
-      {popular_products.map((item) => {
-        return (
-          <div className=' ml-[20px]'>
-            <Card
-              key={item.id}
-              img={"https://decora-backend.onrender.com/" + item.images[1]}
-              name={item.name}
-              price={item.price}
-              id={item.id}
-              setcardinfo={props.setcardinfo}
-              handleis={props.handleis}
-              onClickItem={action("click")}
-              is={props.is}
-            />
-          </div>
-        );
-      })}
+      {popular_products.length > 0 ? (
+        popular_products.map((item) => {
+          return (
+            <div className=' ml-[20px]'>
+              <Card
+                key={item.id}
+                img={"https://decora-backend.onrender.com/" + item.images[1]}
+                name={item.name}
+                price={item.price}
+                id={item.id}
+                setcardinfo={props.setcardinfo}
+                handleis={props.handleis}
+                onClickItem={action("click")}
+                is={props.is}
+              />
+            </div>
+          );
+        })
+      ) : (
+        <div className='bg-white flex gap-5'>
+          {[...Array(4)].map((item) => {
+            return (
+              <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                <Skeleton variant='rounded' width={317} height={317} />
+                <Skeleton variant='caption' width={180} />
+                <Skeleton variant='caption' width={100} />
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }

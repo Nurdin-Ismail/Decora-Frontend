@@ -11,6 +11,7 @@ import arrow from "../arrow1.png";
 import Card from "./Card";
 
 import Slider from "@mui/material/Slider";
+import Skeleton from "@mui/material/Skeleton";
 
 import AOS from "aos";
 import "aos/dist/aos.css"; // You can also use <link> for styles
@@ -320,31 +321,39 @@ function Store(props) {
 
           {/* {filtero && icon ? <Filter filtero={filtero} setfilter={setfilter} x={x} filter={filter} seticon={seticon} display={display}/> : null} */}
 
-          <div className=' grid grid-cols-4 gap-[10px]'>
-            {display ? (
-              display.map((item) => {
-                return (
-                  <div className=' '>
-                    <Card
-                      key={item.id}
-                      img={
-                        "https://decora-backend.onrender.com" + item.images[1]
-                      }
-                      name={item.name}
-                      price={item.price.toLocaleString()}
-                      id={item.id}
-                      setcardinfo={props.setcardinfo}
-                      handleis={props.handleis}
-                      onClickItem={action("click")}
-                      is={props.is}
-                      type={filtero ? null : "large"}
-                    />
-                  </div>
-                );
-              })
-            ) : (
-              <h1>Kanu</h1>
-            )}
+          <div className=' grid grid-cols-4 gap-[10px] mb-10'>
+            {display
+              ? display.map((item) => {
+                  return (
+                    <div className=' '>
+                      <Card
+                        key={item.id}
+                        img={
+                          "https://decora-backend.onrender.com" + item.images[1]
+                        }
+                        name={item.name}
+                        price={item.price.toLocaleString()}
+                        id={item.id}
+                        setcardinfo={props.setcardinfo}
+                        handleis={props.handleis}
+                        onClickItem={action("click")}
+                        is={props.is}
+                        type={filtero ? null : "large"}
+                      />
+                    </div>
+                  );
+                })
+              : [...Array(8)].map((item) => {
+                  return (
+                    <div className='bg-white grid '>
+                      <div className='bg-white rounded-sm   flex flex-col gap-[5px] mb-6'>
+                        <Skeleton variant='rounded' width={388} height={400} />
+                        <Skeleton variant='caption' width={180} />
+                        <Skeleton variant='caption' width={100} />
+                      </div>
+                    </div>
+                  );
+                })}
           </div>
         </div>
 

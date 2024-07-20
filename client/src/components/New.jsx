@@ -3,6 +3,8 @@ import Card from "./Card";
 import "animate.css";
 import { action } from "@storybook/addon-actions";
 
+import Skeleton from "@mui/material/Skeleton";
+
 export default function (props) {
   const [newest, setnewest] = useState();
 
@@ -46,7 +48,22 @@ export default function (props) {
             );
           })
         ) : (
-          <h1>Loading ...</h1>
+          <div className='bg-white flex gap-5'>
+            {[...Array(4)].map((item) => {
+              return (
+                <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                  <Skeleton
+                    animation='wave'
+                    variant='rounded'
+                    width={317}
+                    height={317}
+                  />
+                  <Skeleton animation='wave' variant='caption' width={180} />
+                  <Skeleton animation='wave' variant='caption' width={100} />
+                </div>
+              );
+            })}
+          </div>
         )}
       </div>
     </div>

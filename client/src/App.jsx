@@ -33,8 +33,8 @@ function App() {
     setorder(JSON.parse(localStorage.getItem("order")));
   }, []);
 
-  console.log(userid);
-  console.log(user);
+  // console.log(userid);
+  // console.log(user);
 
   useEffect(() => {
     fetch("https://decora-backend.onrender.com/products")
@@ -53,14 +53,14 @@ function App() {
         });
     }
   }, [updated, userid]);
-  console.log(cart);
+  // console.log(cart);
 
   // console.log(user);
 
   function handleis(is) {
     setis(!is);
   }
-  console.log(order);
+  // console.log(order);
 
   return (
     <div className=' overflow-x-clip'>

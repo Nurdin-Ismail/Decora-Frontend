@@ -7,6 +7,7 @@ import shopthedecor from "../shopthedecor.jpeg";
 import { useEffect } from "react";
 import forward from "../forward.png";
 import tag from "../tag4.png";
+import Skeleton from "@mui/material/Skeleton";
 
 export default function LookBook({ setcardinfo, handleis, is }) {
   const [current, setcurrent] = useState("Bathroom Accessories");
@@ -15,10 +16,10 @@ export default function LookBook({ setcardinfo, handleis, is }) {
   const [currentslidecandle, setcurrentslidecandle] = useState(0);
   const [cards, setcards] = useState();
 
-  console.log(current);
-  const [bath, setBath] = useState();
-  const [decor, setDecor] = useState();
-  const [candle, setCandle] = useState();
+  // console.log(current);
+  const [bath, setBath] = useState([]);
+  const [decor, setDecor] = useState([]);
+  const [candle, setCandle] = useState([]);
 
   const bathEndpoints = [
     "https://decora-backend.onrender.com/product/1",
@@ -62,7 +63,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
     fetchAndSetData(candleEndpoints, setCandle);
   }, []);
 
-  console.log(bath, decor, candle);
+  // console.log(bath, decor, candle);
 
   //Handles the pressing of the SHOP THE LOOK buttons and assigns values to specific states that deal with this component
 
@@ -97,7 +98,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
           setcurrentslidebath(currentslidebath - 1);
         }
       } else if (direction == "right") {
-        console.log(cards);
+        // console.log(cards);
 
         if (currentslidebath != cards - 1) {
           setcurrentslidebath(currentslidebath + 1);
@@ -373,7 +374,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                     transform: `translate(-${currentslidebath * 17.2}%)`,
                   }}
                 >
-                  {bath
+                  {bath.length != 0
                     ? bath.map((item) => {
                         return (
                           <div
@@ -408,7 +409,19 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           </div>
                         );
                       })
-                    : null}
+                    : [...Array(5)].map((item) => {
+                        return (
+                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                            <Skeleton
+                              variant='rounded'
+                              width={200}
+                              height={200}
+                            />
+                            <Skeleton variant='caption' width={180} />
+                            <Skeleton variant='caption' width={100} />
+                          </div>
+                        );
+                      })}
                 </div>
               </div>
             </div>
@@ -444,7 +457,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                     transform: `translate(-${currentslidedecor * 26}%)`,
                   }}
                 >
-                  {decor
+                  {decor.length != 0
                     ? decor.map((item) => {
                         return (
                           <div
@@ -479,7 +492,19 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           </div>
                         );
                       })
-                    : null}
+                    : [...Array(4)].map((item) => {
+                        return (
+                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                            <Skeleton
+                              variant='rounded'
+                              width={200}
+                              height={200}
+                            />
+                            <Skeleton variant='caption' width={180} />
+                            <Skeleton variant='caption' width={100} />
+                          </div>
+                        );
+                      })}
                 </div>
               </div>
             </div>
@@ -505,7 +530,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                     transform: `translate(-${currentslidecandle * 17.2}%)`,
                   }}
                 >
-                  {candle
+                  {candle.length != 0
                     ? candle.map((item) => {
                         return (
                           <div
@@ -540,7 +565,19 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           </div>
                         );
                       })
-                    : null}
+                    : [...Array(3)].map((item) => {
+                        return (
+                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                            <Skeleton
+                              variant='rounded'
+                              width={200}
+                              height={200}
+                            />
+                            <Skeleton variant='caption' width={180} />
+                            <Skeleton variant='caption' width={100} />
+                          </div>
+                        );
+                      })}
                 </div>
               </div>
             </div>

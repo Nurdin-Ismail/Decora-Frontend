@@ -31,7 +31,8 @@ export default function CartCard({
   }, [del_product]);
 
   useEffect(() => {
-    if (counter && counter != item.quantity[1]) {
+    console.log(item);
+    if (counter && counter != item.quantity) {
       let newCart = cart.map((item) => {
         if (cart.indexOf(item) == index) {
           item.quantity = counter;
@@ -47,7 +48,7 @@ export default function CartCard({
       });
 
       setcart(newCart);
-    } else if (counter && counter == item.quantity[1]) {
+    } else if (counter && counter == item.quantity) {
       let newCart = cart.map((item) => {
         if (cart.indexOf(item) == index) {
           item.quantity = counter;
@@ -116,7 +117,7 @@ export default function CartCard({
       </div>
       <div className=' cart-product-price'>
         {item.product.price ? (
-          <h1>Ksh {item.product.price.toLocaleString()}</h1>
+          <h1>Ksh {(item.product.price * item.quantity).toLocaleString()}</h1>
         ) : null}
       </div>
 

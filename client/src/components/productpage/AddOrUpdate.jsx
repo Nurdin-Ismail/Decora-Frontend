@@ -10,16 +10,9 @@ export default function AddOrUpdate({
   setcounter,
   setpatched,
   patched,
+  id,
 }) {
   const [updatecounter, setupdatecounter] = useState(quantity);
-
-  //  console.log(quantity);
-  // useEffect(() => {
-  //   if(partofcart ===true && updatecounter === undefined){
-  //       setupdatecounter(product.quantity[1])
-  //   }
-
-  // }, [updatecounter])
 
   useEffect(() => {
     setupdatecounter(quantity);
@@ -104,7 +97,7 @@ export default function AddOrUpdate({
   function handlePatch() {
     if (product) {
       if (updatecounter != quantity) {
-        const url = `https://decora-backend.onrender.com/cart/${product.cart_id}`;
+        const url = `https://decora-backend.onrender.com/cart/${id}`;
 
         const PatchData = async (url) => {
           console.log("has been called");

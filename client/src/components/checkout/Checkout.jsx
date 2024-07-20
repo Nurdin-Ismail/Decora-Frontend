@@ -3,7 +3,7 @@ import Alert from "@mui/material/Alert";
 import axios from "axios";
 
 export default function Checkout({ cart, id, order, setorder }) {
-  const [number, setnumber] = useState();
+  const [number2, setnumber] = useState();
 
   const [amount, setAmount] = useState(1);
   const [message, setMessage] = useState("");
@@ -11,14 +11,19 @@ export default function Checkout({ cart, id, order, setorder }) {
   const handlePayment = async (e) => {
     e.preventDefault();
 
+    let number = "254" + `${number2}`;
+    // console.log(number);
     try {
-      const response = await fetch("http://127.0.0.1:5000/mpesa", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ number, amount }),
-      });
+      const response = await fetch(
+        "https://decora-backend.onrender.com/mpesa",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ number, amount }),
+        }
+      );
 
       if (response.ok) {
         const data = await response.json();
@@ -70,18 +75,25 @@ export default function Checkout({ cart, id, order, setorder }) {
       </div>
       <div className='grid place-self-center'>
         <form onSubmit={handlePayment} className='grid gap-2'>
-          <input
-            type='tel'
-            value={number}
-            onChange={(e) => setnumber(e.target.value)}
-            className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
-          />
-          <button className='button-23' type='submit'>
-            Submit
-          </button>
+          <div className=' flex gap-2'>
+            <h1 className='grid place-self-center'>+254</h1>
+            <input
+              type='tel'
+              value={number2}
+              onChange={(e) => setnumber(e.target.value)}
+              className='h-[4vh] border-[#d3d3d3] border-[1px] focus:outline-dotted focus:border-none placeholder:text-sm pl-2 placeholder:italic placeholder:font-serif'
+            />
+          </div>
 
-          {message ? <Alert severity='info'>{message}</Alert> : null}
+          <div className='grid place-self-center'>
+            <button className='button-23 ' type='submit'>
+              Submit
+            </button>
+          </div>
         </form>
+      </div>
+      <div className='grid place-content-center'>
+        {message ? <Alert severity='info'>{message}</Alert> : null}
       </div>
     </div>
   );

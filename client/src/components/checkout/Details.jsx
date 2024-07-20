@@ -32,7 +32,7 @@ export default function Details({ cart, id, order, setorder }) {
   function handleTotal() {
     if (cart) {
       let total = cart.map((item) => {
-        return item.quantity[1] * item.price;
+        return item.quantity * item.product.price;
       });
       // console.log(total)
 
@@ -44,7 +44,7 @@ export default function Details({ cart, id, order, setorder }) {
 
       // console.log(sum);
 
-      return `Ksh ${sum.toLocaleString()}`;
+      return `KSH ${sum.toLocaleString()}`;
     }
   }
 
@@ -139,7 +139,7 @@ export default function Details({ cart, id, order, setorder }) {
           .catch((e) => console.log(e));
       }
     } else {
-      // window.location.replace('/')
+      window.location.replace("/checkout");
       console.log("kanu");
     }
 
@@ -148,10 +148,6 @@ export default function Details({ cart, id, order, setorder }) {
 
   return (
     <div className='grid '>
-      <div className='h-10'>
-        <LinearProgress variant='determinate' value={progress} />{" "}
-      </div>
-
       <form
         className='grid place-self-center grid-cols-[70%_30%] w-[78%] my-[20vh]'
         onSubmit={(e) => handleSubmit(e)}
@@ -306,10 +302,10 @@ export default function Details({ cart, id, order, setorder }) {
                     return (
                       <div className='grid grid-flow-col h-[8vh] border-b-[1px] border-[#a5a2a2]'>
                         <h1 className='  grid center-start pr-24'>
-                          {item.name} X{item.quantity[1]}
+                          {item.product.name} X {item.quantity}
                         </h1>
                         <h1 className='grid center-end'>
-                          KSH{item.price * item.quantity[1]}
+                          Ksh {item.product.price * item.quantity}
                         </h1>
                       </div>
                     );
@@ -326,71 +322,21 @@ export default function Details({ cart, id, order, setorder }) {
                 <h1>{handleTotal()}</h1>
               </div>
             </div>
-            <div className='flex flex-col mt-10'>
-              <div>
-                <div className=' flex gap-3'>
-                  <div class='checkbox-wrapper-12'>
-                    <div class='cbx'>
-                      <input
-                        id='cbx-12'
-                        type='checkbox'
-                        checked={Mpesa}
-                        onChange={(e) => {
-                          setcard(Mpesa);
-
-                          setmpesa(!Mpesa);
-                        }}
-                      />
-                      <label for='cbx-12'></label>
-                      <svg
-                        width='15'
-                        height='14'
-                        viewbox='0 0 15 14'
-                        fill='none'
-                      >
-                        <path d='M2 8.36364L6.23077 12L13 2'></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <label htmlFor='cbx-12'>MPESA PAYEMENT</label>
+            <div className='flex flex-col mt-10 '>
+              <div className='ml-10'>
+                <div className='grid'>
+                  <h1 className='grid place-self-center font-bold'>
+                    MPESA PAYEMENT
+                  </h1>
+                  <img src={mpesa} alt='' className='grid place-self-center' />
                 </div>
-                <img src={mpesa} alt='' className='ml-8' />
-              </div>
 
-              <div>
-                <div className=' flex gap-3'>
-                  <div class='checkbox-wrapper-12'>
-                    <div class='cbx'>
-                      <input
-                        id='cbx-12'
-                        type='checkbox'
-                        checked={card}
-                        onChange={(e) => {
-                          setmpesa(!Mpesa);
-                          setcard(!card);
-                        }}
-                      />
-                      <label for='cbx-12'></label>
-                      <svg
-                        width='15'
-                        height='14'
-                        viewbox='0 0 15 14'
-                        fill='none'
-                      >
-                        <path d='M2 8.36364L6.23077 12L13 2'></path>
-                      </svg>
-                    </div>
-                  </div>
-                  <label htmlFor='cbx-12'>CARD PAYEMENT</label>
-                </div>
-                <img src={cardpayment} alt='' className='ml-8' />
+                <p>
+                  Your personal data will be used to process your order, support
+                  your experience throughout this website, and for other
+                  purposes described in our privacy policy.
+                </p>
               </div>
-
-              <p>
-                Your personal data will be used to process your order, support
-                your experience throughout this website, and for other purposes
-                described in our privacy policy.
-              </p>
 
               <button className='button-23 my-10 ml-[10%] hover:bg-[#341952] hover:text-white'>
                 Place Order
