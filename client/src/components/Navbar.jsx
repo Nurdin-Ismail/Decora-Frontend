@@ -92,7 +92,6 @@ function Navbar({ products, quantity, setcurrent, isloggedIn }) {
                 >
                   Home
                 </li>
-                <li className=' cursor-pointer'>Shop</li>
                 <li className=' cursor-pointer'>About</li>
                 <li className=' cursor-pointer'>Contact</li>
               </ul>

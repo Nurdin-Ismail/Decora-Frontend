@@ -26,19 +26,19 @@ export default function LookBook({ setcardinfo, handleis, is }) {
     "https://decora-backend.onrender.com/product/2",
     "https://decora-backend.onrender.com/product/3",
     "https://decora-backend.onrender.com/product/4",
-    "https://decora-backend.onrender.com/product/6",
-    "https://decora-backend.onrender.com/product/7",
+    "https://decora-backend.onrender.com/product/8",
+    "https://decora-backend.onrender.com/product/10",
   ];
   const decorEndpoints = [
-    "https://decora-backend.onrender.com/product/23",
-    "https://decora-backend.onrender.com/product/20",
-    "https://decora-backend.onrender.com/product/17",
-    "https://decora-backend.onrender.com/product/49",
+    "https://decora-backend.onrender.com/product/53",
+    "https://decora-backend.onrender.com/product/24",
+    "https://decora-backend.onrender.com/product/21",
+    "https://decora-backend.onrender.com/product/28",
   ];
   const candleEndpoints = [
-    "https://decora-backend.onrender.com/product/48",
-    "https://decora-backend.onrender.com/product/49",
-    "https://decora-backend.onrender.com/product/22",
+    "https://decora-backend.onrender.com/product/26",
+    "https://decora-backend.onrender.com/product/53",
+    "https://decora-backend.onrender.com/product/52",
   ];
   const [showcase, setshowcase] = useState(false);
   const [index, setindex] = useState();
@@ -237,8 +237,8 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 alt=''
                 className='pulse-decor  dark-grey-ceramic'
                 onMouseEnter={() => {
-                  setcurrentslidedecor(0);
-                  setindex(0);
+                  setcurrentslidedecor(3);
+                  setindex(3);
                   setshowcase(true);
                 }}
                 onMouseLeave={() => {
@@ -280,8 +280,8 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 alt=''
                 className='pulse-decor lorin-medium'
                 onMouseEnter={() => {
-                  setcurrentslidedecor(3);
-                  setindex(3);
+                  setcurrentslidedecor(0);
+                  setindex(0);
                   setshowcase(true);
                 }}
                 onMouseLeave={() => {
@@ -302,8 +302,8 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 alt=''
                 className='pulse  lorin-large'
                 onMouseEnter={() => {
-                  setcurrentslidebath(0);
-                  setindex(0);
+                  setcurrentslidebath(2);
+                  setindex(2);
                   setshowcase(true);
                 }}
                 onMouseLeave={() => {
@@ -331,8 +331,8 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 alt=''
                 className='pulse lorin-small'
                 onMouseEnter={() => {
-                  setcurrentslidebath(2);
-                  setindex(2);
+                  setcurrentslidebath(0);
+                  setindex(0);
                   setshowcase(true);
                 }}
                 onMouseLeave={() => {
