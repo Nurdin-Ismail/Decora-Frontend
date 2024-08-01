@@ -57,7 +57,7 @@ export default function AddOrUpdate({
   function handlePost(url) {
     console.log(url);
     if (product) {
-      const url = "https://decora-backend.onrender.com/carts";
+      const url = "http://127.0.0.1:5000/carts";
 
       const PostData = async (url) => {
         console.log("has been called");
@@ -97,7 +97,7 @@ export default function AddOrUpdate({
   function handlePatch() {
     if (product) {
       if (updatecounter != quantity) {
-        const url = `https://decora-backend.onrender.com/cart/${id}`;
+        const url = `http://127.0.0.1:5000/cart/${id}`;
 
         const PatchData = async (url) => {
           console.log("has been called");
@@ -161,7 +161,7 @@ export default function AddOrUpdate({
           <button
             className='grid h-[50px] w-[250px] bg-[#554586] text-white place-content-center text-xl'
             onClick={() => {
-              handlePost("https://decora-backend.onrender.com/carts");
+              handlePost("http://127.0.0.1:5000/carts");
             }}
           >
             Add To Cart

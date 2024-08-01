@@ -18,7 +18,7 @@ export default function CartCard({
     console.log(`${id} has been clicked`);
 
     if (del_product) {
-      fetch(`https://decora-backend.onrender.com/cart/${id}`, {
+      fetch(`http://127.0.0.1:5000/cart/${id}`, {
         method: "DELETE",
       })
         .then((r) => r.json())
@@ -84,14 +84,14 @@ export default function CartCard({
     }
   }
 
-  console.log(item.product.name);
+  // console.log(item.product.name);
 
   return (
     <div className=' h-[160px]  grid  grid-cols-[60%_20%_10%_10%] border-b-[1px]'>
       <div className=' grid grid-cols-[30%_70%]'>
         <div className='place-self-center'>
           <img
-            src={"https://decora-backend.onrender.com" + item.product.images[1]}
+            src={"http://127.0.0.1:5000" + item.product.images[1]}
             alt=''
             className='h-[130px] '
           />

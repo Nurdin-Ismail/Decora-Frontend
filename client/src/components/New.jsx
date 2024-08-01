@@ -35,7 +35,7 @@ export default function (props) {
               <div className=' ml-[29.3px]'>
                 <Card
                   key={item.id}
-                  img={"https://decora-backend.onrender.com" + item.images[1]}
+                  img={"http://127.0.0.1:5000" + item.images[1]}
                   name={item.name}
                   price={item.price}
                   id={item.id}

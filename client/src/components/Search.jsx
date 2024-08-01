@@ -65,10 +65,7 @@ function Search({ is, setis, search, setsearch, mostSearched, searchData }) {
                         }
                       >
                         <img
-                          src={
-                            "https://decora-backend.onrender.com/" +
-                            item.images[1]
-                          }
+                          src={"http://127.0.0.1:5000/" + item.images[1]}
                           alt=''
                           className='h-[90px]'
                         />
@@ -194,10 +191,7 @@ function Search({ is, setis, search, setsearch, mostSearched, searchData }) {
                         }
                       >
                         <img
-                          src={
-                            "https://decora-backend.onrender.com/" +
-                            item.images[0]
-                          }
+                          src={"http://127.0.0.1:5000/" + item.images[0]}
                           alt=''
                           className='h-[150px]'
                         />

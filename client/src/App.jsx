@@ -37,7 +37,7 @@ function App() {
   // console.log(user);
 
   useEffect(() => {
-    fetch("https://decora-backend.onrender.com/products")
+    fetch("http://127.0.0.1:5000/products")
       .then((res) => res.json())
       .then((data) => setproducts(data));
   }, []);
@@ -45,7 +45,7 @@ function App() {
   useEffect(() => {
     if (userid) {
       console.log(userid);
-      fetch(`https://decora-backend.onrender.com/user/${userid}`)
+      fetch(`http://127.0.0.1:5000/user/${userid}`)
         .then((res) => res.json())
         .then((data) => {
           setcart(data.cart);

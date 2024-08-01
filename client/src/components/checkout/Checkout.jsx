@@ -14,16 +14,13 @@ export default function Checkout({ cart, id, order, setorder }) {
     let number = "254" + `${number2}`;
     // console.log(number);
     try {
-      const response = await fetch(
-        "https://decora-backend.onrender.com/mpesa",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ number, amount }),
-        }
-      );
+      const response = await fetch("http://127.0.0.1:5000/mpesa", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ number, amount }),
+      });
 
       if (response.ok) {
         const data = await response.json();

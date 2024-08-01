@@ -32,7 +32,7 @@ function CartModal({ setadd, count, product }) {
         <div className='  mx-2  flex justify-center items-center'>
           <div className='image mr-4'>
             <img
-              src={"https://decora-backend.onrender.com" + product.images[0]}
+              src={"http://127.0.0.1:5000" + product.images[0]}
               alt=''
               className='min-h-[7vh] max-h-[7vh] min-w-[4vw] max-w-[4vw]'
             />

@@ -118,7 +118,7 @@ export default function Details({ cart, id, order, setorder }) {
 
     if (order == "" && undefined) {
       if (orderOverview) {
-        fetch("https://decora-backend.onrender.com/orders", {
+        fetch("http://127.0.0.1:5000/orders", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

@@ -19,7 +19,7 @@ export default function SignupOrLogin({
   const [password, setpassword] = useState();
 
   useEffect(() => {
-    fetch("https://decora-backend.onrender.com//users")
+    fetch("http://127.0.0.1:5000//users")
       .then((res) => res.json())
       .then((data) => setusers(data));
   }, []);

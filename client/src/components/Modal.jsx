@@ -37,7 +37,7 @@ function Modal({ setis, data, is, setadd, user, cart, patched, setpatched }) {
             class='button-60'
             role='button'
             onClick={() => {
-              handlePost("https://decora-backend.onrender.com/carts");
+              handlePost("http://127.0.0.1:5000/carts");
               setis(false);
             }}
           >
@@ -51,7 +51,7 @@ function Modal({ setis, data, is, setadd, user, cart, patched, setpatched }) {
   function handlePost(url) {
     console.log(url);
     if (data) {
-      const url = "https://decora-backend.onrender.com/carts";
+      const url = "http://127.0.0.1:5000/carts";
 
       const PostData = async (url) => {
         console.log("has been called");
@@ -124,7 +124,7 @@ function Modal({ setis, data, is, setadd, user, cart, patched, setpatched }) {
               return (
                 <img
                   key={data[0].images.indexOf(item)}
-                  src={"https://decora-backend.onrender.com" + item}
+                  src={"http://127.0.0.1:5000" + item}
                   alt=''
                   className=' h-[35vh] mx-1 max-w-[20vw]'
                 />

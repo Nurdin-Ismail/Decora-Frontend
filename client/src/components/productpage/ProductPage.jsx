@@ -70,7 +70,7 @@ function ProductPage({
 
   //fetch product
   useEffect(() => {
-    fetch(`https://decora-backend.onrender.com/product/${params.id}`)
+    fetch(`http://127.0.0.1:5000/product/${params.id}`)
       .then((res) => res.json())
       .then((data) => {
         setproduct(data);
@@ -204,7 +204,7 @@ function ProductPage({
                       return (
                         <img
                           key={product.images.indexOf(pic)}
-                          src={"https://decora-backend.onrender.com" + pic}
+                          src={"http://127.0.0.1:5000" + pic}
                           alt=''
                           className=' h-[700px] min-w-[700px]'
                         />
@@ -219,7 +219,7 @@ function ProductPage({
                       return (
                         <img
                           key={product.images.indexOf(pic)}
-                          src={"https://decora-backend.onrender.com" + pic}
+                          src={"http://127.0.0.1:5000" + pic}
                           alt=''
                           className=' h-[100px] min-w-[100px] cursor-pointer'
                           onClick={() => setslides(product.images.indexOf(pic))}
@@ -237,7 +237,7 @@ function ProductPage({
                       return (
                         <img
                           key={product.images.indexOf(pic)}
-                          src={"https://decora-backend.onrender.com" + pic}
+                          src={"http://127.0.0.1:5000" + pic}
                           alt=''
                           className=' h-[600px] min-w-[500px]'
                         />
@@ -314,9 +314,7 @@ function ProductPage({
                     <div className=' '>
                       <Card
                         key={item.id}
-                        img={
-                          "https://decora-backend.onrender.com" + item.images[1]
-                        }
+                        img={"http://127.0.0.1:5000" + item.images[1]}
                         name={item.name}
                         price={item.price}
                         id={item.id}
@@ -441,7 +439,7 @@ export default ProductPage;
 //   <div ref={kanu} className='  flex mb-[2vh] pt-20 ml-[15vw] '>
 //   <div className='flex flex-col' >
 //     {product ? product.images.map((item) => {
-//     return <img key={product.images.indexOf(item)} src={"https://decora-backend.onrender.com" + item} alt="" loading="lazy" className='  mt-1 mb-2   h-[700px] w-[600px] ' />
+//     return <img key={product.images.indexOf(item)} src={"http://127.0.0.1:5000" + item} alt="" loading="lazy" className='  mt-1 mb-2   h-[700px] w-[600px] ' />
 
 //   }) : null}
 
@@ -515,7 +513,7 @@ export default ProductPage;
 //       {similar_products? similar_products.map((item) => {
 //           return (<Card
 //               key={item.id}
-//               img= {'https://decora-backend.onrender.com' + item.images[0] }
+//               img= {'http://127.0.0.1:5000' + item.images[0] }
 //               name={item.name}
 //               price={item.price}
 //               id={item.id}

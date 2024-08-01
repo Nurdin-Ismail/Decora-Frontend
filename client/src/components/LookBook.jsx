@@ -22,23 +22,23 @@ export default function LookBook({ setcardinfo, handleis, is }) {
   const [candle, setCandle] = useState([]);
 
   const bathEndpoints = [
-    "https://decora-backend.onrender.com/product/1",
-    "https://decora-backend.onrender.com/product/2",
-    "https://decora-backend.onrender.com/product/3",
-    "https://decora-backend.onrender.com/product/4",
-    "https://decora-backend.onrender.com/product/8",
-    "https://decora-backend.onrender.com/product/10",
+    "http://127.0.0.1:5000/product/1",
+    "http://127.0.0.1:5000/product/2",
+    "http://127.0.0.1:5000/product/3",
+    "http://127.0.0.1:5000/product/4",
+    "http://127.0.0.1:5000/product/8",
+    "http://127.0.0.1:5000/product/10",
   ];
   const decorEndpoints = [
-    "https://decora-backend.onrender.com/product/53",
-    "https://decora-backend.onrender.com/product/24",
-    "https://decora-backend.onrender.com/product/21",
-    "https://decora-backend.onrender.com/product/28",
+    "http://127.0.0.1:5000/product/53",
+    "http://127.0.0.1:5000/product/24",
+    "http://127.0.0.1:5000/product/21",
+    "http://127.0.0.1:5000/product/28",
   ];
   const candleEndpoints = [
-    "https://decora-backend.onrender.com/product/26",
-    "https://decora-backend.onrender.com/product/53",
-    "https://decora-backend.onrender.com/product/52",
+    "http://127.0.0.1:5000/product/26",
+    "http://127.0.0.1:5000/product/53",
+    "http://127.0.0.1:5000/product/52",
   ];
   const [showcase, setshowcase] = useState(false);
   const [index, setindex] = useState();
@@ -386,10 +386,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           >
                             <div className=''>
                               <img
-                                src={
-                                  "https://decora-backend.onrender.com" +
-                                  item.images[1]
-                                }
+                                src={"http://127.0.0.1:5000" + item.images[1]}
                                 alt=''
                                 className={
                                   showcase && index == bath.indexOf(item)
@@ -469,10 +466,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           >
                             <div className=''>
                               <img
-                                src={
-                                  "https://decora-backend.onrender.com" +
-                                  item.images[2]
-                                }
+                                src={"http://127.0.0.1:5000" + item.images[2]}
                                 alt=''
                                 className={
                                   showcase && index == decor.indexOf(item)
@@ -542,10 +536,7 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                           >
                             <div className=''>
                               <img
-                                src={
-                                  "https://decora-backend.onrender.com" +
-                                  item.images[1]
-                                }
+                                src={"http://127.0.0.1:5000" + item.images[1]}
                                 alt=''
                                 className={
                                   showcase && index == candle.indexOf(item)

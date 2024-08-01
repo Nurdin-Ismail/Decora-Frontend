@@ -19,7 +19,7 @@ export default function Cart({ user, cart, setcart }) {
 
   useEffect(() => {
     if (user) {
-      fetch(`https://decora-backend.onrender.com/user/${user}`)
+      fetch(`http://127.0.0.1:5000/user/${user}`)
         .then((res) => res.json())
         .then((data) => {
           setcart(data.cart);
@@ -34,9 +34,7 @@ export default function Cart({ user, cart, setcart }) {
       changed.filter((value, index) => changed.indexOf(value) === index)
     );
     console.log(changed);
-    let endpoints = changed.map(
-      (item) => `https://decora-backend.onrender.com/cart/${item}`
-    );
+    let endpoints = changed.map((item) => `http://127.0.0.1:5000/cart/${item}`);
 
     console.log(endpoints);
 
@@ -89,7 +87,7 @@ export default function Cart({ user, cart, setcart }) {
   function deleteCart() {
     if (cart) {
       let endpoints = cart.map(
-        (item) => `https://decora-backend.onrender.com/cart/${item.id}`
+        (item) => `http://127.0.0.1:5000/cart/${item.id}`
       );
       // console.log(endpoints);
       const DeleteData = async (endpoints) => {
@@ -119,6 +117,7 @@ export default function Cart({ user, cart, setcart }) {
 
   function handleCartProducts() {
     if (display) {
+      console.log(display);
       let listo = display.map((item) => {
         return (
           <div key={item.id}>

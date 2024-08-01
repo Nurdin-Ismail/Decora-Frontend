@@ -15,7 +15,7 @@ function Popular(props) {
   const [carts, setcarts] = useState();
 
   useEffect(() => {
-    fetch("https://decora-backend.onrender.com/carts")
+    fetch("http://127.0.0.1:5000/carts")
       .then((res) => res.json())
       .then((data) => setcarts(data));
   }, []);
@@ -90,7 +90,7 @@ function Popular(props) {
             <div className=' ml-[20px]'>
               <Card
                 key={item.id}
-                img={"https://decora-backend.onrender.com/" + item.images[1]}
+                img={"http://127.0.0.1:5000/" + item.images[1]}
                 name={item.name}
                 price={item.price}
                 id={item.id}

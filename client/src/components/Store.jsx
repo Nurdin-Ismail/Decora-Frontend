@@ -328,9 +328,7 @@ function Store(props) {
                     <div className=' '>
                       <Card
                         key={item.id}
-                        img={
-                          "https://decora-backend.onrender.com" + item.images[1]
-                        }
+                        img={"http://127.0.0.1:5000" + item.images[1]}
                         name={item.name}
                         price={item.price.toLocaleString()}
                         id={item.id}
