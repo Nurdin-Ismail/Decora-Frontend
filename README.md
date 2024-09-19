@@ -13,7 +13,7 @@
 
 - **Product Catalog**: Browse and view detailed information on a wide range of products.
 - **Shopping Cart**: Add and manage products in the cart with real-time price updates.
-- **Payment Integration**: MPesa (or your preferred payment gateway) for secure transactions.
+- **Payment Integration**: MPesa for secure transactions.
 - **Search and Filter**: Easily find products using search and category filters.
 - **User Authentication**: Register, login, and view order history.
 
