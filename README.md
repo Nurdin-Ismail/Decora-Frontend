@@ -36,9 +36,8 @@
 
 ---
 
-## Screenshots
+## Screen-Recordings
 
-Include a few relevant screenshots or GIFs showcasing your eCommerce site:
 1. **Home Page**: 
    <video width="320" height="240"  autoPlay loop muted playsInline>
      <source src="../Decora-Frontend/media/Homepage.mp4" type="video/mp4">
