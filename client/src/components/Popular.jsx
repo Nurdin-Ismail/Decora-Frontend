@@ -82,7 +82,7 @@ function Popular(props) {
   return (
     <div
       className='flex best'
-      style={{ transform: `translate(-${props.slide * 25.65}%)` }}
+      style={{ transform: `translateX(-${props.slide * 18}vw)` }}
     >
       {popular_products.length > 0 ? (
         popular_products.map((item) => {

@@ -376,49 +376,49 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 >
                   {bath.length != 0
                     ? bath.map((item) => {
-                        return (
-                          <div
-                            className=' grid '
-                            onClick={() => {
-                              setcardinfo(item.id);
-                              handleis(is);
-                            }}
-                          >
-                            <div className=''>
-                              <img
-                                src={"http://127.0.0.1:5000" + item.images[1]}
-                                alt=''
-                                className={
-                                  showcase && index == bath.indexOf(item)
-                                    ? "h-[200px] min-w-[200px] border-[1px] border-black"
-                                    : "h-[200px] min-w-[200px]"
-                                }
-                              />
-                            </div>
-                            <div className=' grid grid-rows-[50px_50px]'>
-                              <h1 className='grid place-self-start font-semibold'>
-                                {item.name}
-                              </h1>
-                              <h1 className='grid place-self-start'>
-                                Ksh {item.price}
-                              </h1>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : [...Array(5)].map((item) => {
-                        return (
-                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
-                            <Skeleton
-                              variant='rounded'
-                              width={200}
-                              height={200}
+                      return (
+                        <div
+                          className=' grid '
+                          onClick={() => {
+                            setcardinfo(item.id);
+                            handleis(is);
+                          }}
+                        >
+                          <div className=''>
+                            <img
+                              src={"http://127.0.0.1:5000" + item.images[1]}
+                              alt=''
+                              className={
+                                showcase && index == bath.indexOf(item)
+                                  ? "h-[200px] min-w-[200px] border-[1px] border-black"
+                                  : "h-[200px] min-w-[200px]"
+                              }
                             />
-                            <Skeleton variant='caption' width={180} />
-                            <Skeleton variant='caption' width={100} />
                           </div>
-                        );
-                      })}
+                          <div className=' grid grid-rows-[50px_50px]'>
+                            <h1 className='grid place-self-start font-semibold'>
+                              {item.name}
+                            </h1>
+                            <h1 className='grid place-self-start'>
+                              Ksh {item.price}
+                            </h1>
+                          </div>
+                        </div>
+                      );
+                    })
+                    : [...Array(5)].map((item) => {
+                      return (
+                        <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                          <Skeleton
+                            variant='rounded'
+                            width={200}
+                            height={200}
+                          />
+                          <Skeleton variant='caption' width={180} />
+                          <Skeleton variant='caption' width={100} />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -456,49 +456,49 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 >
                   {decor.length != 0
                     ? decor.map((item) => {
-                        return (
-                          <div
-                            className=' grid '
-                            onClick={() => {
-                              setcardinfo(item.id);
-                              handleis(is);
-                            }}
-                          >
-                            <div className=''>
-                              <img
-                                src={"http://127.0.0.1:5000" + item.images[2]}
-                                alt=''
-                                className={
-                                  showcase && index == decor.indexOf(item)
-                                    ? "h-[200px] min-w-[200px] border-[1px] border-black"
-                                    : "h-[200px] min-w-[200px]"
-                                }
-                              />
-                            </div>
-                            <div className=' grid grid-rows-[50px_50px]'>
-                              <h1 className=' grid place-self-start font-semibold'>
-                                {item.name}
-                              </h1>
-                              <h1 className='grid place-self-start'>
-                                Ksh {item.price}
-                              </h1>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : [...Array(4)].map((item) => {
-                        return (
-                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
-                            <Skeleton
-                              variant='rounded'
-                              width={200}
-                              height={200}
+                      return (
+                        <div
+                          className=' grid '
+                          onClick={() => {
+                            setcardinfo(item.id);
+                            handleis(is);
+                          }}
+                        >
+                          <div className=''>
+                            <img
+                              src={"http://127.0.0.1:5000" + item.images[2]}
+                              alt=''
+                              className={
+                                showcase && index == decor.indexOf(item)
+                                  ? "h-[200px] min-w-[200px] border-[1px] border-black"
+                                  : "h-[200px] min-w-[200px]"
+                              }
                             />
-                            <Skeleton variant='caption' width={180} />
-                            <Skeleton variant='caption' width={100} />
                           </div>
-                        );
-                      })}
+                          <div className=' grid grid-rows-[50px_50px]'>
+                            <h1 className=' grid place-self-start font-semibold'>
+                              {item.name}
+                            </h1>
+                            <h1 className='grid place-self-start'>
+                              Ksh {item.price}
+                            </h1>
+                          </div>
+                        </div>
+                      );
+                    })
+                    : [...Array(4)].map((item) => {
+                      return (
+                        <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                          <Skeleton
+                            variant='rounded'
+                            width={200}
+                            height={200}
+                          />
+                          <Skeleton variant='caption' width={180} />
+                          <Skeleton variant='caption' width={100} />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>
@@ -526,49 +526,49 @@ export default function LookBook({ setcardinfo, handleis, is }) {
                 >
                   {candle.length != 0
                     ? candle.map((item) => {
-                        return (
-                          <div
-                            className=' grid '
-                            onClick={() => {
-                              setcardinfo(item.id);
-                              handleis(is);
-                            }}
-                          >
-                            <div className=''>
-                              <img
-                                src={"http://127.0.0.1:5000" + item.images[1]}
-                                alt=''
-                                className={
-                                  showcase && index == candle.indexOf(item)
-                                    ? "h-[200px] min-w-[200px] border-[1px] border-black"
-                                    : "h-[200px] min-w-[200px]"
-                                }
-                              />
-                            </div>
-                            <div className='grid grid-rows-[50px_50px]'>
-                              <h1 className=' grid place-self-start font-semibold'>
-                                {item.name}
-                              </h1>
-                              <h1 className='grid place-self-start'>
-                                Ksh {item.price}
-                              </h1>
-                            </div>
-                          </div>
-                        );
-                      })
-                    : [...Array(3)].map((item) => {
-                        return (
-                          <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
-                            <Skeleton
-                              variant='rounded'
-                              width={200}
-                              height={200}
+                      return (
+                        <div
+                          className=' grid '
+                          onClick={() => {
+                            setcardinfo(item.id);
+                            handleis(is);
+                          }}
+                        >
+                          <div className=''>
+                            <img
+                              src={"http://127.0.0.1:5000" + item.images[1]}
+                              alt=''
+                              className={
+                                showcase && index == candle.indexOf(item)
+                                  ? "h-[200px] min-w-[200px] border-[1px] border-black"
+                                  : "h-[200px] min-w-[200px]"
+                              }
                             />
-                            <Skeleton variant='caption' width={180} />
-                            <Skeleton variant='caption' width={100} />
                           </div>
-                        );
-                      })}
+                          <div className='grid grid-rows-[50px_50px]'>
+                            <h1 className=' grid place-self-start font-semibold'>
+                              {item.name}
+                            </h1>
+                            <h1 className='grid place-self-start'>
+                              Ksh {item.price}
+                            </h1>
+                          </div>
+                        </div>
+                      );
+                    })
+                    : [...Array(3)].map((item) => {
+                      return (
+                        <div className='bg-white rounded-sm   flex flex-col gap-[5px]'>
+                          <Skeleton
+                            variant='rounded'
+                            width={200}
+                            height={200}
+                          />
+                          <Skeleton variant='caption' width={180} />
+                          <Skeleton variant='caption' width={100} />
+                        </div>
+                      );
+                    })}
                 </div>
               </div>
             </div>

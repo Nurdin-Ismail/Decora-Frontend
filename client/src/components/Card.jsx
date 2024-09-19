@@ -12,14 +12,12 @@ export default function Card({
 }) {
   return (
     <div
-      className={
-        type && type == "large"
-          ? " flex flex-col justify-between mb-5  w-[388px] min-h-[452px]  "
-          : " flex flex-col justify-between  mb-5  w-[17vw] h-[40vh] "
-      }
+      className={type && type == 'large' ? ' flex flex-col justify-between mb-5  w-[388px] min-h-[452px]  ' : ' flex flex-col justify-between  mb-5  w-[17vw] h-[40vh] '}
       onClick={() => {
-        setcardinfo(id);
-        handleis(is);
+        setcardinfo(id)
+        handleis(is)
+
+
       }}
     >
       <img src={img} alt='' className='min-h-[317px]  min-w-[317px]' />

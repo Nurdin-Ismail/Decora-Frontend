@@ -201,31 +201,31 @@ function ProductPage({
               >
                 {product
                   ? product.images.map((pic) => {
-                      return (
-                        <img
-                          key={product.images.indexOf(pic)}
-                          src={"http://127.0.0.1:5000" + pic}
-                          alt=''
-                          className=' h-[700px] min-w-[700px]'
-                        />
-                      );
-                    })
+                    return (
+                      <img
+                        key={product.images.indexOf(pic)}
+                        src={"http://127.0.0.1:5000" + pic}
+                        alt=''
+                        className=' h-[700px] min-w-[700px]'
+                      />
+                    );
+                  })
                   : null}
               </div>
 
               <div className='thumbnail grid grid-cols-5 place-items-center gap-[30px]'>
                 {product
                   ? product.images.map((pic) => {
-                      return (
-                        <img
-                          key={product.images.indexOf(pic)}
-                          src={"http://127.0.0.1:5000" + pic}
-                          alt=''
-                          className=' h-[100px] min-w-[100px] cursor-pointer'
-                          onClick={() => setslides(product.images.indexOf(pic))}
-                        />
-                      );
-                    })
+                    return (
+                      <img
+                        key={product.images.indexOf(pic)}
+                        src={"http://127.0.0.1:5000" + pic}
+                        alt=''
+                        className=' h-[100px] min-w-[100px] cursor-pointer'
+                        onClick={() => setslides(product.images.indexOf(pic))}
+                      />
+                    );
+                  })
                   : null}
               </div>
             </div>
@@ -234,15 +234,15 @@ function ProductPage({
               <div className=' grid gap-[20px]'>
                 {product
                   ? product.images.map((pic) => {
-                      return (
-                        <img
-                          key={product.images.indexOf(pic)}
-                          src={"http://127.0.0.1:5000" + pic}
-                          alt=''
-                          className=' h-[600px] min-w-[500px]'
-                        />
-                      );
-                    })
+                    return (
+                      <img
+                        key={product.images.indexOf(pic)}
+                        src={"http://127.0.0.1:5000" + pic}
+                        alt=''
+                        className=' h-[600px] min-w-[500px]'
+                      />
+                    );
+                  })
                   : null}
               </div>
             </div>
@@ -307,7 +307,7 @@ function ProductPage({
             <div className=' overflow-x-hidden'>
               <div
                 className=' besto grid grid-flow-col gap-[20px]  '
-                style={{ transform: `translate(-${related * 25.35}%)` }}
+                style={{ transform: `translateX(-${related * 18}vw)` }}
               >
                 {similar_products.map((item) => {
                   return (

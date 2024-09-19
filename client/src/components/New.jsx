@@ -24,15 +24,15 @@ export default function (props) {
   }
 
   return (
-    <div className=' h-[100%] mx-[130px] w-[85%] mt-10 overflow-x-hidden overflow-y-clip'>
+    <div className=' h-[100%] mx-[130px] w-[80%] mt-10 overflow-x-hidden overflow-y-clip'>
       <div
         className='flex best'
-        style={{ transform: `translate(-${props.slide2 * 24.8}%)` }}
+        style={{ transform: `translateX(-${props.slide2 * 18}vw)` }}
       >
         {newest ? (
           newest.map((item) => {
             return (
-              <div className=' ml-[29.3px]'>
+              <div className=' ml-[20px]'>
                 <Card
                   key={item.id}
                   img={"http://127.0.0.1:5000" + item.images[1]}
