@@ -1,3 +1,5 @@
+
+
 # Decora - E-Commerce Site
 
 ## Overview
@@ -38,9 +40,8 @@
 
 Include a few relevant screenshots or GIFs showcasing your eCommerce site:
 1. **Home Page**: 
-<video width="320" height="240" autoplay muted loop>
-     <source src="/media/Homepage.mp4" type="video/mp4">
-     Your browser does not support the video tag.
+   <video width="320" height="240"  autoPlay loop muted playsInline>
+     <source src="../Decora-Frontend/media/Homepage.mp4" type="video/mp4">
    </video>
 
 <!-- 2. **Product Page**: ![Product Page Screenshot](path/to/image)
