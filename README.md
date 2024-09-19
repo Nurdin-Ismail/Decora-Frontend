@@ -27,7 +27,7 @@
   - [Tailwind CSS](https://tailwindcss.com/) for styling the UI.
   - `fetch` for handling API requests.
 
-- **Backend** (if applicable):
+- **Backend**:
   - [Flask](https://flask.palletsprojects.com/) for building the API backend.
   - SQL for database management.
 
