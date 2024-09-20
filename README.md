@@ -36,16 +36,23 @@
 
 ---
 
-## Screen-Recordings
+## Screenshots and Demos
 
-1. **Home Page**: 
-   <video width="320" height="240"  autoPlay loop muted playsInline>
-     <source src="../Decora-Frontend/media/Homepage.mp4" type="video/mp4">
-   </video>
+Click on the images to watch the full video on YouTube.
 
-<!-- 2. **Product Page**: ![Product Page Screenshot](path/to/image)
-3. **Cart**: ![Cart Screenshot](path/to/image)
-4. **Checkout**: ![Checkout Page Screenshot](path/to/image) -->
+### 1. Home Page
+[![Home Page](/media/home.png)](https://youtu.be/EQbZuT_T6IU?si=MlbYN_YLcfrCfxI7)
 
+### 2. User Login and Profile
+[![User Login and Profile](/media/profile.png)](https://youtu.be/xAYqXg1rn1U?si=tJRtlGm2TptBm1yo)
+
+### 3. Store
+[![Store](/media/store.png)](https://youtu.be/J0PdwN8Ul_o?si=WlGmrTajLTyOkFBD)
+
+### 4. Product Page
+[![Product Page](/media/product.png)](https://youtu.be/1lPAo_6JSiY?si=Mvos_jAkFoaHIAaf)
+
+### 5. Cart
+[![Cart](/media/cart.png)](https://youtu.be/V92tLnflaLk?si=JIAq1tDUbIF3wmTu)
 ---
 

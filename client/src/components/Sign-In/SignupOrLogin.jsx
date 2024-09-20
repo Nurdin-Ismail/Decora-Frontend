@@ -56,7 +56,7 @@ export default function SignupOrLogin({
           email: signUpEmail,
           password: signupPass,
         };
-        fetch("http://127.0.0.1:5555/users", {
+        fetch("http://127.0.0.1:5000/users", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(obj),

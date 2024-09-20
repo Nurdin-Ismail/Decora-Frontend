@@ -418,7 +418,7 @@ export default function User({
 
       if (confirm == user.password) {
         //patch request
-        fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+        fetch(`http://127.0.0.1:5000/user/${user.id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(obj),
@@ -441,7 +441,7 @@ export default function User({
       if (confirm == user.password) {
         if (newPassword === confirmNewPassword) {
           //patch request
-          fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+          fetch(`http://127.0.0.1:5000/user/${user.id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(obj),
@@ -468,7 +468,7 @@ export default function User({
       if (confirm == user.password) {
         if (newPassword === confirmNewPassword) {
           //patch request
-          fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+          fetch(`http://127.0.0.1:5000/user/${user.id}`, {
             method: "PATCH",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(obj),
@@ -499,7 +499,7 @@ export default function User({
       handlePasssword(obj);
       console.log(obj, "only password");
     } else {
-      fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+      fetch(`http://127.0.0.1:5000/user/${user.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(obj),
@@ -561,7 +561,7 @@ export default function User({
     if (selectedCityorCounty != undefined) {
       let stringifiedAddress = JSON.stringify(obj);
 
-      fetch(`http://127.0.0.1:5555/user/${user.id}`, {
+      fetch(`http://127.0.0.1:5000/user/${user.id}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
